@@ -33,7 +33,7 @@ public class SearchController {
 
         List<ArtWork> artWorkList = searchService.getArtWorkList();
 
-        model.addAttribute("title","테스트검색");
+        model.addAttribute("title","검색 테스트");
         model.addAttribute("artWorkList", artWorkList);
 
         return "list";
