@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <!-- 검색 -->
+    <form th:action="@{/test/searchResult}" method="get">
+        <div class="testsearch" style="margin-bottom: 20px; margin-top: 20px; text-align: center">
+            <select name="searchKey" hidden>
+                <option value="art_description">설명</option>
+                <option value="art_title">제목</option>
+            </select>
+            <input type="text" name="searchValue" placeholder="검색키워드를 입력해주세요."/>
+            <button type="submit">검색</button>
+        </div>
+    </form>
+
+
+    <th:block th:if="${not #lists.isEmpty(artWorkSearchList)}" th:each="l : ${artWorkSearchList}">
+        <table class="testsearch" style="border-bottom: black; margin-bottom: 20px;">
+            <thead>
+            <tr>
+                <td th:text="제목" th:width="100">
+                </td>
+                <td th:text="${l.art_title}">
+                    제목 없음
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="제작연도">
+                </td>
+                <td th:text="${l.art_year}">
+                    연도 없음
+                </td>
+            </tr>
+            <tr>
+                <td th:text="설명">
+                </td>
+                <td th:text="${l.art_description}">
+                    설명 없음
+                </td>
+            </tr>
+            <tr>
+                <td th:text="재료">
+                </td>
+                <td th:text="${l.art_material}">
+                    재료 없음
+                </td>
+            </tr>
+            <tr>
+                <td th:text="기법">
+                </td>
+                <td th:text="${l.art_technique}">
+                    기법 없음
+                </td>
+            </tr>
+            <tr>
+                <td th:text="크기">
+                </td>
+                <td th:text="${l.art_size}">
+                    크기 없음
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+    <th:block th:unless="${not #lists.isEmpty(artWorkSearchList)}" th:each="l : ${artWorkSearchList}">
+        <tr>
+            <td colspan="2">
+                <p>등록된 작품이 없습니다.</p>
+            </td>
+        </tr>
+    </th:block>
+</body>
+</html>

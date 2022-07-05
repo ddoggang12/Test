@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+
+    <!-- 검색 -->
+    <form th:action="@{/test/searchResult}" method="get">
+      <div class="testsearch" style="margin-bottom: 20px; margin-top: 20px; text-align: center">
+          <select name="searchKey" hidden>
+              <option value="art_description">설명</option>
+              <option value="art_title">제목</option>
+          </select>
+          <input type="text" name="searchValue" placeholder="검색키워드를 입력해주세요."/>
+        <button type="submit">검색</button>
+      </div>
+    </form>
+
+</body>
+</html>
