@@ -1,9 +1,12 @@
 package com.example.testsearch.dto;
 
+import java.util.List;
+
 public class ArtWork {
 
     private String art_id;
     private int image_num;
+    private String fileIdx;
     private String art_year;
     private String art_title;
     private String art_description;
@@ -26,7 +29,8 @@ public class ArtWork {
     private String exhibition_id;
 
     private ImageTest imageTest;
-
+    private List<FileDto> fileList;
+    private ImageFile imageFile;
 
 
     public String getArt_id() {
@@ -39,6 +43,14 @@ public class ArtWork {
 
     public int getImage_num() {
         return image_num;
+    }
+
+    public String getFileIdx() {
+        return fileIdx;
+    }
+
+    public void setFileIdx(String fileIdx) {
+        this.fileIdx = fileIdx;
     }
 
     public void setImage_num(int image_num) {
@@ -213,11 +225,27 @@ public class ArtWork {
         this.imageTest = imageTest;
     }
 
+    public List<FileDto> getFileList() {
+        return fileList;
+    }
+    public void setFileList(List<FileDto> fileList) {
+        this.fileList = fileList;
+    }
+
+    public ImageFile getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(ImageFile imageFile) {
+        this.imageFile = imageFile;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ArtWork{");
         sb.append("art_id='").append(art_id).append('\'');
         sb.append(", image_num=").append(image_num);
+        sb.append(", fileIdx='").append(fileIdx).append('\'');
         sb.append(", art_year='").append(art_year).append('\'');
         sb.append(", art_title='").append(art_title).append('\'');
         sb.append(", art_description='").append(art_description).append('\'');
@@ -239,10 +267,11 @@ public class ArtWork {
         sb.append(", rental_id='").append(rental_id).append('\'');
         sb.append(", exhibition_id='").append(exhibition_id).append('\'');
         sb.append(", imageTest=").append(imageTest);
+        sb.append(", fileList=").append(fileList);
+        sb.append(", imageFile=").append(imageFile);
         sb.append('}');
         return sb.toString();
     }
-
 
 
 }

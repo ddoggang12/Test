@@ -5,6 +5,7 @@
     <resultMap id="ArtWorkResultMap" type="ArtWork">
         <id     column="art_id"                             property="art_id"/>
         <result column="image_num"                          property="image_num"/>
+        <result column="fileIdx" 					        property="fileIdx"/>
         <result column="art_year"                           property="art_year"/>
         <result column="art_title"                          property="art_title"/>
         <result column="art_description"                    property="art_description"/>
@@ -31,6 +32,14 @@
             <result column="filename"            property="filename"/>
             <result column="image"               property="image"/>
         </association>
+
+        <collection property="fileList" javaType="List" ofType="FileDto">
+            <id column="fileIdx" 						property="fileIdx"/>
+            <result	column="fileOriginalName" 			property="fileOriginalName"/>
+            <result column="fileNewName" 				property="fileNewName"/>
+            <result column="filePath" 					property="filePath"/>
+            <result column="fileSize" 					property="fileSize"/>
+        </collection>
     </resultMap>
 
     <resultMap id="ImageTestResultMap" type="ImageTest">
@@ -38,6 +47,43 @@
         <result column="filename"            property="filename"/>
         <result column="image"               property="image"/>
     </resultMap>
+
+    <resultMap id="ImageFileResultMap" type="ImageFile">
+        <result column="fileIdx"             property="fileIdx"/>
+        <result column="fileTitle"          property="fileTitle"/>
+    </resultMap>
+
+
+    <!--이미지 목록 조회-->
+    <select id="getImageFileList" resultMap="ImageFileResultMap">
+        SELECT
+              fileIdx
+             ,fileTitle
+        FROM
+            ImageFile
+            INNER JOIN
+            tb_file_control
+            ON
+            fileIdx = referenceCode
+            INNER JOIN
+            tb_file
+            ON
+            fileIdx = fileIdx;
+    </select>
+
+    <!-- 이미지 등록 -->
+    <insert id="ImageInsert" parameterType="ImageFile">
+        INSERT INTO imagefile
+        (
+          fileIdx
+        , fileTitle
+        )VALUES (
+                  #{fileIdx}
+                , #{fileTitle}
+        );
+    </insert>
+
+
 
     <!-- BLOB 이미지 가져오기 -->
     <select id="getByteImage" resultType="java.util.Map">
@@ -51,7 +97,7 @@
     <!-- 상세 검색 -->
     <select id="getArtWorkSearchDetailList" resultMap="ArtWorkResultMap">
         SELECT
-              a.art_id
+            a.art_id
              ,a.image_num
              ,a.art_year
              ,a.art_title
@@ -59,13 +105,19 @@
              ,a.art_material
              ,a.art_technique
              ,a.art_size
-             ,i.filename
+             ,f.fileIdx
+             ,f.filepath
+             ,SUBSTRING_INDEX(f.fileOriginalName, '.',1)
         FROM
             artwork AS a
             LEFT JOIN
-            imagetest AS i
+            tb_file_control AS fc
             ON
-            a.image_num = i.num
+            a.art_code = fc.referenceCode
+            LEFT JOIN
+            tb_file AS f
+            ON
+            fc.fileIdx = f.fileIdx
         WHERE
             a.art_id=#{art_id};
 

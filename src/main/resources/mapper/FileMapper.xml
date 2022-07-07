@@ -7,7 +7,7 @@
 
         <insert id="addFile" parameterType="FileDto">
             /* 단일 파일 처리 */
-            INSERT INTO art_file
+            INSERT INTO tb_file
             (     fileIdx
                 , fileOriginalName
                 , fileNewName
@@ -25,7 +25,7 @@
 
         <insert id="addFiles" parameterType="List">
             /* 다량 파일 처리 */
-            INSERT INTO art_file
+            INSERT INTO tb_file
             (    fileIdx
                 ,fileOriginalName
                 ,fileNewName
@@ -45,7 +45,7 @@
 
         <insert id="addFileControl" parameterType="List">
             /* 파일 관계 테이블 등록 */
-            INSERT INTO art_file_control
+            INSERT INTO tb_file_control
             (    referenceCode
                 ,fileIdx
             )VALUES
