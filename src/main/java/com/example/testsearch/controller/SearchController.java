@@ -7,9 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,11 +47,25 @@ public class SearchController {
         paramMap.put("searchValue", searchValue);
 
         List<ArtWork> artWorkSearchList = searchService.getArtWorkSearchList(paramMap);
+        logger.info("artWorkSearchList에 담긴 값 : {}", artWorkSearchList);
 
         model.addAttribute("title", "작품 검색");
         model.addAttribute("artWorkSearchList", artWorkSearchList);
 
         return "searchResult";
+    }
+
+    @GetMapping("/searchDetail")
+    public String searchDetail(  Model model
+                                ,@RequestParam(value = "art_id",required = false)String art_id){
+
+        ArtWork artWork = searchService.getArtWorkSearchDetailList(art_id);
+        logger.info("artWork 담긴 값 : {} ", artWork);
+
+        model.addAttribute("title","검색 상세 화면");
+        model.addAttribute("artWork",artWork);
+
+        return "searchDetail";
     }
 
 }
