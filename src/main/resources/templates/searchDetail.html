@@ -79,9 +79,17 @@
             </p>
         </th:block>
         <div>
-
-            <img src="/image/1.jpg">
-
+            <th:block th:if="${not #lists.isEmpty(artWork.fileList)}"  th:each="f : ${artWork.fileList}">
+                <div class="blog_item_img">
+                    <img th:src="@{${ '/' + #strings.replace(f.filePath, '\', '/')}}" class="card-img rounded-0" th:alt="${f.fileOriginalName}"/>
+                </div>
+            </th:block>
+            <th:block th:unless="${not #lists.isEmpty(artWork.fileList)}">
+                <div class="blog_item_img">
+                    <img th:src="@{/assets/img/ImgNone.png}"  class="card-img rounded-0"/>
+                </div>
+            </th:block>
+            <!--<img src="/image/1.jpg">-->
         </div>
         <div class id="CONTENTS">
             <div class="LineInContents">
