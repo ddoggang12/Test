@@ -4,6 +4,7 @@
 <mapper namespace="com.example.testsearch.mapper.SearchMapper">
     <resultMap id="ArtWorkResultMap" type="ArtWork">
         <id     column="art_id"                             property="art_id"/>
+        <result column="image_num"                          property="image_num"/>
         <result column="art_year"                           property="art_year"/>
         <result column="art_title"                          property="art_title"/>
         <result column="art_description"                    property="art_description"/>
@@ -24,33 +25,46 @@
         <result column="artist_id"                          property="artist_id"/>
         <result column="rental_id"                          property="rental_id"/>
         <result column="exhibition_id"                      property="exhibition_id"/>
+
+        <association property="imageTest" javaType="ImageTest">
+            <result column="num"                 property="num"/>
+            <result column="filename"            property="filename"/>
+            <result column="image"               property="image"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="ImageTestResultMap" type="ImageTest">
+        <result column="num"                 property="num"/>
+        <result column="filename"            property="filename"/>
+        <result column="image"               property="image"/>
     </resultMap>
     
-    <resultMap id="TestFileResultMap" type="TestFile">
-        <result column="fileIdx"            property="fileIdx"/>
-        <result column="fileTitle"          property="fileTitle"/>
+    
+    <!-- 상세 검색 -->
+    <select id="getArtWorkSearchDetailList" resultMap="ArtWorkResultMap">
+        SELECT
+              a.art_id
+             ,a.image_num
+             ,a.art_year
+             ,a.art_title
+             ,a.art_description
+             ,a.art_material
+             ,a.art_technique
+             ,a.art_size
+             ,i.filename
+             ,i.image
 
-        <collection property="fileList" javaType="List" ofType="FileDto">
-            <id     column="fileIdx"            property="fileIdx"/>
-            <result column="fileOriginalName"   property="fileOriginalName"/>
-            <result column="fileNewName"        property="fileNewName"/>
-            <result column="filePath"           property="filePath"/>
-            <result column="fileSize"           property="fileSize"/>
-        </collection>
-    </resultMap>
+        FROM
+            artwork AS a
+            LEFT JOIN
+            imagetest AS i
+            ON
+            a.image_num = i.num
+        WHERE
+            a.art_id=#{art_id};
 
-    <!-- 이미지 등록 -->
-   <!-- <insert id="testFileInsert" parameterType="TestFile">
-        INSERT INTO test_file
-        (
-             fileIdx
-            ,fileTitle
-        )VALUES (
-             #{fileIdx}
-            ,#{fileTitle}
-        );
-    </insert>-->
-
+    </select>
+    
     <!-- 테스트 목록 조회 -->
     <select id="getArtWorkList" resultMap="ArtWorkResultMap">
         SELECT
@@ -67,7 +81,8 @@
     <!-- 검색 -->
     <select id="getArtWorkSearchList" parameterType="map" resultMap="ArtWorkResultMap">
         SELECT
-              art_title
+              art_id
+             ,art_title
              ,art_year
              ,art_description
              ,art_material

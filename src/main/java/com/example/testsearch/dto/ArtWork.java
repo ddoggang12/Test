@@ -3,6 +3,7 @@ package com.example.testsearch.dto;
 public class ArtWork {
 
     private String art_id;
+    private int image_num;
     private String art_year;
     private String art_title;
     private String art_description;
@@ -24,6 +25,8 @@ public class ArtWork {
     private String rental_id;
     private String exhibition_id;
 
+    private ImageTest imageTest;
+
 
 
     public String getArt_id() {
@@ -32,6 +35,14 @@ public class ArtWork {
 
     public void setArt_id(String art_id) {
         this.art_id = art_id;
+    }
+
+    public int getImage_num() {
+        return image_num;
+    }
+
+    public void setImage_num(int image_num) {
+        this.image_num = image_num;
     }
 
     public String getArt_year() {
@@ -194,11 +205,19 @@ public class ArtWork {
         this.exhibition_id = exhibition_id;
     }
 
+    public ImageTest getImageTest() {
+        return imageTest;
+    }
+
+    public void setImageTest(ImageTest imageTest) {
+        this.imageTest = imageTest;
+    }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("ArtWork{");
         sb.append("art_id='").append(art_id).append('\'');
+        sb.append(", image_num=").append(image_num);
         sb.append(", art_year='").append(art_year).append('\'');
         sb.append(", art_title='").append(art_title).append('\'');
         sb.append(", art_description='").append(art_description).append('\'');
@@ -219,8 +238,11 @@ public class ArtWork {
         sb.append(", artist_id='").append(artist_id).append('\'');
         sb.append(", rental_id='").append(rental_id).append('\'');
         sb.append(", exhibition_id='").append(exhibition_id).append('\'');
+        sb.append(", imageTest=").append(imageTest);
         sb.append('}');
         return sb.toString();
     }
+
+
 
 }
