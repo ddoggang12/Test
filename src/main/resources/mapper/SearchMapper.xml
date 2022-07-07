@@ -38,8 +38,16 @@
         <result column="filename"            property="filename"/>
         <result column="image"               property="image"/>
     </resultMap>
-    
-    
+
+    <!-- BLOB 이미지 가져오기 -->
+    <select id="getByteImage" resultType="java.util.Map">
+        SELECT
+            img
+        FROM
+            imagetest;
+    </select>
+
+
     <!-- 상세 검색 -->
     <select id="getArtWorkSearchDetailList" resultMap="ArtWorkResultMap">
         SELECT
@@ -52,8 +60,6 @@
              ,a.art_technique
              ,a.art_size
              ,i.filename
-             ,i.image
-
         FROM
             artwork AS a
             LEFT JOIN

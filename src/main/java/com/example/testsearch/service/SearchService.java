@@ -2,6 +2,7 @@ package com.example.testsearch.service;
 
 import com.example.testsearch.dto.ArtWork;
 import com.example.testsearch.mapper.SearchMapper;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ public class SearchService {
 
     private static final Logger logger = (Logger) LogManager.getLogger(SearchService.class);
     private SearchMapper searchMapper;
+    private SqlSession query;
 
     @Autowired
     public SearchService(SearchMapper searchMapper){
@@ -41,6 +43,10 @@ public class SearchService {
 
         return searchMapper.getArtWorkSearchDetailList(art_id);
 
+    }
+
+    public Map<String, Object> getByteImage(){
+        return query.selectOne("query.getByteImage");
     }
 
 }
