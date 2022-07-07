@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <title th:text="${title}"></title>
+</head>
+<body>
+    이미지 이미지 이미지 이미지 이미지 이미지 이미지
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-body" style="padding-bottom: 30px">
+                <form class="mb-5" id="testFileInsert" th:action="@{/insert}" method="get"enctype="multipart/form-data">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group form-animate-text" style="margin-top: 40px !important">
+                                        <input type="text" class="form-text" id="validate_testFileInsert" name="fileTitle" required>
+                                        <span class="bar"></span>
+                                        <label>파일 제목</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h5>파일 업로드</h5>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group fileupload-vl">
+                                <input type="file" name="fileImage" multiple="multiple" class="fileupload-v1-file hidden"/>
+                                <input type="text" class="filecontrol fileupload-v1-path" placeholder="File Path..." disabled>
+                                <span class="input-group-btn">
+                                    <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="text-align: center">
+                            <input class="submit btn btn-danger" type="submit" value="등록">
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

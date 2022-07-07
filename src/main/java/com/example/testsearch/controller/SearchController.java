@@ -5,6 +5,10 @@ import com.example.testsearch.mapper.SearchMapper;
 import com.example.testsearch.service.SearchService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -67,5 +71,21 @@ public class SearchController {
 
         return "searchDetail";
     }
+
+    @RequestMapping(value = "/view")
+    public String view(){
+        return "view";
+    }
+
+    @RequestMapping(value = "/getByteImage")
+    public ResponseEntity<byte[]> getByteImage(){
+        Map<String, Object> map = searchService.getByteImage();
+        byte[] imageContent = (byte[]) map.get("img");
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
+    }
+
+
 
 }
