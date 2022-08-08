@@ -4,7 +4,6 @@
 <mapper namespace="com.example.testsearch.mapper.SearchMapper">
     <resultMap id="ArtWorkResultMap" type="ArtWork">
         <id     column="art_id"                             property="art_id"/>
-        <result column="image_num"                          property="image_num"/>
         <result column="fileIdx" 					        property="fileIdx"/>
         <result column="art_year"                           property="art_year"/>
         <result column="art_title"                          property="art_title"/>
@@ -83,22 +82,10 @@
         );
     </insert>
 
-
-
-    <!-- BLOB 이미지 가져오기 -->
-    <select id="getByteImage" resultType="java.util.Map">
-        SELECT
-            img
-        FROM
-            imagetest;
-    </select>
-
-
     <!-- 상세 검색 -->
     <select id="getArtWorkSearchDetailList" resultMap="ArtWorkResultMap">
         SELECT
-            a.art_id
-             ,a.image_num
+              a.art_id
              ,a.art_year
              ,a.art_title
              ,a.art_description
@@ -111,13 +98,9 @@
         FROM
             artwork AS a
             LEFT JOIN
-            tb_file_control AS fc
-            ON
-            a.art_code = fc.referenceCode
-            LEFT JOIN
             tb_file AS f
             ON
-            fc.fileIdx = f.fileIdx
+            a.fileIdx = f.fileIdx
         WHERE
             a.art_id=#{art_id};
 
