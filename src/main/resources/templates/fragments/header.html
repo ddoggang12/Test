@@ -22,7 +22,7 @@
                                       <span class="icon-bar"></span>
                                       <span class="icon-bar"></span>
                                   </button>
-                                  <a class="navbar-brand" href="#">
+                                  <a class="navbar-brand" th:href="@{/}">
                                       <strong>KGZ TEST</strong>
                                       <!--<img src="assets/images/logo.png"/>-->
                                   </a>
@@ -32,9 +32,13 @@
 
                               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                   <ul class="nav navbar-nav navbar-right">
-                                      <li><a href="#">HOME</a></li>
-                                      <li><a href="#">로그인</a></li>
-                                      <li><a href="#">회원가입</a></li>
+                                      <li><a th:href="@{/}">HOME</a></li>
+                                      <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/list}">작품목록</a></li>
+                                      <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/insert}">작품등록</a></li>
+                                      <li th:if="${session.SEMAIL != null}" style="margin-top: 13px; font-size: 17px;">[[${session.SNAME}]]님이 로그인하셨습니다.</li>
+                                      <li th:if="${session.SEMAIL == null}"><a th:href="@{/user/login}">로그인</a></li>
+                                      <li th:unless="${session.SEMAIL == null}"><a th:href="@{/user/logout}">로그아웃</a></li>
+                                      <li><a th:href="@{/user/join}">회원가입</a></li>
                                   </ul>
                               </div>
                           </div>

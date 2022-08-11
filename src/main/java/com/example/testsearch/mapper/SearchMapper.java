@@ -18,7 +18,7 @@ public interface SearchMapper {
     public ArtWork getArtWorkSearchDetailList(String art_id);
 
     //이미지 등록 처리
-    public int ImageInsert(ImageFile imageFile);
+    public int addImage(ImageFile imageFile);
 
     //이미지 목록 조회
     public List<ImageFile> getImageFileList();

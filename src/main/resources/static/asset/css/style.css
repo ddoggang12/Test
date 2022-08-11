@@ -320,7 +320,7 @@ p.quote{
     .form-signin .panel{background: #2196f3;color: #fff;padding: 10px;border:none !important;box-shadow: 0 7px 16px #0a86e9, 0 4px 5px #0a86e9;}
     .form-signin .panel-body{padding-bottom: 50px;padding-top: 30px;}
     .form-signin .atomic-number{font-size: 20px;}
-    .form-signin .atomic-symbol{font-size: 10em !important;font-weight: 500;padding-bottom: 20spx;}
+    .form-signin .atomic-symbol{font-size: 10em !important;font-weight: 500;padding-bottom: 20px;}
     .form-signin .element-name,.form-signin .atomic-mass{font-size: 18px;margin-top: -10px;font-weight: 600;line-height: 1.2;}
     .form-signin label{color:#fff !important;}
     .form-signin .bar:before,.form-signin .bar:after{background-color:#fff !important;}
@@ -395,7 +395,7 @@ p.quote{
    
     .search-v1 #search-v1-images .post { height: 100px; background: cyan; margin-bottom: 20px; }
     .search-v1 #search-v1-images .tall { height: 200px; }
-}
+
 /*end: search v1*/
 
 
@@ -1352,7 +1352,7 @@ ul li a:focus {
     background: -o-linear-gradient(top, #33a6cc 50%, #1c84c6 50%);
     background: -ms-linear-gradient(top, #33a6cc 50%, #1c84c6 50%);
     background: linear-gradient(to bottom, #33a6cc 50%, #1c84c6 50%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#1c84c6', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#1c84c6', GradientType=0);*/
   }
   .btn-gradient.btn-success,
   .label-gradient.label-success,
@@ -1363,7 +1363,7 @@ ul li a:focus {
     background: -o-linear-gradient(top, #27C24C 50%, #1DAA3F 50%);
     background: -ms-linear-gradient(top, #27C24C 50%, #1DAA3F 50%);
     background: linear-gradient(to bottom, #27C24C 50%, #1DAA3F 50%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#27C24C', endColorstr='#1DAA3F', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#27C24C', endColorstr='#1DAA3F', GradientType=0);*/
   }
   .btn-gradient.btn-info,
   .label-gradient.label-info,
@@ -1374,7 +1374,7 @@ ul li a:focus {
     background: -o-linear-gradient(top, #73CAEF 50%, #47B4E2 50%);
     background: -ms-linear-gradient(top, #73CAEF 50%, #47B4E2 50%);
     background: linear-gradient(to bottom, #73CAEF 50%, #47B4E2 50%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#73CAEF', endColorstr='#47B4E2', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#73CAEF', endColorstr='#47B4E2', GradientType=0);*/
   }
 
   .btn-gradient.btn-danger,
@@ -1386,7 +1386,7 @@ ul li a:focus {
     background: -o-linear-gradient(top, #FF6656 50%, #E43927 50%);
     background: -ms-linear-gradient(top, #FF6656 50%, #E43927 50%);
     background: linear-gradient(to bottom, #FF6656 50%, #E43927 50%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#FF6656', endColorstr='#E43927', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#FF6656', endColorstr='#E43927', GradientType=0);*/
   }
 
   .btn-gradient.btn-warning,
@@ -1398,7 +1398,7 @@ ul li a:focus {
     background: -o-linear-gradient(top, #F0AD4E 50%, #D49236 50%);
     background: -ms-linear-gradient(top, #F0AD4E 50%, #D49236 50%);
     background: linear-gradient(to bottom, #F0AD4E 50%, #D49236 50%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#F0AD4E', endColorstr='#D49236', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#F0AD4E', endColorstr='#D49236', GradientType=0);*/
   }
 
   .btn-gradient.btn-default,
@@ -1411,7 +1411,7 @@ ul li a:focus {
     background: -ms-linear-gradient(top, #857E7E 50%, #7B7474 50%);
     background: linear-gradient(to bottom, #857E7E 50%, #7B7474 50%);
     color: #fff !important;
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#857E7E', endColorstr='#7B7474', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#857E7E', endColorstr='#7B7474', GradientType=0);*/
   }
 
   .btn-raised.btn-primary,
@@ -1612,11 +1612,11 @@ ul li a:focus {
   .btn-flip {
     height: 50px !important;
     padding: 0px !important;
-    -webkit-perspective: 600;
+    /*-webkit-perspective: 600;*/
     -moz-perspective: 600;
     -ms-perspective: 600;
     -o-perspective: 600;
-    perspective: 600;
+    /*perspective: 600;*/
     position: relative;
     width: 150px !important;
   }
@@ -1957,7 +1957,7 @@ ul li a:focus {
 /*-----Left menu-------*/
 #left-menu{}
 #left-menu .left-bg {
-  background: url('../img/left-bg.png');
+  /*background: url('../img/left-bg.png');*/
   background-repeat: no-repeat;
   background-position: center;
   height: 90px;
@@ -2622,11 +2622,11 @@ ul li a:focus {
   border: 5px solid white;
   border-right-color: transparent;
   border-top-color: transparent;
-  -webkit-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -moz-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -ms-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -o-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  box-shadow: 1px 1px 2px rgba(black, 0.2);
+  /*-webkit-box-shadow: 1px 1px 2px rgba(black, 0.2);*/
+  /*-moz-box-shadow: 1px 1px 2px rgba(black, 0.2);*/
+  /*-ms-box-shadow: 1px 1px 2px rgba(black, 0.2);*/
+  /*-o-box-shadow: 1px 1px 2px rgba(black, 0.2);*/
+  /*box-shadow: 1px 1px 2px rgba(black, 0.2);*/
 }
 
 .msg_sent > time {
@@ -3032,11 +3032,11 @@ ul li a:focus {
   -ms-transition: height .25s ease, width .25s ease;
   -o-transition: height .25s ease, width .25s ease;
   transition: height .25s ease, width .25s ease;
-  -webkit-transform: transform: translate(-50%, -50%);
-  -moz-transform: transform: translate(-50%, -50%);
-  -ms-transform: transform: translate(-50%, -50%);
-  -o-transform: transform: translate(-50%, -50%);
-  transform: transform: translate(-50%, -50%);
+  -webkit-transform: transform translate(-50%, -50%);
+  -moz-transform: transform translate(-50%, -50%);
+  /*-ms-transform: transform translate(-50%, -50%);*/
+  -o-transform: transform translate(-50%, -50%);
+  /*transform: transform translate(-50%, -50%);*/
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -3168,7 +3168,7 @@ ul li a:focus {
   width: 2px;
   height: 10px;
   margin-top: 0px;
-  background: -webkit-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
+  /*background: -webkit-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
   background: -moz-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
   background: -ms-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
   background: -o-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
@@ -3182,7 +3182,7 @@ ul li a:focus {
   background: -moz-radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
   background: -ms-radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
   background: -o-radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
-  background: radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
+  background: radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);*/
   position: absolute;
   -webkit-border-radius: 10px 10px 10px 10px / 30px 30px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px / 30px 30px 10px 10px;
@@ -4851,7 +4851,7 @@ ul li a:focus {
   padding: 10px;
   padding-top: 20px;
   padding-left: 20px;
-  border-top: 1px solid 1px solid #E7E7E7;
+  /*border-top: 1px solid 1px solid #E7E7E7;*/
 }
 
 .mail-wrapper .mail-right .searchbox-v1 {
@@ -5130,11 +5130,11 @@ ul li a:focus {
   -ms-transition: -webkit-transform 0.2s ease-in;
   -o-transition: -webkit-transform 0.2s ease-in;
   transition: -webkit-transform 0.2s ease-in;
-  -webkit-transition: transform: 0.2s ease-in;
-  -moz-transition: transform: 0.2s ease-in;
-  -ms-transition: transform: 0.2s ease-in;
-  -o-transition: transform: 0.2s ease-in;
-  transition: transform: 0.2s ease-in;
+  -webkit-transition: transform 0.2s ease-in;
+  -moz-transition: transform 0.2s ease-in;
+  -ms-transition: transform 0.2s ease-in;
+  -o-transition: transform 0.2s ease-in;
+  transition: transform 0.2s ease-in;
 }
 
 .nav-tabs.nav-tabs-v1 li a:focus {
@@ -6408,7 +6408,7 @@ ul li a:focus {
   .responsive-table td:before { content: attr(data-title); }
 
   .search-nav{
-    display: none !Im;
+    display: none !important;
   }
 
   #quote-carousel .carousel-indicators {
