@@ -26,7 +26,6 @@ public class SearchService {
 
     private static final Logger logger = (Logger) LogManager.getLogger(SearchService.class);
     private SearchMapper searchMapper;
-    private SqlSession query;
     private CommonMapper commonMapper;
     private FileUtil fileUtil;
     private FileMapper fileMapper;
@@ -59,17 +58,14 @@ public class SearchService {
 
     }
 
-    public Map<String, Object> getByteImage(){
-        return query.selectOne("query.getByteImage");
-    }
 
-    //이미지 대체 등록 처리
-    public int ImageInsert(ImageFile imageFile, MultipartFile[] fileImage, String fileRealPath) {
+    //이미지 등록 처리
+    public int addImage(ImageFile imageFile, MultipartFile[] fileImage, String fileRealPath) {
 
         String filecode = commonMapper.getNewCode("fileIdx", "imageFile");
         imageFile.setFileIdx(filecode);
 
-        int result = searchMapper.ImageInsert(imageFile);
+        int result = searchMapper.addImage(imageFile);
 
         List<FileDto> fileList = fileUtil.parseFileInfo(fileImage, fileRealPath);
 

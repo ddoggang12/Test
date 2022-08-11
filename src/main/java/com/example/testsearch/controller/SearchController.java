@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +44,9 @@ public class SearchController {
         model.addAttribute("artWorkList", artWorkList);
         model.addAttribute("imageFileList", imageFileList);
 
-        return "list";
+        logger.info("imageFileList에 담김 값: {}", imageFileList);
+
+        return "test/list";
     }
 
     @GetMapping("/searchResult")
@@ -63,7 +64,7 @@ public class SearchController {
         model.addAttribute("title", "작품 검색");
         model.addAttribute("artWorkSearchList", artWorkSearchList);
 
-        return "searchResult";
+        return "test/searchResult";
     }
 
     @GetMapping("/searchDetail")
@@ -78,35 +79,22 @@ public class SearchController {
         model.addAttribute("title","검색 상세 화면");
         model.addAttribute("artWork",artWork);
 
-        return "searchDetail";
+        return "test/searchDetail";
     }
 
-    @RequestMapping(value = "/view")
-    public String view(){
-        return "view";
-    }
-
-    @RequestMapping(value = "/getByteImage")
-    public ResponseEntity<byte[]> getByteImage(){
-        Map<String, Object> map = searchService.getByteImage();
-        byte[] imageContent = (byte[]) map.get("img");
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        return new ResponseEntity<byte[]>(imageContent, headers, HttpStatus.OK);
-    }
 
     //이미지 등록
     @GetMapping("/insert")
-    public String ImageInsert(Model model) {
+    public String addImage(Model model) {
 
         model.addAttribute("title", "이미지 등록");
 
-        return "insert";
+        return "test/insert";
     }
 
     //이미지 대체 등록 처리
     @PostMapping("/insert")
-    public String ImageInsertInsert(  ImageFile imageFile
+    public String addImage(  ImageFile imageFile
             , @RequestParam MultipartFile[] fileImage
             , HttpServletRequest request) {
 
@@ -122,12 +110,15 @@ public class SearchController {
 
         logger.info("이미지 등록 폼에서 입력받은 데이터: {}", imageFile);
 
-        searchService.ImageInsert(imageFile, fileImage, fileRealPath);
+        searchService.addImage(imageFile, fileImage, fileRealPath);
 
 
-        return "list";
+        return "test/list";
 
     }
+
+
+
 
 
 }

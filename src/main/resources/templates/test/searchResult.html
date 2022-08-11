@@ -17,11 +17,11 @@
         <header th:replace="fragments/header :: headerFragment"></header>
 
         <main layout:fragment="customContents">
-            <section id="aboutus" class="aboutus margin-top-120">
+            <section id="service" class="service sections margin-top-120">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="head_title text-center margin-top-80">
+                            <div class="head_title text-center">
                                 <!-- 검색 -->
                                 <form th:action="@{/test/searchResult}" method="get">
                                     <div class="testsearch" style="margin-bottom: 20px; margin-top: 20px; text-align: center">
@@ -31,14 +31,14 @@
                                         </select>
                                         <div style="height: 100%">
                                             <input type="text" class="search-bar" name="searchValue" placeholder="검색키워드를 입력해주세요."
-                                                   style="width: 350px; line-height: 39px; margin-right: -5px"/>
+                                                   style="width: 350px; line-height: 39px; margin-right: -7px"/>
                                             <button type="submit" class="btn" style="margin-bottom: 23px; border-radius: 0px;">검색</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
 
-                            <div class="main_about_area">
+                            <div class="single_service_area  margin-top-80">
                                 <div class="row">
                                     <div id="CONTENTS">
                                         <div class="LineInContents">
