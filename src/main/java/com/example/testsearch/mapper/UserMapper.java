@@ -3,6 +3,8 @@ package com.example.testsearch.mapper;
 import com.example.testsearch.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -14,5 +16,9 @@ public interface UserMapper {
 
     // 아이디 중복확인
     boolean isIdCheck(String id);
+
+    // 전체 회원정보 조회
+    public List<UserDto> getUserList();
+
 
 }

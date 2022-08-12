@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class UserService {
@@ -33,6 +35,14 @@ public class UserService {
         UserDto userDto = userMapper.getUserInfoByEmail(useremail);
 
         return userDto;
+    }
+
+    /* 전체 회원정보 조회 */
+    public List<UserDto> getUserList(){
+
+        List<UserDto> userList = userMapper.getUserList();
+
+        return userList;
     }
 
 }
