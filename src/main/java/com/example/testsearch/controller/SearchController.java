@@ -44,7 +44,7 @@ public class SearchController {
         model.addAttribute("artWorkList", artWorkList);
         model.addAttribute("imageFileList", imageFileList);
 
-        logger.info("imageFileList에 담김 값: {}", imageFileList);
+        logger.info("artWorkList 담김 값: {}", artWorkList);
 
         return "test/list";
     }
@@ -87,7 +87,7 @@ public class SearchController {
     @GetMapping("/insert")
     public String addImage(Model model) {
 
-        model.addAttribute("title", "이미지 등록");
+        model.addAttribute("title", "작품 등록");
 
         return "test/insert";
     }
