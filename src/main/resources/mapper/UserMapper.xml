@@ -56,6 +56,22 @@
 
         </select>
 
+        <!-- 전체 회원정보 조회 -->
+        <select id="getUserList" parameterType="String" resultMap="UserDtoResultMap">
+            SELECT
+                useremail,
+                userpw,
+                username,
+                phone,
+                regdate,
+                logindate,
+                moddate,
+                enabled
+            FROM
+                `user`;
+
+        </select>
+
         <!-- email 중복체크 -->
         <select id="isIdCheck" parameterType="String" resultType="boolean">
             SELECT
