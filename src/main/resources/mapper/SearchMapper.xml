@@ -108,7 +108,8 @@
     <!-- 테스트 목록 조회 -->
     <select id="getArtWorkList" resultMap="ArtWorkResultMap">
         SELECT
-              art_title
+              art_id
+             ,art_title
              ,art_year
              ,art_description
              ,art_material
