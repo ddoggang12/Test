@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <head th:replace="fragments/head :: headFragment">
+
+    </head>
+
+    <title th:text="${title}"></title>
+
+    <body data-spy="scroll" data-target=".navbar-collapse">
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div class='preloader' th:replace="fragments/preloader :: preloaderFragment"></div>
+
+        <header th:replace="fragments/header :: headerFragment"></header>
+
+        <main layout:fragment="customContents">
+            <section id="service" class="service sections margin-top-120">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="head_title text-center">
+                                <!-- 검색 -->
+                                <form th:action="@{/test/dataSearchResult}" method="get">
+                                    <div class="testsearch" style="margin-bottom: 20px; margin-top: 20px; text-align: center">
+                                        <select name="searchKey" hidden>
+                                            <option value="Description">Description</option>
+                                            <option value="Objects">Objects</option>
+                                            <option value="Title">Title</option>
+                                            <option value="Subject">Subject</option>
+                                            <option value="Identifier">Identifier</option>
+                                        </select>
+                                        <div style="height: 100%">
+                                            <input type="text" class="search-bar" name="searchValue" placeholder="Please enter a search keyword."
+                                                   style="width: 350px; line-height: 39px; margin-right: -7px"/>
+                                            <button type="submit" class="btn" style="margin-bottom: 23px; border-radius: 0px;">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="single_service_area  margin-top-80">
+                                <div class="row">
+                                    <div id="CONTENTS">
+                                        <div class="LineInContents">
+                                            <th:block th:if="${not #lists.isEmpty(dataSearchList)}" th:each="l : ${dataSearchList}">
+                                                <table class="testsearch" style="border-bottom: 1px solid #AAAAAA; margin-bottom: 30px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <td th:text="Identifier" th:width="200"></td>
+                                                            <td>
+                                                                <a th:text="${l.Identifier}" th:onclick="|location.href='@{'/test/dataSearchDetail'(Data_Code=${l.Data_Code})}'|" style="cursor:pointer;">
+                                                                    None
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td th:text="Provider_Country"></td>
+                                                            <td th:text="${l.Provider_Country}">
+                                                                None
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td th:text="Objects"></td>
+                                                            <td th:text="${l.Objects}">
+                                                                None
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td th:text="Title"></td>
+                                                            <td th:text="${l.Title}">
+                                                                None
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td th:text="Created_Time"></td>
+                                                            <td th:text="${l.Created_Time}">
+                                                                None
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </th:block>
+                                            <th:block th:unless="${not #lists.isEmpty(dataSearchList)}" th:each="l : ${dataSearchList}">
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <p>등록된 작품이 없습니다.</p>
+                                                    </td>
+                                                </tr>
+                                            </th:block>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <th:block layout:fragments="customCss">
+            <style>
+                .LineInContents {
+                    width: 98%;
+                    min-height: 50px;
+                    padding-top: 25px;
+                    padding-bottom: 25px;
+                    margin-left: 1%;
+                    margin-right: 1%;
+                    /*border-bottom: 1px solid #AAAAAA;*/
+                    clear: both;
+                    overflow: hidden;
+                    line-height: 160%;
+                }
+                #CONTENTS {
+                    width: 100%;
+                    max-width: 1140px;
+                    margin: auto;
+                }
+
+            </style>
+        </th:block>
+
+        <footer th:replace="fragments/footer :: footerFragment"></footer>
+
+        <!-- START SCROLL TO TOP  -->
+        <div class="scrollup">
+            <a href="#"><i class="fa fa-chevron-up"></i></a>
+        </div>
+
+        <th:block th:replace="fragments/JavaScripts :: JSFragment"></th:block>
+
+    </body>
+</html>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+    <mapper namespace="com.example.testsearch.mapper.AdminMapper">
+        <resultMap id="DataResultMap" type="Data">
+            <id     column="Identifier"                     property="Identifier"/>
+            <result column="Objects" 					    property="Objects"/>
+            <result column="Title"                          property="Title"/>
+            <result column="Subject"                        property="Subject"/>
+            <result column="Description"                    property="Description"/>
+            <result column="Institute_Identifier"           property="Institute_Identifier"/>
+            <result column="Language"                       property="Language"/>
+            <result column="Temporary"                      property="Temporary"/>
+            <result column="Places"                         property="Places"/>
+            <result column="Current_location"               property="Current_location"/>
+            <result column="Raw_Data_Type"                  property="Raw_Data_Type"/>
+            <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
+            <result column="Coverage"                       property="Coverage	"/>
+            <result column="Creator"                        property="Creator"/>
+            <result column="Publisher"                      property="Publisher"/>
+            <result column="Provider"                       property="Provider"/>
+            <result column="Providing_Institution"          property="Providing_Institution"/>
+            <result column="Provider_Country"               property="Provider_Country"/>
+            <result column="Source"                         property="Source"/>
+            <result column="IsPartOf"                       property="IsPartOf"/>
+            <result column="Links"                          property="Links"/>
+            <result column="Rights_Statement_Media"         property="Rights_Statement_Media"/>
+            <result column="Rights"                         property="Rights"/>
+            <result column="Data_Code"                      property="Data_Code"/>
+            <result column="useremail"                      property="useremail"/>
+            <result column="Created_Time"                   property="Created_Time"/>
+            <result column="Updated_Time"                   property="Updated_Time"/>
+
+            <collection property="fileList" javaType="List" ofType="FileDto">
+                <id column="fileIdx" 						property="fileIdx"/>
+                <result	column="fileOriginalName" 			property="fileOriginalName"/>
+                <result column="fileNewName" 				property="fileNewName"/>
+                <result column="filePath" 					property="filePath"/>
+                <result column="fileSize" 					property="fileSize"/>
+            </collection>
+
+        </resultMap>
+
+        <insert id="addData" parameterType="com.example.testsearch.dto.Data">
+            /* Data 등록 처리 */
+            INSERT INTO `data`
+            ( Objects,
+              Title,
+              Subject,
+              Description,
+              Institute_Identifier,
+              Identifier,
+              Language,
+              Temporary,
+              Places,
+              Current_location,
+              Raw_Data_Type,
+              Digital_Data_Type,
+              Coverage,
+              Creator,
+              Publisher,
+              Provider,
+              Providing_Institution,
+              Provider_Country,
+              Source,
+              IsPartOf,
+              Links,
+              Rights_Statement_Media,
+              Rights,
+              Data_Code,
+              useremail,
+              Created_Time,
+              Updated_Time
+            ) VALUES (
+                 #{Objects},
+                 #{Title},
+                 #{Subject},
+                 #{Description},
+                 #{Institute_Identifier},
+                 #{Identifier},
+                 #{Language},
+                 #{Temporary},
+                 #{Places},
+                 #{Current_location},
+                 #{Raw_Data_Type},
+                 #{Digital_Data_Type},
+                 #{Coverage},
+                 #{Creator},
+                 #{Publisher},
+                 #{Provider},
+                 #{Providing_Institution},
+                 #{Provider_Country},
+                 #{Source},
+                 #{IsPartOf},
+                 #{Links},
+                 #{Rights_Statement_Media},
+                 #{Rights},
+                 #{Data_Code},
+                 #{useremail},
+                 NOW(),
+                 NOW()
+            );
+
+        </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </mapper>
