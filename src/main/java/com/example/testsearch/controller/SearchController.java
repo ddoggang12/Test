@@ -1,6 +1,7 @@
 package com.example.testsearch.controller;
 
 import com.example.testsearch.dto.ArtWork;
+import com.example.testsearch.dto.Data;
 import com.example.testsearch.dto.ImageFile;
 import com.example.testsearch.mapper.SearchMapper;
 import com.example.testsearch.service.SearchService;
@@ -30,6 +31,21 @@ public class SearchController {
     }
 
 
+    /* data리스트 조회 */
+    @GetMapping("/list2")
+    public  String getDataList(Model model){
+
+        List<Data> dataList = searchService.getDataList();
+
+        model.addAttribute("title", "data리스트 조회");
+        model.addAttribute("dataList", dataList);
+
+        return "test/list2";
+
+    }
+
+
+    /* 테스트리스트 조회 */
     @GetMapping("/list")
     public String testSearch(Model model){
 
@@ -45,6 +61,7 @@ public class SearchController {
         return "test/list";
     }
 
+    /* 검색 */
     @GetMapping("/searchResult")
     public String searchResult( Model model
                                ,@RequestParam (value = "searchKey", defaultValue = "art_description") String searchKey
@@ -63,6 +80,7 @@ public class SearchController {
         return "test/searchResult";
     }
 
+    /* 상세검색 */
     @GetMapping("/searchDetail")
     public String searchDetail(  Model model
                                 ,@RequestParam(value = "art_id",required = false)String art_id
@@ -78,41 +96,46 @@ public class SearchController {
         return "test/searchDetail";
     }
 
+    /* data 검색 */
+    @GetMapping("/dataSearchResult")
+    public String dataSeachResult(Model model
+                                 ,@RequestParam (value = "searchKey", defaultValue = "Description") String searchKey
+                                 ,@RequestParam (value = "searchValue", required = false) String searchValue){
 
-    //이미지 등록
-    @GetMapping("/insert")
-    public String addImage(Model model) {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("searchKey", searchKey);
+        paramMap.put("searchValue", searchValue);
 
-        model.addAttribute("title", "작품 등록");
+        List<Data> dataSearchList = searchService.getDataSearchList(paramMap);
+        logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
 
-        return "test/insert";
-    }
+        model.addAttribute("title", "작품 검색");
+        model.addAttribute("dataSearchList", dataSearchList);
 
-    //이미지 대체 등록 처리
-    @PostMapping("/insert")
-    public String addImage(  ImageFile imageFile
-            , @RequestParam MultipartFile[] fileImage
-            , HttpServletRequest request) {
+        return "test/dataSearchResult";
 
-        //파일 업로드
-        String serverName = request.getServerName();
-        String fileRealPath = "";
-        if("localhost".equals(serverName)) {
-            fileRealPath = System.getProperty("user.dir") + "/src/main/resources/static/";
-            //fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
-        }else {
-            fileRealPath = request.getSession().getServletContext().getRealPath("/WEB-INF/classes/static/");
-        }
-
-        logger.info("이미지 등록 폼에서 입력받은 데이터: {}", imageFile);
-
-        searchService.addImage(imageFile, fileImage, fileRealPath);
-
-
-        return "test/list";
 
     }
 
+
+    /* Data_Code로 data 상세검색 */
+    @GetMapping("/dataSearchDetail")
+    public String dataSearchDetail( Model model
+                                   ,@RequestParam(value = "Data_Code",required = false)String Data_Code
+                                   ,@RequestParam(value = "filePath", required = false)String filePath) throws ParseException{
+
+        logger.info("파일 주소 : " , filePath);
+
+        Data data = searchService.getDataSearchDetailList(Data_Code);
+        logger.info("data 담긴 값 : {} ", data);
+
+        model.addAttribute("title","Data 검색 상세 화면");
+        model.addAttribute("data",data);
+
+        return "test/dataSearchDetail";
+
+
+    }
 
 
 

@@ -107,7 +107,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="margin-top: 40px;">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a th:href="@{/}">HOME</a></li>
-                        <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/list}">작품목록</a></li>
+                        <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/list2}">List</a></li>
                         <li th:if="${session.SEMAIL != null}" style="margin-top: 13px; font-size: 17px;">[[${session.SNAME}]]님이 로그인하셨습니다.</li>
                         <li th:if="${session.SEMAIL == null}"><a th:href="@{/user/login}">로그인</a></li>
                         <li th:unless="${session.SEMAIL == null}"><a th:href="@{/user/logout}">로그아웃</a></li>
@@ -122,123 +122,133 @@
                     <div class="col-md-12">
                         <div class="panel">
                             <div class="panel-heading bg-white border-none">
-                                <h4><span class="icon-social-youtube"></span> 작품 등록</h4>
+                                <h4><span class="icon-social-youtube"></span> Upload</h4>
                             </div>
                             <div class="panel-body" style="padding-bottom:30px;">
-                                <form class="mb-5" id="ArtInsert" th:action="@{/test/insert}" method="post" enctype="multipart/form-data">
+                                <form class="mb-5" id="ArtInsert" th:action="@{/admin/insert}" method="post" enctype="multipart/form-data">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Objects" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Objects" name="Objects" required>
                                                         <span class="bar"></span>
                                                         <label>Objects</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Title" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Title" name="Title" required>
                                                         <span class="bar"></span>
                                                         <label>Title</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Subject" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Subject" name="Subject" >
                                                         <span class="bar"></span>
                                                         <label>Subject</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Institute_identifier" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Description" name="Description">
+                                                        <span class="bar"></span>
+                                                        <label>Description</label>
+                                                    </div>
+                                                    <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                        <input type="text" class="form-text" id="validate_Institute_identifier" name="Institute_Identifier" >
                                                         <span class="bar"></span>
                                                         <label>Institute identifier</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                        <input type="text" class="form-text" id="validate_Identifier" name="Identifier">
+                                                        <span class="bar"></span>
+                                                        <label>Identifier</label>
+                                                    </div>
+                                                    <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                         <label>Language</label>
-                                                            <select class="form-control1" id="validate_Language" name="Language" required="required">
-                                                                <option value="Language">Language</option>
+                                                            <select class="form-control1" id="validate_Language" name="Language">
+                                                                <option value="Choose Language">Choose Language</option>
                                                                 <option value="English">English</option>
                                                                 <option value="русский">русский</option>
                                                             </select>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Temporary" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Temporary" name="Temporary" >
                                                         <span class="bar"></span>
                                                         <label>Temporary</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Places" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Places" name="Places" >
                                                         <span class="bar"></span>
                                                         <label>Places</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Current_location" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Current_location" name="Current_location" >
                                                         <span class="bar"></span>
                                                         <label>Current location</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Raw_Data_Type" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Raw_Data_Type" name="Raw_Data_Type" >
                                                         <span class="bar"></span>
                                                         <label>Raw Data Type</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                         <label>Digital Data Type</label>
-                                                        <select class="form-control1" id="validate_Digital_Data_Type1" name="media_type1" required="required" onchange="mediaType(this.value)">
-                                                            <option value="Media Type">Media Type</option>
+                                                        <select class="form-control1" id="validate_Digital_Data_Type1" required="required" onchange="mediaType(this)">
+                                                            <option value="Choose MediaType">Choose MediaType</option>
                                                             <option value="Image">Image</option>
                                                             <option value="Text">Text</option>
                                                             <option value="Video">Video</option>
                                                         </select>
-                                                        <select class="form-control1" id="validate_Digital_Data_Type2" name="media_type2" style="margin-top:5px;" required="required">
+                                                        <select class="form-control1" id="validate_Digital_Data_Type2" name="Digital_Data_Type" style="margin-top:5px;" required="required">
                                                             <option value="File Extension">File Extension</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Coverage" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Coverage" name="Coverage" >
                                                         <span class="bar"></span>
                                                         <label>Coverage</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Creator" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Creator" name="Creator" >
                                                         <span class="bar"></span>
                                                         <label>Creator</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Publisher" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Publisher" name="Publisher" >
                                                         <span class="bar"></span>
                                                         <label>Publisher</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Provider" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Provider" name="Provider" >
                                                         <span class="bar"></span>
                                                         <label>Provider</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Prividing_institution" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Prividing_institution" name="Providing_Institution" >
                                                         <span class="bar"></span>
                                                         <label>Providing institution</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Provider_Country" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Provider_Country" name="Provider_Country" >
                                                         <span class="bar"></span>
                                                         <label>Provider Country</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Source" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Source" name="Source" >
                                                         <span class="bar"></span>
                                                         <label>Source</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_isPartOf" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_isPartOf" name="IsPartOf" >
                                                         <span class="bar"></span>
                                                         <label>isPartOf</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Links" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Links" name="Links" >
                                                         <span class="bar"></span>
                                                         <label>Links(isReferenceBy)</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                         <label>Rights statement for the Media in this item(unless otherwise specified)</label>
                                                         <span>
-                                                        <select class="form-control1" id="validate_Rights_statement" name="rights_statement" style="margin-left: 650px; width: 40%" required="required">
+                                                        <select class="form-control1" id="validate_Rights_statement" name="Rights_Statement_Media" style="margin-left: 650px; width: 40%" required="required">
                                                             <option value="Can I user this?">Can I user this?</option>
                                                             <option value="Yes">Yes</option>
                                                             <option value="Yes with conditions">Yes with conditions</option>
@@ -247,7 +257,7 @@
                                                         </span>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Rights" name="fileTitle" required>
+                                                        <input type="text" class="form-text" id="validate_Rights" name="Rights" >
                                                         <span class="bar"></span>
                                                         <label>Rights</label>
                                                     </div>
@@ -270,7 +280,7 @@
                                             <div class="dropzone" id="my-awesome-dropzone"></div>
                                         </div>
                                         <div style="text-align: center;">
-                                            <input class="submit btn btn-danger" type="submit" value="등록">
+                                            <input class="submit btn btn-danger" type="submit" value="Upload">
                                         </div>
                                     </div><!-- /.row -->
                                 </form>
@@ -312,30 +322,35 @@
                     }
                 });
 
-                function mediaType(e){
-                    console.log("이거되나유");
-                    var Image=["jpg", "png", "gif", "bmp"];
-                    var Text=["doc", "pdf"];
-                    var Video=["mp4", "avi"];
-                    var target = document.getElementById("validate_Digital_Data_Type2");
+            });
 
-                    if(e.value == "Image") var fileExtension = Image;
-                    else if(e.value == "Text") var fileExtension = Text;
-                    else if(e.value == "Video") var fileExtension = Video;
+            function mediaType(e){
+                let fileExtension;
+                console.log("이거되나유");
+                const Image = ["Image : jpg", "Image : png", "Image : gif", "Image : bmp"];
+                const Text = ["Text : doc", "Text : pdf"];
+                const Video = ["Video : mp4", "Video : avi"];
+                const target = document.getElementById("validate_Digital_Data_Type2");
 
-                    target.options.length = 0;
-
-                    for(x in fileExtension){
-                        var opt = document.createElement("option");
-                        opt.value = fileExtension[x];
-                        opt.innerHTML = fileExtension[x];
-                        target.appendChild(opt);
-                    }
+                if(e.value == "Image") {
+                    fileExtension = Image;
+                }
+                else if(e.value == "Text") {
+                    fileExtension = Text;
+                }
+                else if(e.value == "Video") {
+                    fileExtension = Video;
                 }
 
+                target.options.length = 0;
 
-
-            });
+                for(x in fileExtension){
+                    var opt = document.createElement("option");
+                    opt.value = fileExtension[x];
+                    opt.innerHTML = fileExtension[x];
+                    target.appendChild(opt);
+                }
+            }
         </script>
         <!-- end: Javascript -->
         <footer class="footer">
