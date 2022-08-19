@@ -21,6 +21,7 @@
             <result column="Provider"                       property="Provider"/>
             <result column="Providing_Institution"          property="Providing_Institution"/>
             <result column="Provider_Country"               property="Provider_Country"/>
+            <result column="Collection_Name"               property="Collection_Name"/>
             <result column="Source"                         property="Source"/>
             <result column="IsPartOf"                       property="IsPartOf"/>
             <result column="Links"                          property="Links"/>
@@ -62,6 +63,7 @@
               Provider,
               Providing_Institution,
               Provider_Country,
+              Collection_Name,
               Source,
               IsPartOf,
               Links,
@@ -90,6 +92,7 @@
                  #{Provider},
                  #{Providing_Institution},
                  #{Provider_Country},
+                 #{Collection_Name},
                  #{Source},
                  #{IsPartOf},
                  #{Links},
