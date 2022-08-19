@@ -31,6 +31,7 @@ public class Data {
     private String Providing_Institution;
     private String Provider_Country;
     private String Source;
+    private String Collection_Name;
     private String IsPartOf;
     private String Links;
     private String Rights_Statement_Media;

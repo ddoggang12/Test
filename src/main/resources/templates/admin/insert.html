@@ -131,11 +131,6 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                        <input type="text" class="form-text" id="validate_Objects" name="Objects" required>
-                                                        <span class="bar"></span>
-                                                        <label>Objects</label>
-                                                    </div>
-                                                    <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                         <input type="text" class="form-text" id="validate_Title" name="Title" required>
                                                         <span class="bar"></span>
                                                         <label>Title</label>
@@ -231,6 +226,11 @@
                                                         <label>Provider Country</label>
                                                     </div>
                                                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                        <input type="text" class="form-text" id="validate_Collection_Name" name="Collection_Name" >
+                                                        <span class="bar"></span>
+                                                        <label>Collection Name</label>
+                                                    </div>
+                                                    <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                         <input type="text" class="form-text" id="validate_Source" name="Source" >
                                                         <span class="bar"></span>
                                                         <label>Source</label>
@@ -324,6 +324,7 @@
 
             });
 
+            /* select 선택값에 따라 두번째 select 값 변경 */
             function mediaType(e){
                 let fileExtension;
                 console.log("이거되나유");

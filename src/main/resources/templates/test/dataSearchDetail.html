@@ -28,9 +28,6 @@
                                         <span class="TitleInContentsInLineInContents">
                                             [[${l.Title}]]
                                         </span>
-                                        <p style="font-size:13px; text-align:center; padding-top:10px">
-                                            KGZ TEST&nbsp;
-                                        </p>
                                     </th:block>
                                     <div>
                                         <th:block th:if="${not #lists.isEmpty(data.fileList)}"  th:each="f : ${data.fileList}">
@@ -53,10 +50,6 @@
                                             <div class="LineInContents">
                                                 <th:block th:if="${not #lists.isEmpty(data)}" th:each="l : ${data}">
                                                     <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Title"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Title}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
                                                         <div class="TitleInLineInContents"th:text="Subject"></div>
                                                         <div class="ContentsInLineInContents"th:text="${l.Subject}"></div>
                                                     </div>
@@ -65,8 +58,8 @@
                                                         <div class="ContentsInLineInContents" th:text="${l.Description}"></div>
                                                     </div>
                                                     <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Language"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Language}"></div>
+                                                        <div class="TitleInLineInContents" th:text="Raw_Data_Type"></div>
+                                                        <div class="ContentsInLineInContents" th:text="${l.Raw_Data_Type}"></div>
                                                     </div>
                                                     <div class="LineInContents">
                                                         <div class="TitleInLineInContents" th:text="Temporary"></div>
@@ -81,8 +74,8 @@
                                                         <div class="ContentsInLineInContents" th:text="${l.Provider}"></div>
                                                     </div>
                                                     <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Provider_Country"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Provider_Country}"></div>
+                                                        <div class="TitleInLineInContents" th:text="Providing_Institution"></div>
+                                                        <div class="ContentsInLineInContents" th:text="${l.Providing_Institution}"></div>
                                                     </div>
                                                     <div class="LineInContents">
                                                         <div class="TitleInLineInContents" th:text="Digital_Data_Type"></div>
@@ -158,6 +151,9 @@
                     letter-spacing: 1px;
                     font-size: 32px;
                     color: #0D47A1;
+                }
+                .blog_item_img{
+                    margin-top: 30px;
                 }
 
             </style>

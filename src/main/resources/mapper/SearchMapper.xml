@@ -97,9 +97,11 @@
             d.Language,
             d.Temporary,
             d.Current_location,
+            d.Raw_Data_Type,
             d.Digital_Data_Type,
             d.Provider,
             d.Provider_Country,
+            d.Providing_Institution,
             d.Data_Code,
             d.Created_Time,
             d.Updated_Time,
@@ -130,6 +132,7 @@
             d.Subject,
             d.Description,
             d.Identifier,
+            d.Raw_Data_Type,
             d.Provider_Country,
             d.Created_Time,
             d.Data_Code
@@ -147,10 +150,10 @@
     <!-- data 목록 조회 -->
     <select id="getDataList" resultMap="DataResultMap">
         SELECT
-            d.Objects,
             d.Title,
             d.Identifier,
             d.Provider_Country,
+            d.Raw_Data_Type,
             d.Created_Time,
             d.Data_Code
         FROM

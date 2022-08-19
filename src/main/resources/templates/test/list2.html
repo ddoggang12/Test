@@ -108,8 +108,8 @@
                                                 <tr>
                                                     <th th:text="Identifier" th:width="100"></th>
                                                     <th th:text="Provider_Country" th:width="100"></th>
-                                                    <th th:text="Objects"></th>
                                                     <th th:text="Title"></th>
+                                                    <th th:text="Raw_Data_Type"></th>
                                                     <th th:text="Created_Time"></th>
                                                 </tr>
                                             </thead>
@@ -121,10 +121,10 @@
                                                     <td th:text="${l.Provider_Country}">
                                                         None
                                                     </td>
-                                                    <td th:text="${l.Objects}">
+                                                    <td th:text="${l.Title}">
                                                         None
                                                     </td>
-                                                    <td th:text="${l.Title}">
+                                                    <td th:text="${l.Raw_Data_Type}">
                                                         None
                                                     </td>
                                                     <td th:text="${l.Created_Time}">
@@ -139,7 +139,7 @@
                                         </table>
                                     </div>
                                     <div style="text-align: center;">
-                                        <input type="submit" class="btn btn-outline btn-primary" value="작품 등록 ">
+                                        <input type="submit" class="btn btn-outline btn-primary" value="Upload">
                                     </div>
                                 </div>
                             </div>
