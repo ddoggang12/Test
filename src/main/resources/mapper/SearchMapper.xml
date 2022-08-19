@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.testsearch.mapper.SearchMapper">
+    <resultMap id="ArtWorkResultMap" type="ArtWork">
+        <id     column="art_id"                             property="art_id"/>
+        <result column="fileIdx" 					        property="fileIdx"/>
+        <result column="art_year"                           property="art_year"/>
+        <result column="art_title"                          property="art_title"/>
+        <result column="art_description"                    property="art_description"/>
+        <result column="art_material"                       property="art_material"/>
+        <result column="art_technique"                      property="art_technique"/>
+        <result column="art_size"                           property="art_size"/>
+        <result column="inventory_number"                   property="inventory_number"/>
+        <result column="art_code"                           property="art_code"/>
+        <result column="art_storage"                        property="art_storage"/>
+        <result column="arrival_date"                       property="arrival_date"/>
+        <result column="method_of_purchasing_to_the_fund"   property="method_of_purchasing_to_the_fund	"/>
+        <result column="art_price"                          property="art_price"/>
+        <result column="preservation_and_restoration"       property="preservation_and_restoration"/>
+        <result column="inscription_and_special_notes"      property="inscription_and_special_notes"/>
+        <result column="art_reference"                      property="art_reference"/>
+        <result column="art_type"                           property="art_type"/>
+        <result column="art_style"                          property="art_style"/>
+        <result column="artist_id"                          property="artist_id"/>
+        <result column="rental_id"                          property="rental_id"/>
+        <result column="exhibition_id"                      property="exhibition_id"/>
+
+        <collection property="fileList" javaType="List" ofType="FileDto">
+            <id column="fileIdx" 						property="fileIdx"/>
+            <result	column="fileOriginalName" 			property="fileOriginalName"/>
+            <result column="fileNewName" 				property="fileNewName"/>
+            <result column="filePath" 					property="filePath"/>
+            <result column="fileSize" 					property="fileSize"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="ImageFileResultMap" type="ImageFile">
+        <result column="fileIdx"             property="fileIdx"/>
+        <result column="fileTitle"          property="fileTitle"/>
+
+        <collection property="fileList" javaType="List" ofType="FileDto">
+            <id column="fileIdx" 						property="fileIdx"/>
+            <result	column="fileOriginalName" 			property="fileOriginalName"/>
+            <result column="fileNewName" 				property="fileNewName"/>
+            <result column="filePath" 					property="filePath"/>
+            <result column="fileSize" 					property="fileSize"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="DataResultMap" type="Data">
+        <id     column="Identifier"                     property="Identifier"/>
+        <result column="Objects" 					    property="Objects"/>
+        <result column="Title"                          property="Title"/>
+        <result column="Subject"                        property="Subject"/>
+        <result column="Description"                    property="Description"/>
+        <result column="Institute_Identifier"           property="Institute_Identifier"/>
+        <result column="Language"                       property="Language"/>
+        <result column="Temporary"                      property="Temporary"/>
+        <result column="Places"                         property="Places"/>
+        <result column="Current_location"               property="Current_location"/>
+        <result column="Raw_Data_Type"                  property="Raw_Data_Type"/>
+        <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
+        <result column="Coverage"                       property="Coverage	"/>
+        <result column="Creator"                        property="Creator"/>
+        <result column="Publisher"                      property="Publisher"/>
+        <result column="Provider"                       property="Provider"/>
+        <result column="Providing_Institution"          property="Providing_Institution"/>
+        <result column="Provider_Country"               property="Provider_Country"/>
+        <result column="Source"                         property="Source"/>
+        <result column="IsPartOf"                       property="IsPartOf"/>
+        <result column="Links"                          property="Links"/>
+        <result column="Rights_Statement_Media"         property="Rights_Statement_Media"/>
+        <result column="Rights"                         property="Rights"/>
+        <result column="Data_Code"                      property="Data_Code"/>
+        <result column="useremail"                      property="useremail"/>
+        <result column="Created_Time"                   property="Created_Time"/>
+        <result column="Updated_Time"                   property="Updated_Time"/>
+
+        <collection property="fileList" javaType="List" ofType="FileDto">
+            <id column="fileIdx" 						property="fileIdx"/>
+            <result	column="fileOriginalName" 			property="fileOriginalName"/>
+            <result column="fileNewName" 				property="fileNewName"/>
+            <result column="filePath" 					property="filePath"/>
+            <result column="fileSize" 					property="fileSize"/>
+        </collection>
+    </resultMap>
+
+
+    <!-- Data_Code로 data 상세 검색 -->
+    <select id="getDataSearchDetailList" resultMap="DataResultMap">
+        SELECT
+            d.Objects,
+            d.Title,
+            d.Subject,
+            d.Description,
+            d.Language,
+            d.Temporary,
+            d.Current_location,
+            d.Raw_Data_Type,
+            d.Digital_Data_Type,
+            d.Provider,
+            d.Provider_Country,
+            d.Providing_Institution,
+            d.Data_Code,
+            d.Created_Time,
+            d.Updated_Time,
+            f.fileIdx,
+            f.filepath,
+            SUBSTRING_INDEX(f.fileOriginalName, '.',1)
+        FROM
+            `data` AS d
+                LEFT JOIN
+            `tb_file_control` AS fc
+            ON
+                d.Data_Code = fc.referenceCode
+                LEFT JOIN
+            `tb_file` AS f
+            ON
+                fc.fileIdx = f.fileIdx
+        WHERE
+            d.Data_Code = #{Data_Code};
+
+    </select>
+
+
+    <!-- data 검색 -->
+    <select id="getDataSearchList" parameterType="map" resultMap="DataResultMap">
+        SELECT
+            d.Objects,
+            d.Title,
+            d.Subject,
+            d.Description,
+            d.Identifier,
+            d.Raw_Data_Type,
+            d.Provider_Country,
+            d.Created_Time,
+            d.Data_Code
+        FROM
+            `data` AS d
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="searchKey != null and searchKey !='' and searchValue != ''">
+                AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+            </if>
+        </trim>
+        ;
+    </select>
+
+
+    <!-- data 목록 조회 -->
+    <select id="getDataList" resultMap="DataResultMap">
+        SELECT
+            d.Title,
+            d.Identifier,
+            d.Provider_Country,
+            d.Raw_Data_Type,
+            d.Created_Time,
+            d.Data_Code
+        FROM
+            `data` AS d;
+    </select>
+
+
+    <!--이미지 목록 조회-->
+    <select id="getImageFileList" resultMap="ArtWorkResultMap">
+        SELECT
+            aw.art_year,
+            aw.art_title
+        FROM
+            `artwork` AS aw
+                INNER JOIN
+            tb_file_control AS  fc
+            ON
+                aw.fileIdx = fc.fileIdx
+                INNER JOIN
+            tb_file AS f
+            ON
+                f.fileIdx = fc.fileIdx;
+    </select>
+
+
+    <!--&lt;!&ndash; 이미지 등록 &ndash;&gt;
+    <insert id="addImage" parameterType="ImageFile">
+        INSERT INTO imagefile
+        (
+          fileIdx
+        , fileTitle
+        )VALUES (
+                  #{fileIdx}
+                , #{fileTitle}
+        );
+    </insert>-->
+
+
+    <!-- 상세 검색 -->
+    <select id="getArtWorkSearchDetailList" resultMap="ArtWorkResultMap">
+        SELECT
+              a.art_id
+             ,a.art_year
+             ,a.art_title
+             ,a.art_description
+             ,a.art_material
+             ,a.art_technique
+             ,a.art_size
+             ,f.fileIdx
+             ,f.filepath
+             ,SUBSTRING_INDEX(f.fileOriginalName, '.',1)
+        FROM
+            artwork AS a
+            LEFT JOIN
+            tb_file AS f
+            ON
+            a.fileIdx = f.fileIdx
+        WHERE
+            a.art_id=#{art_id};
+
+    </select>
+
+    
+    <!-- 테스트 목록 조회 -->
+    <select id="getArtWorkList" resultMap="ArtWorkResultMap">
+        SELECT
+              art_id
+             ,art_title
+             ,art_year
+             ,art_description
+             ,art_material
+             ,art_technique
+             ,art_size
+        FROM
+            artwork;
+    </select>
+
+
+    <!-- 검색 -->
+    <select id="getArtWorkSearchList" parameterType="map" resultMap="ArtWorkResultMap">
+        SELECT
+              art_id
+             ,art_title
+             ,art_year
+             ,art_description
+             ,art_material
+             ,art_technique
+             ,art_size
+        FROM
+              artwork
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="searchKey != null and searchKey !='' and searchValue != ''">
+                AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+            </if>
+        </trim>
+            ;
+    </select>
+
+</mapper>
