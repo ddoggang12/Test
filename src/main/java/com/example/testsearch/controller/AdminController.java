@@ -52,9 +52,11 @@ public class AdminController {
 
     //data 등록화면
     @GetMapping("/insert")
-    public String addImage(Model model) {
+    public String addImage(Model model, HttpSession session) {
 
+        String sessionEmail = (String) session.getAttribute("SEMAIL");
         model.addAttribute("title", "작품 등록");
+        model.addAttribute("SEMAIL",sessionEmail);
 
         return "admin/insert";
     }
@@ -66,7 +68,12 @@ public class AdminController {
             , @RequestParam MultipartFile[] fileImage
             , HttpServletRequest request) {
 
-        String sessinEmail = (String) session.getAttribute("SEMAIL");
+        String sessionEmail = (String) session.getAttribute("SEMAIL");
+
+        /*String Providing_Institution = request.getParameter("NHM - I");
+        if("NHM - I".equals(Providing_Institution)){
+            data.setProviding_Institution("National History Museum");
+        }*/
 
         //파일 업로드
         String serverName = request.getServerName();
@@ -80,7 +87,7 @@ public class AdminController {
 
         logger.info("data 등록 폼에서 입력받은 데이터: {}", data);
 
-        adminService.addData(data, sessinEmail, fileImage, fileRealPath);
+        adminService.addData(data, sessionEmail, fileImage, fileRealPath);
 
 
         return "redirect:/test/list2";
