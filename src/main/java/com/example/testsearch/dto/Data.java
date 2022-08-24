@@ -28,6 +28,7 @@ public class Data {
     private String Creator;
     private String Publisher;
     private String Provider;
+    private String Participants;
     private String Providing_Institution;
     private String Provider_Country;
     private String Source;

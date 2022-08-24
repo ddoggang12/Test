@@ -28,6 +28,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
+    /* 회원가입 화면 */
     @GetMapping("/join")
     public String addUser(Model model){
 
@@ -36,6 +37,7 @@ public class UserController {
         return "user/join";
     }
 
+    /* 회원가입 처리 */
     @RequestMapping(value = "/join", method = {RequestMethod.POST})
     public String addUser(UserDto userDto){
 
@@ -45,6 +47,7 @@ public class UserController {
         return "redirect:/";
     }
 
+    /* Ajax - 이메일 중복체크 */
     @PostMapping("/idCheck")
     @ResponseBody
     public boolean isIdCheck(@RequestParam(value = "useremail") String useremail){
@@ -59,6 +62,7 @@ public class UserController {
         return idCheck;
     }
 
+    /* 로그인 화면 */
     @GetMapping("/login")
     public String login( Model model
                         ,@RequestParam(value = "result", required = false) String result){
@@ -70,6 +74,7 @@ public class UserController {
         return "user/login";
     }
 
+    /* 로그인 처리 */
     @PostMapping("/login")
     public String login(UserDto userDto, HttpSession session, RedirectAttributes reAttr){
         String useremail = userDto.getUseremail();
@@ -93,6 +98,7 @@ public class UserController {
         return "redirect:/user/login";
     }
 
+    /* 로그아웃 */
     @GetMapping("/logout")
     public String logout(HttpSession session){
 

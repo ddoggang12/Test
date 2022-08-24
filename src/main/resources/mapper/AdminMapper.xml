@@ -17,6 +17,7 @@
             <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
             <result column="Coverage"                       property="Coverage	"/>
             <result column="Creator"                        property="Creator"/>
+            <result column="Participants"                   property="Participants"/>
             <result column="Publisher"                      property="Publisher"/>
             <result column="Provider"                       property="Provider"/>
             <result column="Providing_Institution"          property="Providing_Institution"/>
@@ -59,6 +60,7 @@
               Digital_Data_Type,
               Coverage,
               Creator,
+              Participants,
               Publisher,
               Provider,
               Providing_Institution,
@@ -88,6 +90,7 @@
                  #{Digital_Data_Type},
                  #{Coverage},
                  #{Creator},
+                 #{Participants},
                  #{Publisher},
                  #{Provider},
                  #{Providing_Institution},
