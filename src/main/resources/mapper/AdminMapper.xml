@@ -15,6 +15,7 @@
             <result column="Current_location"               property="Current_location"/>
             <result column="Raw_Data_Type"                  property="Raw_Data_Type"/>
             <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
+            <result column="File_Extension"                 property="File_Extension"/>
             <result column="Coverage"                       property="Coverage	"/>
             <result column="Creator"                        property="Creator"/>
             <result column="Participants"                   property="Participants"/>
@@ -58,6 +59,7 @@
               Current_location,
               Raw_Data_Type,
               Digital_Data_Type,
+              File_Extension,
               Coverage,
               Creator,
               Participants,
@@ -88,6 +90,7 @@
                  #{Current_location},
                  #{Raw_Data_Type},
                  #{Digital_Data_Type},
+                 #{File_Extension},
                  #{Coverage},
                  #{Creator},
                  #{Participants},

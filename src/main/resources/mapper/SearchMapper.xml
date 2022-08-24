@@ -61,6 +61,7 @@
         <result column="Current_location"               property="Current_location"/>
         <result column="Raw_Data_Type"                  property="Raw_Data_Type"/>
         <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
+        <result column="File_Extension"                 property="File_Extension"/>
         <result column="Coverage"                       property="Coverage	"/>
         <result column="Creator"                        property="Creator"/>
         <result column="Publisher"                      property="Publisher"/>
@@ -99,6 +100,7 @@
             d.Current_location,
             d.Raw_Data_Type,
             d.Digital_Data_Type,
+            d.File_Extension,
             d.Provider,
             d.Provider_Country,
             d.Providing_Institution,

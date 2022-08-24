@@ -54,6 +54,21 @@
                 font-size: 20px;
             }
 
+            #all_static {
+                width: 160px;
+                height: auto;
+                border: 1px solid black;
+                float: right;
+                position: relative;
+                z-index: 2;
+                cursor: pointer;
+                padding: 2px 0 2px 0;
+                transition: 0.3s;
+                text-align: center;
+                margin-right: 16px;
+                margin-top: 18px;
+            }
+
 
 
         </style>
@@ -95,11 +110,15 @@
         <section id="service" class="service sections margin-top-120" style="margin-top: 30px;">
             <div class="container">
                 <div class="row">
+                    <div id="piechart" style="width: 900px; height: 500px;"></div>
                     <form th:action="@{/admin/insert}" method="get">
                         <div class="col-md-12">
                             <div class="panel">
                                 <div class="panel-heading bg-white border-none" style="margin-top: 40px">
                                     <h4><span class="icon-list"></span>&nbsp List</h4>
+                                </div>
+                                <div class="total">
+                                    <div class="static" id="all_static" onclick="showTotalStatistics_Popup();">Statistical Info.</div>
                                 </div>
                                 <div class="panel-body">
                                     <div class="responsive-table">
@@ -164,30 +183,31 @@
 
         <!-- custom -->
         <script th:src="@{/asset/js/main.js}"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
 
             $(document).ready(function(){
 
                 /* 데이터 테이블 생성 */
-                var table = $('#dataList').DataTable({
-                    order : [ 0, 'desc' ],
-                    lengthChange : false,
-                    pageLength : 15,
-                    filter : false,
-                    dom : '<"top"i>rt<"bottom"p><"clear">',
-                        "language": {
-                            "info": "전체_TOTAL_건",
-                            "Paginate": {
-                                "first":       "처음",
-                                "last":        "마지막",
-                                "next":        "다음",
-                                "previous":    "이전"
-                            }
+                const table = $('#dataList').DataTable({
+                    order: [0, 'desc'],
+                    lengthChange: false,
+                    pageLength: 15,
+                    filter: false,
+                    dom: '<"top"i>rt<"bottom"p><"clear">',
+                    "language": {
+                        "info": "전체_TOTAL_건",
+                        "Paginate": {
+                            "first": "처음",
+                            "last": "마지막",
+                            "next": "다음",
+                            "previous": "이전"
                         }
+                    }
                 });
 
                 /* 레코드 수 포맷 */
-                var info = table.page.info();
+                const info = table.page.info();
                 $('#dataList_info').html(
                     '전체 ' + info.recordsTotal + ' 건').css('font-weight', 'bold');
 
@@ -197,6 +217,44 @@
                     });
 
             });
+
+            /*function showTotalStatisticsPopup() {
+                window.open("/Loading?query=" + encodeURIComponent("region=total"), "Statistics", 'width=1200,height=1200,left=0,top=0');
+            }*/
+            /* 팝업창 */
+            function showTotalStatistics_Popup(){
+                const url = "/test/totalStatisticsPopup";
+                const winWidth = 1200;
+                const winHeight = 800;
+                const left = 0;
+                const top = 0;
+                const popupOption = "width=" + winWidth + ", height=" + winHeight + ", left=" + left + ", top=" +top;
+                const myWindow = window.open(url, "구글차트 어떻게 할까요", popupOption);
+                myWindow.document.write("<h1>"+myWindow.name+"</h1>");
+            }
+
+            /* 구글 차트 */
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day'],
+                    ['National History Museum', 11],
+                    ['Fine Arts Museum', 2],
+                    ['The Center of nomadic civilization', 2],
+                    ['Others', 1],
+                ]);
+
+                const options = {
+                    title: '기관별 통계'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                chart.draw(data, options);
+            }
 
         </script>
         <footer class="footer">
