@@ -173,16 +173,22 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                <label>Providing institution</label>
-                                                <select class="form-control1" id="validate_Providing_institution" name="Providing_Institution" required="required" onchange="providing_institution(this)">
-                                                    <option value="Classification"> ::: Classification ::: </option>
-                                                    <option value="National History Museum">National History Museum</option>
-                                                    <option value="Fine Arts Museum">Fine Arts Museum</option>
-                                                    <option value="The Center of nomadic civilization">The Center of nomadic civilization</option>
-                                                </select>
+                                        <h5>File Upload</h5>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="input-group fileupload-v1">
+                                                    <input type="file" name="fileImage" multiple="multiple" class="fileupload-v1-file hidden"/>
+                                                    <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+                                                    </span>
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                            <div class="panel-body">
+                                                <div class="dropzone" id="my-awesome-dropzone"></div>
                                             </div>
+                                        </div>
+                                        <div class="col-md-12">
                                             <div class="form-group form-animate-text" style="margin-top:40px!important;">
                                                 <label>Digital Data Type</label>
                                                 <select class="form-control1" id="validate_Digital_Data_Type" name="Digital_Data_Type" style="display: inline; width: 30%;" required="required" onchange="mediaType(this)">
@@ -193,6 +199,15 @@
                                                 </select>
                                                 <select class="form-control1" id="validate_File_Extension" name="File_Extension" required="required">
                                                     <option value="File Extension">File Extension</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <label>Providing institution</label>
+                                                <select class="form-control1" id="validate_Providing_institution" name="Providing_Institution" required="required" onchange="providing_institution(this)">
+                                                    <option value="Classification"> ::: Classification ::: </option>
+                                                    <option value="National History Museum">National History Museum</option>
+                                                    <option value="Fine Arts Museum">Fine Arts Museum</option>
+                                                    <option value="The Center of nomadic civilization">The Center of nomadic civilization</option>
                                                 </select>
                                             </div>
                                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
@@ -323,25 +338,10 @@
                                                 <label>Rights</label>
                                             </div>
                                         </div>
+                                        <div style="text-align: center;">
+                                            <input class="submit btn btn-danger" type="submit" value="Upload">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <h5>File Upload</h5>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="input-group fileupload-v1">
-                                        <input type="file" name="fileImage" multiple="multiple" class="fileupload-v1-file hidden"/>
-                                        <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
-                                        <span class="input-group-btn">
-                                                    <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
-                                                  </span>
-                                    </div><!-- /input-group -->
-                                </div><!-- /.col-lg-6 -->
-                                <div class="panel-body">
-                                    <div class="dropzone" id="my-awesome-dropzone"></div>
-                                </div>
-                                <div style="text-align: center;">
-                                    <input class="submit btn btn-danger" type="submit" value="Upload">
                                 </div>
                             </div><!-- /.row -->
                         </form>
@@ -397,7 +397,7 @@
         if(day < 10){
             day = "0" + day;
         }
-        $('#current_date').append(day + "" + month + "" + year);
+        $('#current_date').append(day + month + year);
 
 
         /* Identifier value 담겨있는지 확인 */
@@ -432,7 +432,11 @@
             $("#validate_File_Extension").css("display", "inline-block");
             fileExtension = Text;
             $('#validate_Identifier2').val("T");
-
+        }
+        else if(e.value == "Video") {
+            $("#validate_File_Extension").css("display", "inline-block");
+            fileExtension = Video;
+            $('#validate_Identifier2').val("V");
         }
         else if(e.value == "Choose MediaType") {
             $("#validate_File_Extension").css("display", "none");
@@ -445,6 +449,34 @@
             opt.value = fileExtension[x];
             opt.innerHTML = fileExtension[x];
             target.appendChild(opt);
+        }
+
+    }
+
+    /* providing_institution select 선택별 입력값 Indentifier input에 생성 */
+   /* function providing_institution(e){
+        console.log("이거 되고 있얼?");
+        const opt = document.getElementById("validate_Providing_institution");
+        const optVal = opt.options[opt.selectedIndex].value;
+        const valI = document.getElementById("validate_Identifier1");
+
+        valI.value = optVal;
+
+    }*/
+    function providing_institution(e) {
+        console.log("이거 되고 있얼?");
+
+        if (e.value == "National History Museum") {
+            $('#validate_Identifier1').val("NHM");
+        }
+        else if (e.value == "Fine Arts Museum") {
+            $('#validate_Identifier1').val("FAM");
+        }
+        else if (e.value == "The Center of nomadic civilization") {
+            $('#validate_Identifier1').val("NOM");
+        }
+        else if (e.value == "Classification") {
+            $('#validate_Identifier1').val("");
         }
 
         /* Identifier 입력값(기관별-날짜-입력자코드-입력번호) value에 담기 */
@@ -465,31 +497,6 @@
 
         $('#validate_Identifier').val(result);
         console.log($('#validate_Identifier').val(),'<-Identifier value');
-
-        // data type 없이 upload 할 때는 Identifier 생성 어떻게 할 것인가
-
-    }
-
-    /* providing_institution select 선택별 입력값 Indentifier input에 생성 */
-   /* function providing_institution(e){
-        console.log("이거 되고 있얼?");
-        const opt = document.getElementById("validate_Providing_institution");
-        const optVal = opt.options[opt.selectedIndex].value;
-        const valI = document.getElementById("validate_Identifier1");
-
-        valI.value = optVal;
-
-    }*/
-    function providing_institution(e) {
-        console.log("이거 되고 있얼?");
-
-        if (e.value == "National History Museum") {
-            $('#validate_Identifier1').val("NHM");
-        } else if (e.value == "Fine Arts Museum") {
-            $('#validate_Identifier1').val("FAM");
-        } else if (e.value == "The Center of nomadic civilization") {
-            $('#validate_Identifier1').val("NOM");
-        }
 
     }
 

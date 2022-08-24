@@ -110,6 +110,7 @@
         <section id="service" class="service sections margin-top-120" style="margin-top: 30px;">
             <div class="container">
                 <div class="row">
+                    <div id="piechart" style="width: 900px; height: 500px;"></div>
                     <form th:action="@{/admin/insert}" method="get">
                         <div class="col-md-12">
                             <div class="panel">
@@ -182,6 +183,7 @@
 
         <!-- custom -->
         <script th:src="@{/asset/js/main.js}"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
 
             $(document).ready(function(){
@@ -219,7 +221,7 @@
             /*function showTotalStatisticsPopup() {
                 window.open("/Loading?query=" + encodeURIComponent("region=total"), "Statistics", 'width=1200,height=1200,left=0,top=0');
             }*/
-
+            /* 팝업창 */
             function showTotalStatistics_Popup(){
                 const url = "/test/totalStatisticsPopup";
                 const winWidth = 1200;
@@ -227,8 +229,31 @@
                 const left = 0;
                 const top = 0;
                 const popupOption = "width=" + winWidth + ", height=" + winHeight + ", left=" + left + ", top=" +top;
-                const myWindow = window.open(url, "Statistics", popupOption);
+                const myWindow = window.open(url, "구글차트 어떻게 할까요", popupOption);
                 myWindow.document.write("<h1>"+myWindow.name+"</h1>");
+            }
+
+            /* 구글 차트 */
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+
+                const data = google.visualization.arrayToDataTable([
+                    ['Task', 'Hours per Day'],
+                    ['National History Museum', 11],
+                    ['Fine Arts Museum', 2],
+                    ['The Center of nomadic civilization', 2],
+                    ['Others', 1],
+                ]);
+
+                const options = {
+                    title: '기관별 통계'
+                };
+
+                const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                chart.draw(data, options);
             }
 
         </script>
