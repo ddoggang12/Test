@@ -81,11 +81,21 @@
                                                         <div class="TitleInLineInContents" th:text="Digital_Data_Type"></div>
                                                         <div class="ContentsInLineInContents" th:text="${l.Digital_Data_Type}"></div>
                                                     </div>
+                                                    <div class="LineInContents">
+                                                        <div class="TitleInLineInContents"  th:text="Latitude"></div>
+                                                        <div class="ContentsInLineInContents" id="lat"  th:text="${l.Latitude}"></div>
+                                                            //값을 가져오기위해 id 추가
+                                                    </div>
+                                                    <div class="LineInContents">
+                                                        <div class="TitleInLineInContents"  th:text="Longitude"></div>
+                                                        <div class="ContentsInLineInContents" id="lng"  th:text="${l.Longitude}"></div>
+                                                    </div>
                                                 </th:block>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div id="googleMap" style="width:50%;height:400px;"></div>
                             </div>
                         </div>
                     </div>
@@ -156,10 +166,32 @@
                     margin-top: 30px;
                 }
 
+
             </style>
 
         </th:block>
 
+        <script>
+//구글 지도 api를 사용해서 위도 경도 값을 불러와서 하단부에 맵 구성
+            function myMap() {
+                const latVal= $('#lat').text();     //javascript에서 데이터베이스에 있는 값을 불러 오기위한 구문
+                                                    //input태그에는 val를 사용하지만 div태그에는 text를 사용
+                console.log(latVal);
+                const lngVal= $('#lng').text();
+                var NHM_position ={lat:latVal,lng:lngVal};  //변수에 위도 경도값을 넣어서 한번에 사용하려했으나 오류로 사용되지가 않음
+                const mapProp= {    //맵을 만들기위한 기본 틀
+                    center:new google.maps.LatLng(latVal,lngVal),       //맵의 중앙
+                    zoom:17,            //확대정도
+                    mapTypeId: google.maps.MapTypeId.HYBRID     //위성으로 볼지 지도로 볼지에 대한 타입설정
+                };
+                const map = new google.maps.Map(document.getElementById("googleMap"),mapProp);  //mapProp에 대한 구글 맵을 불러온다
+
+                const marker = new google.maps.Marker({     //마커
+                    position:mapProp.center,        //center
+                    map:map
+                });
+            }
+        </script>
         <footer th:replace="fragments/footer :: footerFragment"></footer>
 
         <!-- START SCROLL TO TOP  -->
@@ -168,7 +200,13 @@
         </div>
 
         <th:block th:replace="fragments/JavaScripts :: JSFragment"></th:block>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-p2WKYIGpnVzk826XaGd4-Kwv0gqOMHk&callback=myMap"></script>
+            //맵 src api key를 넣으면 됨
+
 
     </body>
 
+
 </html>
+
+

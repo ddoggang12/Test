@@ -77,6 +77,8 @@
         <result column="useremail"                      property="useremail"/>
         <result column="Created_Time"                   property="Created_Time"/>
         <result column="Updated_Time"                   property="Updated_Time"/>
+        <result column="Latitude"                       property="Latitude"/>
+        <result column="Longitude"                      property="Longitude"/>
 
         <collection property="fileList" javaType="List" ofType="FileDto">
             <id column="fileIdx" 						property="fileIdx"/>
@@ -107,6 +109,8 @@
             d.Data_Code,
             d.Created_Time,
             d.Updated_Time,
+            d.Longitude,
+            d.Latitude,
             f.fileIdx,
             f.filepath,
             SUBSTRING_INDEX(f.fileOriginalName, '.',1)
@@ -137,7 +141,9 @@
             d.Raw_Data_Type,
             d.Provider_Country,
             d.Created_Time,
-            d.Data_Code
+            d.Data_Code,
+            d.Latitude,
+            d.Longitude
         FROM
             `data` AS d
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
@@ -253,5 +259,6 @@
         </trim>
             ;
     </select>
+
 
 </mapper>

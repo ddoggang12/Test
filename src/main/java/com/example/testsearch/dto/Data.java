@@ -42,6 +42,8 @@ public class Data {
     private String useremail;
     private LocalDateTime Created_Time;
     private LocalDateTime Updated_Time;
+    private Float Latitude;
+    private Float Longitude;
 
     private UserDto userDto;
     private List<FileDto> fileList;
