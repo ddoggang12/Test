@@ -24,6 +24,7 @@ public class Data {
     private String Current_location;
     private String Raw_Data_Type;
     private String Digital_Data_Type;
+    private String File_Extension;
     private String Coverage;
     private String Creator;
     private String Publisher;

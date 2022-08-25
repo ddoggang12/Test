@@ -31,6 +31,7 @@ public class SearchController {
     }
 
 
+
     /* data리스트 조회 */
     @GetMapping("/list2")
     public  String getDataList(Model model){
