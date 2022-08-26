@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,15 @@ public class SearchController {
         this.searchMapper = searchMapper;
     }
 
+    @GetMapping("/totalStatisticsPopup")
+    public String totalStatisticsPopup(Model model){
 
+        List<Data> PICntList = searchMapper.getPICntList();
+        logger.info("PICntList에 담긴 값 : {}", PICntList);
+        model.addAttribute("title", "Staticstical Info");
+
+        return "/test/totalStatisticsPopup";
+    }
 
     /* data리스트 조회 */
     @GetMapping("/list2")
@@ -44,7 +53,6 @@ public class SearchController {
         return "test/list2";
 
     }
-
 
     /* 테스트리스트 조회 */
     @GetMapping("/list")
