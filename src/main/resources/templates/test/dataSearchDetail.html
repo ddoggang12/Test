@@ -25,7 +25,7 @@
                             <div class="head_title text-center">
                                 <div align="center" style="padding: 20px 0px 0px 0px">
                                     <th:block th:if="${not #lists.isEmpty(data)}" th:each="l : ${data}">
-                                        <span class="TitleInContentsInLineInContents">
+                                        <span class="TitleInContentsInLineInContents" id="title">
                                             [[${l.Title}]]
                                         </span>
                                     </th:block>
@@ -41,61 +41,72 @@
                                             </div>
                                         </th:block>
                                         <!--<img src="/image/1.jpg">-->
+
                                     </div>
                                 </div>
 
                                 <div class="single_service_area  margin-top-80">
                                     <div class="row">
-                                        <div class id="CONTENTS">
-                                            <div class="LineInContents">
-                                                <th:block th:if="${not #lists.isEmpty(data)}" th:each="l : ${data}">
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents"th:text="Subject"></div>
-                                                        <div class="ContentsInLineInContents"th:text="${l.Subject}"></div>
+                                        <div class="tabs">
+                                            <input id="all" type="radio" name="tab_item" checked>
+                                            <label class="tab_item" for="all">All Content</label>
+                                            <input id="programming" type="radio" name="tab_item">
+                                            <label class="tab_item" for="programming">Map</label>
+                                                <div class="tab_content" id="all_content">
+                                                    <div class id="CONTENTS">
+                                                        <div class="LineInContents">
+                                                            <th:block th:if="${not #lists.isEmpty(data)}" th:each="l : ${data}">
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents"th:text="Subject"></div>
+                                                                    <div class="ContentsInLineInContents"th:text="${l.Subject}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Description"></div>
+                                                                    <div class="ContentsInLineInContents" id ="desc" th:text="${l.Description}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Raw_Data_Type"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Raw_Data_Type}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Temporary"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Temporary}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Current_location"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Current_location}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Provider"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Provider}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Providing_Institution"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Providing_Institution}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents" th:text="Digital_Data_Type"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Digital_Data_Type}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents"  th:text="Latitude"></div>
+                                                                    <div class="ContentsInLineInContents" id="lat"  th:text="${l.Latitude}"></div>
+                                                                </div>
+                                                                <div class="LineInContents">
+                                                                    <div class="TitleInLineInContents"  th:text="Longitude"></div>
+                                                                    <div class="ContentsInLineInContents" id="lng"  th:text="${l.Longitude}"></div>
+                                                                </div>
+                                                            </th:block>
+                                                        </div>
                                                     </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Description"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Description}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Raw_Data_Type"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Raw_Data_Type}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Temporary"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Temporary}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Current_location"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Current_location}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Provider"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Provider}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Providing_Institution"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Providing_Institution}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents" th:text="Digital_Data_Type"></div>
-                                                        <div class="ContentsInLineInContents" th:text="${l.Digital_Data_Type}"></div>
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents"  th:text="Latitude"></div>
-                                                        <div class="ContentsInLineInContents" id="lat"  th:text="${l.Latitude}"></div>
-                                                            //값을 가져오기위해 id 추가
-                                                    </div>
-                                                    <div class="LineInContents">
-                                                        <div class="TitleInLineInContents"  th:text="Longitude"></div>
-                                                        <div class="ContentsInLineInContents" id="lng"  th:text="${l.Longitude}"></div>
-                                                    </div>
-                                                </th:block>
+                                                </div>
+                                            <div class="tab_content" id="programming_content">
+                                                <div id="googleMap"></div>
                                             </div>
-                                        </div>
+
                                     </div>
                                 </div>
-                                <div id="googleMap" style="width:50%;height:400px;"></div>
+
                             </div>
                         </div>
                     </div>
@@ -165,31 +176,94 @@
                 .blog_item_img{
                     margin-top: 30px;
                 }
+                /* 탭 전체 스타일 */
+                .tabs {
+                    margin-top: 100px;
+                    padding-bottom: 40px;
+                    background-color: #ffffff;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                    width: 1200px;
+                    margin: 0 auto;}
+
+                /* 탭 스타일 */
+                .tab_item {
+                    width: calc(100%/2);
+                    height: 50px;
+                    border-bottom: 3px solid #333333;
+                    background-color: #f8f8f8;
+                    line-height: 50px;
+                    font-size: 16px;
+                    text-align: center;
+                    color: #333333;
+                    display: block;
+                    float: left;
+                    font-weight: bold;
+                    transition: all 0.2s ease;
+                }
+                .tab_item:hover {
+                    opacity: 0.75;
+                }
+
+                /* 라디오 버튼 UI삭제*/
+                input[name="tab_item"] {
+                    display: none;
+                }
+
+                /* 탭 컨텐츠 스타일 */
+                .tab_content {
+                    display: none;
+                    padding: 40px 40px 0;
+                    clear: both;
+                    overflow: hidden;
+                }
 
 
+                /* 선택 된 탭 콘텐츠를 표시 */
+                #all:checked ~ #all_content,
+                #programming:checked ~ #programming_content,
+                #design:checked ~ #design_content {
+                    display: block;
+                }
+
+                /* 선택된 탭 스타일 */
+                .tabs input:checked + .tab_item {
+                    background-color: #333333;
+                    color: #fff;
+                }
+                #googleMap{
+                    height:500px;
+                    width:100%;
+
+                }
             </style>
 
         </th:block>
 
         <script>
-//구글 지도 api를 사용해서 위도 경도 값을 불러와서 하단부에 맵 구성
+
+
+
+            //구글 지도 api를 사용해서 위도 경도 값을 불러와서 하단부에 맵 구성
             function myMap() {
                 const latVal= $('#lat').text();     //javascript에서 데이터베이스에 있는 값을 불러 오기위한 구문
                                                     //input태그에는 val를 사용하지만 div태그에는 text를 사용
-                console.log(latVal);
                 const lngVal= $('#lng').text();
                 var NHM_position ={lat:latVal,lng:lngVal};  //변수에 위도 경도값을 넣어서 한번에 사용하려했으나 오류로 사용되지가 않음
                 const mapProp= {    //맵을 만들기위한 기본 틀
                     center:new google.maps.LatLng(latVal,lngVal),       //맵의 중앙
                     zoom:17,            //확대정도
-                    mapTypeId: google.maps.MapTypeId.HYBRID     //위성으로 볼지 지도로 볼지에 대한 타입설정
+                    mapTypeId: google.maps.MapTypeId.HYBRID,     //위성으로 볼지 지도로 볼지에 대한 타입설정
+                    zoomControl : true,
+                    scrollwheel : false
                 };
                 const map = new google.maps.Map(document.getElementById("googleMap"),mapProp);  //mapProp에 대한 구글 맵을 불러온다
 
                 const marker = new google.maps.Marker({     //마커
                     position:mapProp.center,        //center
-                    map:map
+                    map:map,
+
                 });
+
             }
         </script>
         <footer th:replace="fragments/footer :: footerFragment"></footer>
@@ -200,8 +274,8 @@
         </div>
 
         <th:block th:replace="fragments/JavaScripts :: JSFragment"></th:block>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-p2WKYIGpnVzk826XaGd4-Kwv0gqOMHk&callback=myMap"></script>
-            //맵 src api key를 넣으면 됨
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-p2WKYIGpnVzk826XaGd4-Kwv0gqOMHk&callback=myMap">//맵 src api key를 넣으면 됨</script>
+
 
 
     </body>
