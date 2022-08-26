@@ -173,27 +173,22 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <div class="row">
+                                        <h5>File Upload</h5>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="input-group fileupload-v1">
+                                                    <input type="file" name="fileImage" multiple="multiple" class="fileupload-v1-file hidden"/>
+                                                    <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
+                                                    </span>
+                                                </div><!-- /input-group -->
+                                            </div><!-- /.col-lg-6 -->
+                                            <div class="panel-body">
+                                                <div class="dropzone" id="my-awesome-dropzone"></div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-12">
-                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                <input type="text" class="form-text" id="validate_Title" name="Title" style="margin-top: -35px;" required>
-                                                <span class="bar"></span>
-                                                <label>Title</label>
-                                            </div>
-                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                <input type="text" class="form-text" id="validate_Subject" name="Subject">
-                                                <span class="bar"></span>
-                                                <label>Subject</label>
-                                            </div>
-                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                <input type="text" class="form-text" id="validate_Description" name="Description">
-                                                <span class="bar"></span>
-                                                <label>Description</label>
-                                            </div>
-                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                <input type="text" class="form-text" id="validate_Institute_identifier" name="Institute_Identifier" >
-                                                <span class="bar"></span>
-                                                <label>Institute identifier</label>
-                                            </div>
                                             <div class="form-group form-animate-text" style="margin-top:40px!important;">
                                                 <label>Digital Data Type</label>
                                                 <select class="form-control1" id="validate_Digital_Data_Type" name="Digital_Data_Type" style="display: inline; width: 30%;" required="required" onchange="mediaType(this)">
@@ -227,6 +222,26 @@
                                                 <input type="hidden" class="form-text" id="validate_Identifier" name="Identifier" value="Identifier">
                                                 <span class="bar"></span>
                                                 <label>Identifier</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Title" name="Title" style="margin-top: -35px;" required>
+                                                <span class="bar"></span>
+                                                <label>Title</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Subject" name="Subject">
+                                                <span class="bar"></span>
+                                                <label>Subject</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Description" name="Description">
+                                                <span class="bar"></span>
+                                                <label>Description</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Institute_identifier" name="Institute_Identifier" >
+                                                <span class="bar"></span>
+                                                <label>Institute identifier</label>
                                             </div>
                                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                 <label>Language</label>
@@ -321,21 +336,6 @@
                                                 <input type="text" class="form-text" id="validate_Rights" name="Rights" >
                                                 <span class="bar"></span>
                                                 <label>Rights</label>
-                                            </div>
-                                            <h5>File Upload</h5>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="input-group fileupload-v1">
-                                                        <input type="file" name="fileImage" multiple="multiple" class="fileupload-v1-file hidden"/>
-                                                        <input type="text" class="form-control fileupload-v1-path" placeholder="File Path..." disabled>
-                                                        <span class="input-group-btn">
-                                                        <button class="btn fileupload-v1-btn" type="button"><i class="fa fa-folder"></i> Choose File</button>
-                                                    </span>
-                                                    </div><!-- /input-group -->
-                                                </div><!-- /.col-lg-6 -->
-                                                <div class="panel-body">
-                                                    <div class="dropzone" id="my-awesome-dropzone"></div>
-                                                </div>
                                             </div>
                                         </div>
                                         <div style="text-align: center;">
