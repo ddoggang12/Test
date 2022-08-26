@@ -70,11 +70,6 @@ public class AdminController {
 
         String sessionEmail = (String) session.getAttribute("SEMAIL");
 
-        /*String Providing_Institution = request.getParameter("NHM - I");
-        if("NHM - I".equals(Providing_Institution)){
-            data.setProviding_Institution("National History Museum");
-        }*/
-
         //파일 업로드
         String serverName = request.getServerName();
         String fileRealPath = "";

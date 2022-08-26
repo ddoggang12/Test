@@ -89,6 +89,17 @@
         </collection>
     </resultMap>
 
+    <!-- 통계 : Providing_Institution별 등록개수 -->
+    <select id="getPICntList" resultMap="DataResultMap">
+        SELECT
+            Providing_Institution,
+            COUNT(Providing_Institution) AS CNT
+        FROM
+            `data`
+        GROUP BY Providing_Institution ORDER BY cnt DESC;
+
+    </select>
+
 
     <!-- Data_Code로 data 상세 검색 -->
     <select id="getDataSearchDetailList" resultMap="DataResultMap">

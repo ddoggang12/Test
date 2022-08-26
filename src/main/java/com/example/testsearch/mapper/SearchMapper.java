@@ -11,6 +11,9 @@ import java.util.Map;
 @Mapper
 public interface SearchMapper {
 
+    /* 통계 : Providing_Institution별 등록개수 */
+    public List<Data> getPICntList();
+
     /* Data_Code로 data 상세 검색 */
     public Data getDataSearchDetailList(String Data_Code);
 
