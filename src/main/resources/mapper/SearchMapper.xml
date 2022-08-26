@@ -90,7 +90,7 @@
     </resultMap>
 
     <!-- 통계 : Providing_Institution별 등록개수 -->
-    <select id="getPICntList" resultMap="DataResultMap">
+    <select id="getPICntList" resultType="map">
         SELECT
             Providing_Institution,
             COUNT(Providing_Institution) AS CNT
