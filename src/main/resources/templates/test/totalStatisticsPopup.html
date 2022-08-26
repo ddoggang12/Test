@@ -97,25 +97,51 @@
 
             function drawChart() {
 
-                const data = google.visualization.arrayToDataTable([
-                    ['Task', 'Hours per Day'],
-                    ['National History Museum', 11],
-                    ['Fine Arts Museum', 2],
-                    ['The Center of nomadic civilization', 2],
-                    ['Others', 1],
-                ]);
+                $.ajax({
+                    type: 'POST',
+                    url: '/test/totalStatistics',
+                    data: {PICntList : this.PICntList},
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data, 'data');
+                        if (data) {
+                            let bigarr =[];
+                            bigarr.push(['Task', 'Hours per Day']);
+                            for(let i =0; i < data.length; i++){
+                                let arr = [];
+                                arr.push(data[i].Providing_Institution);
+                                arr.push(data[i].CNT);
+                                bigarr.push(arr);
+                            }
 
-                // 그래프 옵션 설정
-                const options = {
-                    //차트 상단의 제목 설정
-                    title: 'Providing Institution Stastical'
-                };
+                            const newData = google.visualization.arrayToDataTable(
+                                /*['Task', 'Hours per Day'],*/
+                                /*['National History Museum', 11],
+                                ['Fine Arts Museum', 2],
+                                ['The Center of nomadic civilization', 2],
+                                ['Others', 1],*/
+                                bigarr
+                            );
+                            debugger;
 
-                // 입력값을 화면에 뿌려주는 역할
-                const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                            // 그래프 옵션 설정
+                            const options = {
+                                //차트 상단의 제목 설정
+                                title: 'Providing Institution Stastical'
+                            };
 
-                chart.draw(data, options);
+                            // 입력값을 화면에 뿌려주는 역할
+                            const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                            chart.draw(newData, options);
+                        }
+                    }, //success
+                    error: function (e) {
+                        console.log(e);
+                    },
+                }); //ajax
             }
+
 
         </script>
         <footer class="footer">
