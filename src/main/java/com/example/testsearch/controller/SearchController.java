@@ -10,12 +10,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +28,24 @@ public class SearchController {
         this.searchMapper = searchMapper;
     }
 
+
+    @PostMapping("/totalStatistics")
+    @ResponseBody
+    public List<Map<String, Object>> totalStatistics(){
+
+        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
+
+        return PICntList;
+
+    }
+
     @GetMapping("/totalStatisticsPopup")
     public String totalStatisticsPopup(Model model){
 
-        List<Data> PICntList = searchMapper.getPICntList();
+        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
         logger.info("PICntList에 담긴 값 : {}", PICntList);
         model.addAttribute("title", "Staticstical Info");
+        model.addAttribute("PICntList", PICntList);
 
         return "/test/totalStatisticsPopup";
     }
@@ -46,9 +55,13 @@ public class SearchController {
     public  String getDataList(Model model){
 
         List<Data> dataList = searchService.getDataList();
+        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
+        logger.info("PICntList에 담긴 값 : {}", PICntList);
 
         model.addAttribute("title", "data리스트 조회");
         model.addAttribute("dataList", dataList);
+        model.addAttribute("PICntList", PICntList);
+
 
         return "test/list2";
 
