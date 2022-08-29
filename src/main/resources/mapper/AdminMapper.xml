@@ -23,16 +23,17 @@
             <result column="Provider"                       property="Provider"/>
             <result column="Providing_Institution"          property="Providing_Institution"/>
             <result column="Provider_Country"               property="Provider_Country"/>
-            <result column="Collection_Name"               property="Collection_Name"/>
+            <result column="Collection_Name"                property="Collection_Name"/>
             <result column="Source"                         property="Source"/>
             <result column="IsPartOf"                       property="IsPartOf"/>
             <result column="Links"                          property="Links"/>
             <result column="Rights_Statement_Media"         property="Rights_Statement_Media"/>
             <result column="Rights"                         property="Rights"/>
             <result column="Data_Code"                      property="Data_Code"/>
-            <result column="useremail"                      property="useremail"/>
             <result column="Created_Time"                   property="Created_Time"/>
             <result column="Updated_Time"                   property="Updated_Time"/>
+            <result column="userId"                         property="userId"/>
+
 
             <collection property="fileList" javaType="List" ofType="FileDto">
                 <id column="fileIdx" 						property="fileIdx"/>
@@ -74,9 +75,9 @@
               Rights_Statement_Media,
               Rights,
               Data_Code,
-              useremail,
               Created_Time,
-              Updated_Time
+              Updated_Time,
+              userId
             ) VALUES (
                  #{Objects},
                  #{Title},
@@ -105,10 +106,10 @@
                  #{Rights_Statement_Media},
                  #{Rights},
                  #{Data_Code},
-                 #{useremail},
                  NOW(),
-                 NOW()
-            );
+                 NOW(),
+                 #{userId}
+                 );
 
         </insert>
 

@@ -42,6 +42,8 @@ public class UserController {
     public String addUser(UserDto userDto){
 
         logger.info("회원가입폼에서 입력받은 데이터: {}", userDto);
+
+
         userService.addUser(userDto);
 
         return "redirect:/";
@@ -85,13 +87,14 @@ public class UserController {
         if(checkUser != null && checkUser.getUserpw() != null && userpw.equals(checkUser.getUserpw())){
             String sessionName = checkUser.getUsername();
             String sessionRole = checkUser.getEnabled();
+            String sessionId = checkUser.getUserId();
 
             session.setAttribute("SEMAIL", useremail);
             session.setAttribute("SROLE", sessionRole);
             session.setAttribute("SNAME", sessionName);
-
+            session.setAttribute("SID",sessionId);
             logger.info("로그인 성공");
-
+            logger.info("SID",sessionId);
             return "redirect:/";
         }
         reAttr.addAttribute("result", "등록된 회원이 없습니다.");
