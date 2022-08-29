@@ -36,11 +36,11 @@ public class AdminService {
     }
 
     /* data 등록 처리 */
-    public int addData(Data data, String sessionEmail, MultipartFile[] fileImage, String fileRealPath){
+    public int addData(Data data, String sessionId, MultipartFile[] fileImage, String fileRealPath){
 
         String code = commonMapper.getNewCode("Data_Code", "data");
         data.setData_Code(code);
-        data.setUseremail(sessionEmail);
+        data.setUserId(sessionId);
 
         int result = adminMapper.addData(data);
 

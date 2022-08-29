@@ -39,6 +39,7 @@ public class Data {
     private String Rights_Statement_Media;
     private String Rights;
     private String Data_Code;
+    private String userId;
     private String useremail;
     private LocalDateTime Created_Time;
     private LocalDateTime Updated_Time;

@@ -107,6 +107,7 @@
         }
         #validate_Identifier3{
             margin-left: -5px;
+            margin-right: -90px;
             display: inline;
             font-size: 18px;
             font-family: "SEBANG_Gothic_Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -221,7 +222,7 @@
                                                 <input type="text" class="form-text" id="validate_Identifier2">
                                                 <div id="current_date"></div>
                                                 <strong> - </strong>
-                                                <input type="text" class="form-text" id="validate_Identifier3" th:value="${SEMAIL}">
+                                                <input type="text" class="form-text" id="validate_Identifier3" th:value="${SID}">
                                                 <strong> - </strong>
                                                 <input type="text" class="form-text" id="validate_Identifier4" value="000001">
                                                 <input type="hidden" class="form-text" id="validate_Identifier" name="Identifier" value="Identifier">
@@ -408,6 +409,7 @@
         });
 
     });
+
 
     /* File_Extension select 감추기 */
     $("#validate_File_Extension").css("display", "none");

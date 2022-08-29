@@ -26,6 +26,8 @@ public class UserService {
 
     /* 회원가입 */
     public int addUser(UserDto userDto){
+        String code = userMapper.getUserCode("userId","user");
+        userDto.setUserId(code);
         int result = userMapper.addUser(userDto);
         return result;
     }
