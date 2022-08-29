@@ -5,6 +5,9 @@ import lombok.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@ToString
 public class UserDto {
 
         @NotBlank(message = "아이디는 필수 입력 값입니다.")
@@ -32,6 +35,7 @@ public class UserDto {
 
         private String enabled;
 
+        private String userId;
 
 
 

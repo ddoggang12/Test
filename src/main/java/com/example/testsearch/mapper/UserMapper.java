@@ -20,5 +20,8 @@ public interface UserMapper {
     // 전체 회원정보 조회
     public List<UserDto> getUserList();
 
+    public String getUserCode(String codePattern, String tableName);
+
+
 
 }
