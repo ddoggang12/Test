@@ -16,6 +16,10 @@ public interface SearchMapper {
 
     /*자동증가 코드 : 쿼리문사용*/
     public String getDataCode();
+
+/*    pi 그래프 값 불러오기*/
+    public List<Map<String, Object>> getRightCntList();
+
     /* Data_Code로 data 상세 검색 */
     public Data getDataSearchDetailList(String Data_Code);
 

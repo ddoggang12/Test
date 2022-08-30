@@ -106,13 +106,14 @@
                         console.log(data, 'data');
                         if (data) {
                             let bigarr =[];
-                            bigarr.push(['Task', 'Hours per Day']);
+                            bigarr.push(['Task', 'Metadata of Kyrgyzstan']);
                             for(let i =0; i < data.length; i++){
                                 let arr = [];
                                 arr.push(data[i].Providing_Institution);
                                 arr.push(data[i].CNT);
                                 bigarr.push(arr);
                             }
+
 
                             const newData = google.visualization.arrayToDataTable(
                                 /*['Task', 'Hours per Day'],*/
@@ -131,7 +132,7 @@
                             };
 
                             // 입력값을 화면에 뿌려주는 역할
-                            const chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                            const chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
 
                             chart.draw(newData, options);
                         }
