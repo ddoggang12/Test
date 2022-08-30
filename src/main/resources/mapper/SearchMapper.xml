@@ -100,6 +100,12 @@
 
     </select>
 
+    <select id="getDataCode" resultType="String">
+        select
+            substring(MAX(CAST(SUBSTRING_INDEX(Identifier,'-',-1) AS UNSIGNED))+1000001,2)
+        from
+            `data`
+    </select>
 
     <!-- Data_Code로 data 상세 검색 -->
     <select id="getDataSearchDetailList" resultMap="DataResultMap">
