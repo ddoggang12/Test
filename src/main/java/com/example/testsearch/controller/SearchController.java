@@ -29,6 +29,15 @@ public class SearchController {
     }
 
 
+    @PostMapping("/insert")
+    @ResponseBody
+    public String getCode(){
+        String autoIncreCode = searchMapper.getDataCode();
+        logger.info(autoIncreCode);
+
+        return autoIncreCode;
+    }
+
     @PostMapping("/totalStatistics")
     @ResponseBody
     public List<Map<String, Object>> totalStatistics(){

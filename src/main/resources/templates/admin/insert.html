@@ -116,7 +116,7 @@
         }
         #validate_Identifier4{
             display: inline;
-            width: 80px;
+            width: 110px;
             border-bottom: none !important;
             font-size: 18px;
             font-family: "SEBANG_Gothic_Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -224,7 +224,7 @@
                                                 <strong> - </strong>
                                                 <input type="text" class="form-text" id="validate_Identifier3" th:value="${SID}">
                                                 <strong> - </strong>
-                                                <input type="text" class="form-text" id="validate_Identifier4" value="000001">
+                                                <input type="text" class="form-text" id="validate_Identifier4" onload="getAutoCode()">
                                                 <input type="hidden" class="form-text" id="validate_Identifier" name="Identifier" value="Identifier">
                                                 <span class="bar"></span>
                                                 <label>Identifier</label>
@@ -465,9 +465,29 @@
         valI.value = optVal;
 
     }*/
+    function getAutoCode() {
+        let getCode;
+        $.ajax({
+            type: 'POST',
+            url: '/test/insert',        //xml에 쿼리문 작성하고 그 url사용 한거
+            data: {autoIncreCode : this.autoIncreCode},
+            async:false,        //동기식으로 사용해야지 리턴값이 있어서 false로 써줘야함
+            success: function (data) {
+                console.log(data, 'data');
+                if (data) {
+                    getCode = $("#validate_Identifier4").val(data);
+                }
+            }, //success
+            error: function (e) {
+                console.log(e);
+            },
+        }); //ajax
+        console.log(getCode);
+        return getCode;
+    }
     function providing_institution(e) {
         console.log("이거 되고 있얼?");
-
+        getAutoCode();
         if (e.value == "National History Museum") {
             $('#validate_Identifier1').val("NHM");
         }
@@ -499,6 +519,7 @@
 
         $('#validate_Identifier').val(result);
         console.log($('#validate_Identifier').val(),'<-Identifier value');
+
 
     }
 
