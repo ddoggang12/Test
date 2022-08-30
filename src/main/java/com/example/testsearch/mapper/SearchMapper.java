@@ -14,6 +14,8 @@ public interface SearchMapper {
     /* 통계 : Providing_Institution별 등록개수 */
     public List<Map<String, Object>> getPICntList();
 
+    /*자동증가 코드 : 쿼리문사용*/
+    public String getDataCode();
     /* Data_Code로 data 상세 검색 */
     public Data getDataSearchDetailList(String Data_Code);
 
