@@ -13,27 +13,29 @@
             <result column="Temporary"                      property="Temporary"/>
             <result column="Places"                         property="Places"/>
             <result column="Current_location"               property="Current_location"/>
-            <result column="Raw_Data_Type"                  property="Raw_Data_Type"/>
+            <result column="Object_Type"                    property="Object_Type"/>
+            <result column="Object_Size"                    property="Object_Size"/>
+            <result column="Object_Material"                property="Object_Material"/>
+            <result column="Object_Etc"                     property="Object_Etc"/>
             <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
             <result column="File_Extension"                 property="File_Extension"/>
             <result column="Coverage"                       property="Coverage	"/>
             <result column="Creator"                        property="Creator"/>
-            <result column="Participants"                   property="Participants"/>
             <result column="Publisher"                      property="Publisher"/>
             <result column="Provider"                       property="Provider"/>
             <result column="Providing_Institution"          property="Providing_Institution"/>
             <result column="Provider_Country"               property="Provider_Country"/>
-            <result column="Collection_Name"                property="Collection_Name"/>
             <result column="Source"                         property="Source"/>
             <result column="IsPartOf"                       property="IsPartOf"/>
             <result column="Links"                          property="Links"/>
             <result column="Rights_Statement_Media"         property="Rights_Statement_Media"/>
             <result column="Rights"                         property="Rights"/>
             <result column="Data_Code"                      property="Data_Code"/>
+            <result column="userId"                         property="userId"/>
             <result column="Created_Time"                   property="Created_Time"/>
             <result column="Updated_Time"                   property="Updated_Time"/>
-            <result column="userId"                         property="userId"/>
-
+            <result column="Latitude"                       property="Latitude"/>
+            <result column="Longitude"                      property="Longitude"/>
 
             <collection property="fileList" javaType="List" ofType="FileDto">
                 <id column="fileIdx" 						property="fileIdx"/>
@@ -58,7 +60,10 @@
               Temporary,
               Places,
               Current_location,
-              Raw_Data_Type,
+              Object_Type,
+              Object_Size,
+              Object_Material,
+              Object_Etc,
               Digital_Data_Type,
               File_Extension,
               Coverage,
@@ -89,7 +94,10 @@
                  #{Temporary},
                  #{Places},
                  #{Current_location},
-                 #{Raw_Data_Type},
+                 #{Object_Type},
+                 #{Object_Size},
+                 #{Object_Material},
+                 #{Object_Etc},
                  #{Digital_Data_Type},
                  #{File_Extension},
                  #{Coverage},

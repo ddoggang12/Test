@@ -18,7 +18,7 @@
 
         <main layout:fragment="customContents">
             <section id="service" class="service sections margin-top-120">
-                <div class="container">
+                <div class="page-container side-filters-enabled container">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="head_title text-center">
@@ -43,59 +43,124 @@
 
                             <div class="single_service_area  margin-top-80">
                                 <div class="row">
-                                    <div id="CONTENTS">
-                                        <div class="LineInContents">
-                                            <th:block th:if="${not #lists.isEmpty(dataSearchList)}" th:each="l : ${dataSearchList}">
-                                                <table class="testsearch" style="border-bottom: 1px solid #AAAAAA; margin-bottom: 30px;">
-                                                    <thead>
-                                                        <tr>
-                                                            <td th:text="Identifier" th:width="200"></td>
-                                                            <td>
-                                                                <a th:text="${l.Identifier}" th:onclick="|location.href='@{'/test/dataSearchDetail'(Data_Code=${l.Data_Code})}'|" style="cursor:pointer;">
-                                                                    None
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td th:text="Title"></td>
-                                                            <td th:text="${l.Title}">
-                                                                None
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td th:text="Raw_Data_Type"></td>
-                                                            <td th:text="${l.Raw_Data_Type}">
-                                                                None
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td th:text="Provider_Country"></td>
-                                                            <td th:text="${l.Provider_Country}">
-                                                                None
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td th:text="Created_Time"></td>
-                                                            <td th:text="${l.Created_Time}">
-                                                                None
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </th:block>
-                                            <th:block th:unless="${not #lists.isEmpty(dataSearchList)}" th:each="l : ${dataSearchList}">
-                                                <tr>
-                                                    <td colspan="2">
-                                                        <p>등록된 작품이 없습니다.</p>
-                                                    </td>
-                                                </tr>
-                                            </th:block>
+                                    <div class="col-sm-4 col-xs-12">
+                                        <div class="contact_contant">
+                                            <div class="side-filters container">
+                                                <div class="row border-bottom border-top d-flex justify-content-between align-items-center flex-nowrap">
+                                                    <div class="filters-title" id="totalResults">
+                                                        Total : 54 items
+                                                        <!--<button class="btn btn-outline-primary mr-3 ">
+                                                            Reset
+                                                        </button>-->
+                                                    </div>
+                                                    <div class="row mb-3 mt-4">
+                                                        <div class="col">
+                                                            <div class="position-relative">
+                                                                <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                                    <label>Providing Institution</label>
+                                                                    <select class="form-control1" id="validate_Providing_Institution" name="Providing_Institution">
+                                                                        <option value="Select types of media">Select Providing Institution</option>
+                                                                        <option value="National History Museum">National History Museum</option>
+                                                                        <option value="Fine Arts Museum">Fine Arts Museum</option>
+                                                                        <option value="Nomad Center">Nomad Center</option>
+                                                                        <option value="Others">Others</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="position-relative">
+                                                                <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                                    <label>Can I use this?</label>
+                                                                    <select class="form-control1" id="validate_Rights_Statement_Media" name="Rights_Statement_Media">
+                                                                        <option value="Select whether you can use this">Select whether you can use this</option>
+                                                                        <option value="https://creativecommons.org/licenses/by-sa/4.0/">Yes(Free)</option>
+                                                                        <option value="http://rightsstatements.org/vocab/InC/1.0/">Maybe, seek permission</option>
+                                                                        <option value="https://creativecommons.org/licenses/by-nc-nd/4.0/">Yes with conditions</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="position-relative">
+                                                                <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                                    <label>Type of Object</label>
+                                                                    <select class="form-control1" id="validate_Object_Type" name="Object_Type">
+                                                                        <option value="Select types of media">Select types of object</option>
+                                                                        <option value="Book">Book</option>
+                                                                        <option value="Manuscripts">Manuscripts</option>
+                                                                        <option value="Fashion">Fashion</option>
+                                                                        <option value="Art">Art</option>
+                                                                        <option value="Archaeology">Archaeology</option>
+                                                                        <option value="Photography">Photography</option>
+                                                                        <option value="Others">Others</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="position-relative">
+                                                                <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                                    <label>Type of Media</label>
+                                                                    <select class="form-control1" id="validate_Digital_Data_Type" name="Digital_Data_Type" onchange="mediaType(this)">
+                                                                        <option value="Select types of media">Select types of media</option>
+                                                                        <option value="Text">Text</option>
+                                                                        <option value="Image">Image</option>
+                                                                        <option value="Sound">Sound</option>
+                                                                        <option value="Video">Video</option>
+                                                                        <option value="Others">Others</option>
+                                                                    </select>
+                                                                    <select class="form-control1" id="validate_File_Extension" name="File_Extension">
+                                                                        <option value="File Extension">File Extension</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-sm-8 col-xs-12">
+                                        <th:block th:if="${not #lists.isEmpty(dataSearchList)}" th:each="l : ${dataSearchList}">
+                                            <table class="testSearch">
+                                                <thead>
+                                                    <tr>
+                                                        <td th:text="Identifier" th:width="150"></td>
+                                                        <td>
+                                                            <a th:text="${l.Identifier}" th:onclick="|location.href='@{'/test/dataSearchDetail'(Data_Code=${l.Data_Code})}'|" style="cursor:pointer;">
+                                                                None
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td th:text="Title"></td>
+                                                        <td id="title" th:text="${l.Title}">
+                                                            None
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td th:text="Description"></td>
+                                                        <td id="desc" th:text="${l.Description}">
+                                                            None
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </th:block>
+                                        <th:block th:unless="${not #lists.isEmpty(dataSearchList)}" th:each="l : ${dataSearchList}">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p>등록된 작품이 없습니다.</p>
+                                                </td>
+                                            </tr>
+                                        </th:block>
+                                    </div>
                                 </div>
-                            </div>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -104,26 +169,171 @@
 
         <th:block layout:fragments="customCss">
             <style>
-                .LineInContents {
-                    width: 98%;
-                    min-height: 50px;
-                    padding-top: 25px;
-                    padding-bottom: 25px;
-                    margin-left: 1%;
-                    margin-right: 1%;
-                    /*border-bottom: 1px solid #AAAAAA;*/
-                    clear: both;
+                #desc, #title{
+                    display: inline-block;
+                    width: 680px;
+                    white-space: nowrap;
                     overflow: hidden;
-                    line-height: 160%;
+                    text-overflow: ellipsis;
                 }
-                #CONTENTS {
+                #validate_Rights_Statement_Media{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                #validate_File_Extension{
+                    margin-top: 20px;
+                }
+                .form-control1 {
+                    display: block;
+                    width: 68%;
+                    height: 50px;
+                    padding: 6px 12px;
+                    font-size: 14px;
+                    line-height: 1.42857143;
+                    color: #1c84c6;
+                    background-color: #fff;
+                    background-image: none;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+                    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+                    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                }
+                .page-container{
+                    max-width: none;
+                }
+                .container, .container-lg, .container-md, .container-sm {
+                    max-width: 1300px;
+                }
+                .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
                     width: 100%;
-                    max-width: 1140px;
-                    margin: auto;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                    margin-right: auto;
+                    margin-left: auto;
                 }
+                *, ::after, ::before {
+                    box-sizing: border-box;
+                }
+                .testSearch{
+                    border-bottom: 1px solid #AAAAAA;
+                    margin-bottom: 30px;
+                    width: 100%;
+                }
+                .side-filters {
+                    background-color: #fff;
+                    height: 100%;
+                }
+                .align-items-center {
+                    -ms-flex-align: center!important;
+                    align-items: center!important;
+                }
+                .justify-content-between {
+                    -ms-flex-pack: justify!important;
+                    justify-content: space-between!important;
+                }
+                .flex-nowrap {
+                    -ms-flex-wrap: nowrap!important;
+                    flex-wrap: nowrap!important;
+                }
+                .border-bottom {
+                    /*border-bottom: 1px solid #dee2e6!important;*/
+                }
+                .filters-title{
+                    font-size: .875rem;
+                    font-weight: 600;
+                    line-height: 1;
+                    margin: 1.25rem 1rem;
+                }
+                .btn-outline-primary{
+                    min-width: 70px;
+                    font-size: 15px !important;
+                    margin-left: 130px;
+                    border-radius: 0px;
+                }
+                .mt-4{
+                    margin-top: 1.5rem!important;
+                }
+                .mb-3{
+                    margin-bottom: 1rem!important;
+                }
+                .col {
+                    -ms-flex-preferred-size: 0;
+                    flex-basis: 0;
+                    -ms-flex-positive: 1;
+                    flex-grow: 1;
+                    max-width: 100%;
+                    position: relative;
+                    width: 100%;
+                    padding-right: 15px;
+                    padding-left: 15px;
+                }
+                .position-relative {
+                    position: relative!important;
+                }
+                .position-relative {
+                    position: relative!important;
+                }
+
 
             </style>
         </th:block>
+
+        <script type="text/javascript">
+            /* File_Extension select 감추기 */
+            $("#validate_File_Extension").css("display", "none");
+
+            /* Digital Data Type select 선택값에 따라 두번째 select 값 변경 */
+            function mediaType(e){
+                let fileExtension;
+                console.log("이거되나유");
+                const Image = ["JPG", "PNG", "GIF", "BMP"];
+                const Text = ["PDF", "DOC", "HTML"];
+                const Video = ["MP4", "AVI"];
+                const Sound = ["MP3"];
+                const Others = ["JPG", "PNG", "GIF", "BMP", "PDF", "DOC", "HTML", "MP4", "AVI", "MP3"];
+                const target = document.getElementById("validate_File_Extension");
+
+                target.options.length = 0;
+
+                if(e.value == "Image") {
+                $("#validate_File_Extension").css("display", "inline-block");
+                fileExtension = Image;
+                }
+                else if(e.value == "Text") {
+                $("#validate_File_Extension").css("display", "inline-block");
+                fileExtension = Text;
+                }
+                else if(e.value == "Video") {
+                $("#validate_File_Extension").css("display", "inline-block");
+                fileExtension = Video;
+                }
+                else if(e.value == "Sound") {
+                $("#validate_File_Extension").css("display", "inline-block");
+                fileExtension = Sound;
+                }
+                else if(e.value == "Others") {
+                $("#validate_File_Extension").css("display", "inline-block");
+                fileExtension = Others;
+                }
+                else if(e.value == "Select types of media") {
+                $("#validate_File_Extension").css("display", "none");
+
+                }
+
+                for(x in fileExtension){
+                const opt = document.createElement("option");
+                opt.value = fileExtension[x];
+                opt.innerHTML = fileExtension[x];
+                target.appendChild(opt);
+                }
+
+            }
+        </script>
 
         <footer th:replace="fragments/footer :: footerFragment"></footer>
 

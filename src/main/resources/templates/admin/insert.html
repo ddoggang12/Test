@@ -230,6 +230,34 @@
                                                 <label>Identifier</label>
                                             </div>
                                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <label>Object Type</label>
+                                                <select class="form-control1" id="validate_Object_Type" name="Object_Type">
+                                                    <option value="Select types of media">Select types of object</option>
+                                                    <option value="Book">Book</option>
+                                                    <option value="Manuscripts">Manuscripts</option>
+                                                    <option value="Fashion">Fashion</option>
+                                                    <option value="Art">Art</option>
+                                                    <option value="Archaeology">Archaeology</option>
+                                                    <option value="Photography">Photography</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Object_Size" name="Object_Size" >
+                                                <span class="bar"></span>
+                                                <label>Object Size</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Object_Material" name="Object_Material" >
+                                                <span class="bar"></span>
+                                                <label>Object Material</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                                                <input type="text" class="form-text" id="validate_Object_Etc" name="Object_Etc" >
+                                                <span class="bar"></span>
+                                                <label>Object Etc</label>
+                                            </div>
+                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                 <label>Language</label>
                                                 <select class="form-control1" id="validate_Language" name="Language">
                                                     <option value="Choose Language">Choose Language</option>
@@ -251,11 +279,6 @@
                                                 <input type="text" class="form-text" id="validate_Current_location" name="Current_location" >
                                                 <span class="bar"></span>
                                                 <label>Current location</label>
-                                            </div>
-                                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                                <input type="text" class="form-text" id="validate_Raw_Data_Type" name="Raw_Data_Type" >
-                                                <span class="bar"></span>
-                                                <label>Raw Data Type</label>
                                             </div>
                                             <div class="form-group form-animate-text" style="margin-top:40px !important;">
                                                 <input type="text" class="form-text" id="validate_Coverage" name="Coverage" >
@@ -311,7 +334,7 @@
                                                 <label>Rights statement for the Media in this item(unless otherwise specified)</label>
                                                 <span>
                                                         <select class="form-control1" id="validate_Rights_statement" name="Rights_Statement_Media" style="margin-left: 650px; width: 40%" required="required">
-                                                            <option value="Can I user this?">Can I user this?</option>
+                                                            <option value="Can I use this?">Can I use this?</option>
                                                             <option value="https://creativecommons.org/licenses/by-sa/4.0/">Yes(Free)</option>
                                                             <option value="https://creativecommons.org/licenses/by-nc-nd/4.0/">Yes with conditions</option>
                                                             <option value="http://rightsstatements.org/vocab/InC/1.0/">Maybe, seek permission</option>
