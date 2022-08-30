@@ -59,10 +59,13 @@
         <result column="Temporary"                      property="Temporary"/>
         <result column="Places"                         property="Places"/>
         <result column="Current_location"               property="Current_location"/>
-        <result column="Raw_Data_Type"                  property="Raw_Data_Type"/>
+        <result column="Object_Type"                    property="Object_Type"/>
+        <result column="Object_Size"                    property="Object_Size"/>
+        <result column="Object_Material"                property="Object_Material"/>
+        <result column="Object_Etc"                     property="Object_Etc"/>
         <result column="Digital_Data_Type"              property="Digital_Data_Type"/>
         <result column="File_Extension"                 property="File_Extension"/>
-        <result column="Coverage"                       property="Coverage	"/>
+        <result column="Coverage"                       property="Coverage"/>
         <result column="Creator"                        property="Creator"/>
         <result column="Publisher"                      property="Publisher"/>
         <result column="Provider"                       property="Provider"/>
@@ -74,7 +77,7 @@
         <result column="Rights_Statement_Media"         property="Rights_Statement_Media"/>
         <result column="Rights"                         property="Rights"/>
         <result column="Data_Code"                      property="Data_Code"/>
-        <result column="useremail"                      property="useremail"/>
+        <result column="userId"                         property="userId"/>
         <result column="Created_Time"                   property="Created_Time"/>
         <result column="Updated_Time"                   property="Updated_Time"/>
         <result column="Latitude"                       property="Latitude"/>
@@ -110,24 +113,39 @@
     <!-- Data_Code로 data 상세 검색 -->
     <select id="getDataSearchDetailList" resultMap="DataResultMap">
         SELECT
-            d.Objects,
+            d.Identifier,
             d.Title,
             d.Subject,
             d.Description,
+            d.Institute_Identifier,
             d.Language,
             d.Temporary,
+            d.Places,
             d.Current_location,
-            d.Raw_Data_Type,
+            d.Object_Type,
+            d.Object_Size,
+            d.Object_Material,
+            d.Object_Etc,
             d.Digital_Data_Type,
             d.File_Extension,
+            d.Coverage,
+            d.Creator,
+            d.Participants,
+            d.Publisher,
             d.Provider,
-            d.Provider_Country,
             d.Providing_Institution,
+            d.Provider_Country,
+            d.Latitude,
+            d.Longitude,
+            d.Collection_Name,
+            d.Source,
+            d.IsPartOf,
+            d.Links,
+            d.Rights_Statement_Media,
+            d.Rights,
             d.Data_Code,
             d.Created_Time,
             d.Updated_Time,
-            d.Longitude,
-            d.Latitude,
             f.fileIdx,
             f.filepath,
             SUBSTRING_INDEX(f.fileOriginalName, '.',1)
@@ -150,13 +168,12 @@
     <!-- data 검색 -->
     <select id="getDataSearchList" parameterType="map" resultMap="DataResultMap">
         SELECT
-            d.Objects,
             d.Title,
             d.Subject,
             d.Description,
             d.Identifier,
-            d.Raw_Data_Type,
-            d.Provider_Country,
+            d.Object_Type,
+            d.Object_Size,
             d.Created_Time,
             d.Data_Code,
             d.Latitude,
@@ -178,7 +195,7 @@
             d.Title,
             d.Identifier,
             d.Provider_Country,
-            d.Raw_Data_Type,
+            d.Object_Type,
             d.Created_Time,
             d.Data_Code
         FROM

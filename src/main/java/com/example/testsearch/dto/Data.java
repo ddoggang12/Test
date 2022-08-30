@@ -22,7 +22,10 @@ public class Data {
     private String Temporary;
     private String Places;
     private String Current_location;
-    private String Raw_Data_Type;
+    private String Object_Type;
+    private String Object_Size;
+    private String Object_Material;
+    private String Object_Etc;
     private String Digital_Data_Type;
     private String File_Extension;
     private String Coverage;
@@ -40,7 +43,6 @@ public class Data {
     private String Rights;
     private String Data_Code;
     private String userId;
-    private String useremail;
     private LocalDateTime Created_Time;
     private LocalDateTime Updated_Time;
     private Float Latitude;
