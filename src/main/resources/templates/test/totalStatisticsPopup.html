@@ -68,7 +68,7 @@
         <section id="service" class="service sections margin-top-120" style="margin-top: 30px;">
             <div class="container">
                 <div class="row">
-                    <div id="piechart" style="width: 1170px; height: 800px;"></div>
+                    <div id="piechart" style="width: 900px; height: 800px;"></div>
                 </div>
             </div>
         </section>
@@ -95,8 +95,8 @@
             google.charts.load('current', {'packages':['corechart']});  //차트 스타일
             google.charts.setOnLoadCallback(drawChart);
 
-            function drawChart() {
 
+            function drawChart() {
                 $.ajax({
                     type: 'POST',
                     url: '/test/totalStatistics',
@@ -128,7 +128,7 @@
                             // 그래프 옵션 설정
                             const options = {
                                 //차트 상단의 제목 설정
-                                title: 'Providing Institution Stastical'
+                                title: 'Providing Institution Statistical'
                             };
 
                             // 입력값을 화면에 뿌려주는 역할

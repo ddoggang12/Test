@@ -24,15 +24,15 @@
                             <div class="head_title text-center">
                                 <!-- 검색 -->
                                 <form th:action="@{/test/dataSearchResult}" method="get">
-                                    <div class="testsearch" style="margin-bottom: 20px; margin-top: 20px; text-align: center">
-                                        <select name="searchKey" hidden>
-                                            <option value="Description">Description</option>
-                                            <option value="Objects">Objects</option>
-                                            <option value="Title">Title</option>
-                                            <option value="Subject">Subject</option>
-                                            <option value="Identifier">Identifier</option>
-                                        </select>
+                                    <div class="testsearch" style="margin-bottom: 20px; margin-top: 20px;  text-align: center">
+
                                         <div style="height: 100%">
+                                            <select name="searchKey" >
+                                                <option value="Description">Description</option>
+                                                <option value="Title">Title</option>
+                                                <option value="Identifier">Identifier</option>
+                                                <option value="Providing_Institution">Providing_Institution</option>
+                                            </select>
                                             <input type="text" class="search-bar" name="searchValue" placeholder="Please enter a search keyword."
                                                    style="width: 350px; line-height: 39px; margin-right: -7px"/>
                                             <button type="submit" class="btn" style="margin-bottom: 23px; border-radius: 0px;">Search</button>

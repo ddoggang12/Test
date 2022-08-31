@@ -110,14 +110,6 @@
             `data`
     </select>
 
-    <select id="getRightStatementMedia" resultType="map">
-        SELECT
-            Rights_Statement_Media,
-            COUNT(Rights_Statement_Media) AS R_Cnt
-        FROM
-            `data`
-        GROUP BY Rights_Statement_Media ORDER BY R_Cnt DESC;
-    </select>
     <!-- Data_Code로 data 상세 검색 -->
     <select id="getDataSearchDetailList" resultMap="DataResultMap">
         SELECT
