@@ -48,15 +48,7 @@ public class SearchController {
 
     }
     /* can i use 차트 코드 컨트롤러부분*/
-    @PostMapping("/totalStatisticsPopup")
-    @ResponseBody
-    public List<Map<String, Object>> getRightChart(){
 
-        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
-
-        return PICntList;
-
-    }
     @GetMapping("/totalStatisticsPopup")
     public String totalStatisticsPopup(Model model){
 
