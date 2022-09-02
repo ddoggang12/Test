@@ -2,6 +2,7 @@ package com.example.testsearch.controller;
 
 import com.example.testsearch.dto.ArtWork;
 import com.example.testsearch.dto.Data;
+import com.example.testsearch.dto.FileDto;
 import com.example.testsearch.dto.ImageFile;
 import com.example.testsearch.mapper.SearchMapper;
 import com.example.testsearch.service.SearchService;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,13 +67,10 @@ public class SearchController {
     public  String getDataList(Model model){
 
         List<Data> dataList = searchService.getDataList();
-        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
-        logger.info("PICntList에 담긴 값 : {}", PICntList);
+        logger.info("dataList 담긴 값 : {}", dataList);
 
         model.addAttribute("title", "data리스트 조회");
         model.addAttribute("dataList", dataList);
-        model.addAttribute("PICntList", PICntList);
-
 
         return "test/list2";
 
@@ -134,12 +133,17 @@ public class SearchController {
                                  ,@RequestParam (value = "searchKey", defaultValue = "Description") String searchKey
                                  ,@RequestParam (value = "searchValue", required = false) String searchValue){
 
+        logger.info("searchKey 담긴 값 : {}", searchKey);
+        logger.info("searchValue 담긴 값 : {}", searchValue);
+
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("searchKey", searchKey);
         paramMap.put("searchValue", searchValue);
 
         List<Data> dataSearchList = searchService.getDataSearchList(paramMap);
         logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
+
+        paramMap = null;
 
         model.addAttribute("title", "작품 검색");
         model.addAttribute("dataSearchList", dataSearchList);

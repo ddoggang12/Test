@@ -194,12 +194,24 @@
         SELECT
             d.Title,
             d.Identifier,
-            d.Provider_Country,
+            d.Description,
             d.Object_Type,
             d.Created_Time,
-            d.Data_Code
+            d.Data_Code,
+            d.Providing_Institution,
+            tf.fileIdx,
+            tf.filePath,
+            tf.fileOriginalName
         FROM
-            `data` AS d;
+            `data` AS d
+                INNER JOIN
+            `tb_file_control` AS tfc
+            ON
+                d.Data_Code = tfc.referenceCode
+                INNER JOIN
+            `tb_file` AS tf
+            ON
+                tfc.fileIdx = tf.fileIdx;
     </select>
 
 
