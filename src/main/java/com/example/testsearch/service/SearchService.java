@@ -39,7 +39,6 @@ public class SearchService {
         this.fileMapper = fileMapper;
     }
 
-
     /* Data_Code로 상세 검색 */
     public Data getDataSearchDetailList(String Data_Code){
 
