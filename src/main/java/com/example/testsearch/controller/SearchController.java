@@ -2,7 +2,6 @@ package com.example.testsearch.controller;
 
 import com.example.testsearch.dto.ArtWork;
 import com.example.testsearch.dto.Data;
-import com.example.testsearch.dto.FileDto;
 import com.example.testsearch.dto.ImageFile;
 import com.example.testsearch.mapper.SearchMapper;
 import com.example.testsearch.service.SearchService;
@@ -13,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +29,7 @@ public class SearchController {
         this.searchMapper = searchMapper;
     }
 
+
     /*자동완성 코드 컨트롤러부분*/
     @PostMapping("/insert")
     @ResponseBody
@@ -39,6 +39,8 @@ public class SearchController {
 
         return autoIncreCode;
     }
+
+
     /*차트 코드 컨트롤러부분*/
     @PostMapping("/totalStatistics")
     @ResponseBody
@@ -49,8 +51,9 @@ public class SearchController {
         return PICntList;
 
     }
-    /* can i use 차트 코드 컨트롤러부분*/
 
+
+    /* can i use 차트 코드 컨트롤러부분*/
     @GetMapping("/totalStatisticsPopup")
     public String totalStatisticsPopup(Model model){
 
@@ -62,19 +65,25 @@ public class SearchController {
         return "/test/totalStatisticsPopup";
     }
 
+
     /* data리스트 조회 */
     @GetMapping("/list2")
     public  String getDataList(Model model){
 
         List<Data> dataList = searchService.getDataList();
-        logger.info("dataList 담긴 값 : {}", dataList);
+        int countData = searchService.countData();
+        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
+        logger.info("PICntList에 담긴 값 : {}", PICntList);
 
         model.addAttribute("title", "data리스트 조회");
         model.addAttribute("dataList", dataList);
+        model.addAttribute("countData", countData);
+        model.addAttribute("PICntList", PICntList);
 
         return "test/list2";
 
     }
+
 
     /* 테스트리스트 조회 */
     @GetMapping("/list")
@@ -92,11 +101,12 @@ public class SearchController {
         return "test/list";
     }
 
+
     /* 검색 */
     @GetMapping("/searchResult")
     public String searchResult( Model model
-                               ,@RequestParam (value = "searchKey", defaultValue = "art_description") String searchKey
-                               ,@RequestParam (value = "searchValue", required = false) String searchValue){
+            ,@RequestParam (value = "searchKey", defaultValue = "art_description") String searchKey
+            ,@RequestParam (value = "searchValue", required = false) String searchValue){
 
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("searchKey", searchKey);
@@ -111,11 +121,12 @@ public class SearchController {
         return "test/searchResult";
     }
 
+
     /* 상세검색 */
     @GetMapping("/searchDetail")
     public String searchDetail(  Model model
-                                ,@RequestParam(value = "art_id",required = false)String art_id
-                                ,@RequestParam(value = "filePath", required = false) String filePath) throws ParseException {
+            ,@RequestParam(value = "art_id",required = false)String art_id
+            ,@RequestParam(value = "filePath", required = false) String filePath) throws ParseException {
         logger.info("파일 주소 : " , filePath);
 
         ArtWork artWork = searchService.getArtWorkSearchDetailList(art_id);
@@ -127,14 +138,72 @@ public class SearchController {
         return "test/searchDetail";
     }
 
+
+    /* select box 선택별 data 검색 */
+   /* @PostMapping("/searchBySelectList")
+    @ResponseBody
+    public List<Map<String, Object>> searchBySelectList(Model model
+            ,@RequestParam (value = "searchKey", defaultValue = "Description") String searchKey
+            ,@RequestParam (value = "searchValue", required = false) String searchValue
+            ,@RequestParam (value = "Providing_Institution", required = false) String Providing_Institution
+            ,@RequestParam (value = "Rights_Statement_Media", required = false) String Rights_Statement_Media
+            ,@RequestParam (value = "Object_Type", required = false) String Object_Type
+            ,@RequestParam (value = "Digital_Data_Type", required = false) String Digital_Data_Type
+            ,@RequestParam (value = "File_Extension", required = false) String File_Extension){
+
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("searchKey", searchKey);
+        paramMap.put("searchValue", searchValue);
+        paramMap.put("Providing_Institution", Providing_Institution);
+        paramMap.put("Rights_Statement_Media", Rights_Statement_Media);
+        paramMap.put("Object_Type", Object_Type);
+        paramMap.put("Digital_Data_Type", Digital_Data_Type);
+        paramMap.put("File_Extension", File_Extension);
+
+        List<Map<String, Object>> searchBySelectList = searchService.getSearchBySelectList(paramMap);
+
+        return searchBySelectList;
+
+    }*/
+
+
+    /* select box 선택별 data 검색  - Ajax */
+    @ResponseBody
+    @RequestMapping("/searchBySelectList")
+    public List<Data> searchBySelectList(Model model
+            , @RequestParam (value = "providingInstitutionList[]", required = false) ArrayList<String> providingInstitutionList
+            , @RequestParam (value = "rightsStatementMediaList[]", required = false) ArrayList<String> rightsStatementMediaList
+            , @RequestParam (value = "objectTypeList[]", required = false) ArrayList<String> objectTypeList
+            , @RequestParam (value = "digitalDateTypeList[]", required = false) ArrayList<String> digitalDateTypeList
+            , @RequestParam (value = "fileExtensionList[]", required = false) ArrayList<String> fileExtensionList){
+
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("providingInstitutionList", providingInstitutionList);
+        paramMap.put("rightsStatementMediaList", rightsStatementMediaList);
+        paramMap.put("objectTypeList", objectTypeList);
+        paramMap.put("digitalDateTypeList", digitalDateTypeList);
+        paramMap.put("fileExtensionList", fileExtensionList);
+
+        /*logger.info("providingInstitutionList 담긴 값 : {}", providingInstitutionList);*/
+
+        List<Data> searchBySelectList = searchService.getSearchBySelectList(paramMap);
+        /* logger.info("[TEST] searchBySelectList 담긴 값 : {}", searchBySelectList);*/
+        //model.addAttribute("title", "작품 검색");
+
+        model.addAttribute("dataSearchList", searchBySelectList);
+
+        return searchBySelectList;
+
+    }
+
+
     /* data 검색 */
     @GetMapping("/dataSearchResult")
     public String dataSeachResult(Model model
-                                 ,@RequestParam (value = "searchKey", defaultValue = "Description") String searchKey
-                                 ,@RequestParam (value = "searchValue", required = false) String searchValue){
-
-        logger.info("searchKey 담긴 값 : {}", searchKey);
-        logger.info("searchValue 담긴 값 : {}", searchValue);
+            ,@RequestParam (value = "searchKey", defaultValue = "Description") String searchKey
+            ,@RequestParam (value = "searchValue", required = false) String searchValue){
 
         Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("searchKey", searchKey);
@@ -143,10 +212,12 @@ public class SearchController {
         List<Data> dataSearchList = searchService.getDataSearchList(paramMap);
         logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
 
-        paramMap = null;
+        int countSearchData = searchService.countSearchData(paramMap);
+        logger.info("data 검색 개수 : {}", countSearchData);
 
         model.addAttribute("title", "작품 검색");
         model.addAttribute("dataSearchList", dataSearchList);
+        model.addAttribute("countSearchData", countSearchData);
 
         return "test/dataSearchResult";
 
@@ -157,8 +228,8 @@ public class SearchController {
     /* Data_Code로 data 상세검색 */
     @GetMapping("/dataSearchDetail")
     public String dataSearchDetail( Model model
-                                   ,@RequestParam(value = "Data_Code",required = false)String Data_Code
-                                   ,@RequestParam(value = "filePath", required = false)String filePath) throws ParseException{
+            ,@RequestParam(value = "Data_Code",required = false)String Data_Code
+            ,@RequestParam(value = "filePath", required = false)String filePath) throws ParseException{
 
         logger.info("파일 주소 : " , filePath);
 

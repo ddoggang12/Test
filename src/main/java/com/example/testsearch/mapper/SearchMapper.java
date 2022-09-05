@@ -11,20 +11,30 @@ import java.util.Map;
 @Mapper
 public interface SearchMapper {
 
+    /* select box 선택별 data 검색 */
+    public List<Data> getSearchBySelectList(Map<String, Object> paramMap);
+
+
     /* 통계 : Providing_Institution별 등록개수 */
     public List<Map<String, Object>> getPICntList();
 
     /*자동증가 코드 : 쿼리문사용*/
     public String getDataCode();
 
-/*    pi 그래프 값 불러오기*/
+    /*    pi 그래프 값 불러오기*/
     public List<Map<String, Object>> getRightCntList();
 
     /* Data_Code로 data 상세 검색 */
     public Data getDataSearchDetailList(String Data_Code);
 
+    /* data 검색 개수 */
+    int countSearchData(Map<String, Object> paramMap);
+
     /* data 검색 */
     List<Data> getDataSearchList(Map<String, Object> paramMap);
+
+    /* data 목록 전체 개수 */
+    int countData();
 
     /* data리스트 조회 */
     List<Data> getDataList();
@@ -38,9 +48,9 @@ public interface SearchMapper {
     //아이디로 상세 검색
     public ArtWork getArtWorkSearchDetailList(String art_id);
 
-   /* //이미지 등록 처리
-    public int addImage(ImageFile imageFile);
-*/
+    /* //이미지 등록 처리
+     public int addImage(ImageFile imageFile);
+ */
     //이미지 목록 조회
     public List<ImageFile> getImageFileList();
 
