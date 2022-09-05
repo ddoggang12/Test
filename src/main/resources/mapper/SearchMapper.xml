@@ -4,7 +4,7 @@
 <mapper namespace="com.example.testsearch.mapper.SearchMapper">
     <resultMap id="ArtWorkResultMap" type="ArtWork">
         <id     column="art_id"                             property="art_id"/>
-        <result column="fileIdx" 					        property="fileIdx"/>
+        <result column="fileIdx"                        property="fileIdx"/>
         <result column="art_year"                           property="art_year"/>
         <result column="art_title"                          property="art_title"/>
         <result column="art_description"                    property="art_description"/>
@@ -15,7 +15,7 @@
         <result column="art_code"                           property="art_code"/>
         <result column="art_storage"                        property="art_storage"/>
         <result column="arrival_date"                       property="arrival_date"/>
-        <result column="method_of_purchasing_to_the_fund"   property="method_of_purchasing_to_the_fund	"/>
+        <result column="method_of_purchasing_to_the_fund"   property="method_of_purchasing_to_the_fund   "/>
         <result column="art_price"                          property="art_price"/>
         <result column="preservation_and_restoration"       property="preservation_and_restoration"/>
         <result column="inscription_and_special_notes"      property="inscription_and_special_notes"/>
@@ -27,11 +27,11 @@
         <result column="exhibition_id"                      property="exhibition_id"/>
 
         <collection property="fileList" javaType="List" ofType="FileDto">
-            <id column="fileIdx" 						property="fileIdx"/>
-            <result	column="fileOriginalName" 			property="fileOriginalName"/>
-            <result column="fileNewName" 				property="fileNewName"/>
-            <result column="filePath" 					property="filePath"/>
-            <result column="fileSize" 					property="fileSize"/>
+            <id column="fileIdx"                   property="fileIdx"/>
+            <result   column="fileOriginalName"          property="fileOriginalName"/>
+            <result column="fileNewName"             property="fileNewName"/>
+            <result column="filePath"                property="filePath"/>
+            <result column="fileSize"                property="fileSize"/>
         </collection>
     </resultMap>
 
@@ -40,17 +40,17 @@
         <result column="fileTitle"          property="fileTitle"/>
 
         <collection property="fileList" javaType="List" ofType="FileDto">
-            <id column="fileIdx" 						property="fileIdx"/>
-            <result	column="fileOriginalName" 			property="fileOriginalName"/>
-            <result column="fileNewName" 				property="fileNewName"/>
-            <result column="filePath" 					property="filePath"/>
-            <result column="fileSize" 					property="fileSize"/>
+            <id column="fileIdx"                   property="fileIdx"/>
+            <result   column="fileOriginalName"          property="fileOriginalName"/>
+            <result column="fileNewName"             property="fileNewName"/>
+            <result column="filePath"                property="filePath"/>
+            <result column="fileSize"                property="fileSize"/>
         </collection>
     </resultMap>
 
     <resultMap id="DataResultMap" type="Data">
         <id     column="Identifier"                     property="Identifier"/>
-        <result column="Objects" 					    property="Objects"/>
+        <result column="Objects"                    property="Objects"/>
         <result column="Title"                          property="Title"/>
         <result column="Subject"                        property="Subject"/>
         <result column="Description"                    property="Description"/>
@@ -84,13 +84,16 @@
         <result column="Longitude"                      property="Longitude"/>
 
         <collection property="fileList" javaType="List" ofType="FileDto">
-            <id column="fileIdx" 						property="fileIdx"/>
-            <result	column="fileOriginalName" 			property="fileOriginalName"/>
-            <result column="fileNewName" 				property="fileNewName"/>
-            <result column="filePath" 					property="filePath"/>
-            <result column="fileSize" 					property="fileSize"/>
+            <id column="fileIdx"                   property="fileIdx"/>
+            <result   column="fileOriginalName"          property="fileOriginalName"/>
+            <result column="fileNewName"             property="fileNewName"/>
+            <result column="filePath"                property="filePath"/>
+            <result column="fileSize"                property="fileSize"/>
         </collection>
     </resultMap>
+
+
+
 
     <!-- 통계 : Providing_Institution별 등록개수 -->
     <select id="getPICntList" resultType="map">
@@ -103,12 +106,117 @@
 
     </select>
 
+
+
     <select id="getDataCode" resultType="String">
         select
             substring(MAX(CAST(SUBSTRING_INDEX(Identifier,'-',-1) AS UNSIGNED))+1000001,2)
         from
             `data`
     </select>
+
+
+
+    <select id="getRightStatementMedia" resultType="map">
+        SELECT
+            Rights_Statement_Media,
+            COUNT(Rights_Statement_Media) AS R_Cnt
+        FROM
+            `data`
+        GROUP BY Rights_Statement_Media ORDER BY R_Cnt DESC;
+    </select>
+
+
+
+    <!-- select box 선택별 data 검색 -->
+    <select id="getSearchBySelectList_back_up" parameterType="map" resultType="map" resultMap="DataResultMap">
+        SELECT
+        d.Title,
+        d.Subject,
+        d.Description,
+        d.Identifier,
+        d.Object_Type,
+        d.Object_Size,
+        d.Digital_Data_Type,
+        d.File_Extension,
+        d.Rights_Statement_Media,
+        d.Providing_Institution,
+        d.Data_Code
+        FROM
+        `data` AS d
+
+        <trim prefix="WHERE" prefixOverrides="AND |OR ">
+            <if test="searchKey != null and searchKey !='' and searchValue != ''">
+                AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
+            </if>
+            <if test="Providing_Institution != null and Providing_Institution !='' and Providing_Institution != ''">
+                /*AND Providing_Institution=${Providing_Institution}*/
+                AND Providing_Institution='National Fine Arts Museum'
+            </if>
+            <if test="Rights_Statement_Media != null and Rights_Statement_Media !='' and Rights_Statement_Media != ''">
+                AND Rights_Statement_Media=${Rights_Statement_Media}
+            </if>
+            <if test="Digital_Data_Type != null and Digital_Data_Type !='' and Digital_Data_Type != ''">
+                AND Digital_Data_Type=${Digital_Data_Type}
+            </if>
+            <if test="File_Extension != null and File_Extension !='' and File_Extension != ''">
+                AND File_Extension=${File_Extension}
+            </if>
+        </trim>
+        ;
+    </select>
+
+
+    <!-- select box 선택별 data 검색 -->
+    <select id="getSearchBySelectList" parameterType="map" resultMap="DataResultMap">
+        SELECT
+        d.Title,
+        d.Subject,
+        d.Description,
+        d.Identifier,
+        d.Object_Type,
+        d.Object_Size,
+        d.Digital_Data_Type,
+        d.File_Extension,
+        d.Rights_Statement_Media,
+        d.Providing_Institution,
+        d.Data_Code
+        FROM
+        `data` AS d
+        where 1=1
+        <if test="providingInstitutionList != null">
+            AND d.Providing_Institution in
+            <foreach collection="providingInstitutionList" item="providingInstitution" open="(" close=")" separator=",">
+                #{providingInstitution}
+            </foreach>
+        </if>
+        <if test="rightsStatementMediaList != null">
+            AND d.Rights_Statement_Media in
+            <foreach collection="rightsStatementMediaList" item="rightsStatementMedia" open="(" close=")" separator=",">
+                #{rightsStatementMedia}
+            </foreach>
+        </if>
+        <if test="objectTypeList != null">
+            AND d.Object_Type in
+            <foreach collection="objectTypeList" item="objectType" open="(" close=")" separator=",">
+                #{objectType}
+            </foreach>
+        </if>
+        <if test="digitalDateTypeList != null">
+            AND d.Digital_Data_Type in
+            <foreach collection="digitalDateTypeList" item="digitalDateType" open="(" close=")" separator=",">
+                #{digitalDateType}
+            </foreach>
+        </if>
+        <if test="fileExtensionList != null">
+            AND d.File_Extension in
+            <foreach collection="fileExtensionList" item="fileExtension" open="(" close=")" separator=",">
+                #{fileExtension}
+            </foreach>
+        </if>
+        ;
+    </select>
+
 
     <!-- Data_Code로 data 상세 검색 -->
     <select id="getDataSearchDetailList" resultMap="DataResultMap">
@@ -165,27 +273,61 @@
     </select>
 
 
+    <!-- data 검색 개수 -->
+    <select id="countSearchData" parameterType="map" resultType="int">
+        /* SELECT COUNT(c.Description + c.Title + c.Identifier + c.Providing_Institution) AS cnt */
+        SELECT COUNT(c.Description) AS cnt
+        FROM(
+                SELECT
+                    d.Title,
+                    d.Subject,
+                    d.Description,
+                    d.Identifier,
+                    d.Object_Type,
+                    d.Object_Size,
+                    d.Digital_Data_Type,
+                    d.File_Extension,
+                    d.Rights_Statement_Media,
+                    d.Providing_Institution
+                FROM
+                    `data` AS d
+                WHERE
+                    DESCRIPTION LIKE CONCAT('%', #{searchValue}, '%')
+            ) AS c;
+
+    </select>
+
+
     <!-- data 검색 -->
     <select id="getDataSearchList" parameterType="map" resultMap="DataResultMap">
         SELECT
-            d.Title,
-            d.Subject,
-            d.Description,
-            d.Identifier,
-            d.Object_Type,
-            d.Object_Size,
-            d.Created_Time,
-            d.Data_Code,
-            d.Latitude,
-            d.Longitude
+        d.Title,
+        d.Subject,
+        d.Description,
+        d.Identifier,
+        d.Object_Type,
+        d.Object_Size,
+        d.Created_Time,
+        d.Data_Code,
+        d.Latitude,
+        d.Longitude
         FROM
-            `data` AS d
+        `data` AS d
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="searchKey != null and searchKey !='' and searchValue != ''">
                 AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
             </if>
         </trim>
         ;
+    </select>
+
+
+    <!-- data 목록 전체 개수 -->
+    <select id="countData" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            `data`;
     </select>
 
 
@@ -233,6 +375,7 @@
     </select>
 
 
+
     <!--&lt;!&ndash; 이미지 등록 &ndash;&gt;
     <insert id="addImage" parameterType="ImageFile">
         INSERT INTO imagefile
@@ -246,10 +389,11 @@
     </insert>-->
 
 
+
     <!-- 상세 검색 -->
     <select id="getArtWorkSearchDetailList" resultMap="ArtWorkResultMap">
         SELECT
-              a.art_id
+            a.art_id
              ,a.art_year
              ,a.art_title
              ,a.art_description
@@ -261,20 +405,21 @@
              ,SUBSTRING_INDEX(f.fileOriginalName, '.',1)
         FROM
             artwork AS a
-            LEFT JOIN
+                LEFT JOIN
             tb_file AS f
             ON
-            a.fileIdx = f.fileIdx
+                a.fileIdx = f.fileIdx
         WHERE
             a.art_id=#{art_id};
 
     </select>
 
-    
+
+
     <!-- 테스트 목록 조회 -->
     <select id="getArtWorkList" resultMap="ArtWorkResultMap">
         SELECT
-              art_id
+            art_id
              ,art_title
              ,art_year
              ,art_description
@@ -286,24 +431,25 @@
     </select>
 
 
+
     <!-- 검색 -->
     <select id="getArtWorkSearchList" parameterType="map" resultMap="ArtWorkResultMap">
         SELECT
-              art_id
-             ,art_title
-             ,art_year
-             ,art_description
-             ,art_material
-             ,art_technique
-             ,art_size
+        art_id
+        ,art_title
+        ,art_year
+        ,art_description
+        ,art_material
+        ,art_technique
+        ,art_size
         FROM
-              artwork
+        artwork
         <trim prefix="WHERE" prefixOverrides="AND |OR ">
             <if test="searchKey != null and searchKey !='' and searchValue != ''">
                 AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
             </if>
         </trim>
-            ;
+        ;
     </select>
 
 

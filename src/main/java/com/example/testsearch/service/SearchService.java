@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnJava;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,10 +40,25 @@ public class SearchService {
         this.fileMapper = fileMapper;
     }
 
+
+    /* select box 선택별 data 검색 */
+    public List<Data> getSearchBySelectList(Map<String, Object> paramMap) {
+        List<Data> dataSearchList = searchMapper.getSearchBySelectList(paramMap);
+
+        return dataSearchList;
+    }
+
     /* Data_Code로 상세 검색 */
     public Data getDataSearchDetailList(String Data_Code){
 
         return searchMapper.getDataSearchDetailList(Data_Code);
+
+    }
+
+    /* data 검색 개수 */
+    public int countSearchData(Map<String, Object> paramMap){
+
+        return searchMapper.countSearchData(paramMap);
 
     }
 
@@ -54,6 +70,11 @@ public class SearchService {
         return dataSearchList;
     }
 
+
+    /* data 전체 개수 */
+    public int countData(){
+        return searchMapper.countData();
+    }
 
     /* data리스트 조회 */
     public List<Data> getDataList(){
@@ -73,7 +94,7 @@ public class SearchService {
     }
 
     /* 검색 */
-   public List<ArtWork> getArtWorkSearchList(Map<String, Object> paramMap){
+    public List<ArtWork> getArtWorkSearchList(Map<String, Object> paramMap){
 
         List<ArtWork> artWorkSearchList = searchMapper.getArtWorkSearchList(paramMap);
 
