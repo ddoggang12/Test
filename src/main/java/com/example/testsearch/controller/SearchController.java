@@ -60,7 +60,7 @@ public class SearchController {
         model.addAttribute("title", "Staticstical Info");
         model.addAttribute("PICntList", PICntList);
 
-        return "/test/totalStatisticsPopup";
+        return "test/totalStatisticsPopup";
     }
 
 
