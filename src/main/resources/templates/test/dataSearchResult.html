@@ -640,13 +640,13 @@
                     $('#searchResultTable').empty();
                     for(x in data) {
 
-                        let filePath = data[x].fileList[0].filePath.replace('\\', '/');
+                        let filePath = '/' + data[x].fileList[0].filePath.replace('\\', '/');
                         let temp = "<table class=\"testSearch\">\n" +
                             "                                            <tbody>\n" +
                             "                                                    <tr>\n" +
                             "                                                        <td rowspan=\"4\" width=\"230\">\n" +
                             "                                                            <a onclick=\"location.href='/test/dataSearchDetail?Data_Code=" +data[x].data_Code + "'\" style=\"cursor:pointer;\">\n" +
-                            "                                                                <img src=\ filePath \ class=\"card-img rounded-0\">\n" +
+                            "                                                                <img src=\"" + filePath + "\"   class=\"card-img rounded-0\">\n" +
                             "                                                            </a>\n" +
                             "                                                        </td>\n" +
                             "                                                    </tr>\n" +
