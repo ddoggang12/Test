@@ -135,9 +135,20 @@
         d.File_Extension,
         d.Rights_Statement_Media,
         d.Providing_Institution,
-        d.Data_Code
+        d.Data_Code,
+        tf.fileIdx,
+        tf.filePath,
+        tf.fileOriginalName
         FROM
         `data` AS d
+        INNER JOIN
+        `tb_file_control` AS tfc
+        ON
+        d.Data_Code = tfc.referenceCode
+        INNER JOIN
+        `tb_file` AS tf
+        ON
+        tfc.fileIdx = tf.fileIdx
         where 1=1
         <if test="providingInstitutionList != null">
             AND d.Providing_Institution in

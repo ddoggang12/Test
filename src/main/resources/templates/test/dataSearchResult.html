@@ -615,6 +615,7 @@
 
 
             function searchProvidingInstitution(providingInstitutionList, rightsStatementMediaList, objectTypeList, digitalDateTypeList, fileExtensionList){
+
                 $.ajax({
                     type: 'POST',
                     url: '/test/searchBySelectList',
@@ -635,34 +636,42 @@
                     },
                 }).done(function (data) {
                     // data : providing institution으로 받은 데이터
+
                     $('#searchResultTable').empty();
                     for(x in data) {
-                        let temp = "<table id=\"resultTable\" class=\"testSearch\">\n" +
-                            "                                        <thead>\n" +
-                            "                                        <tr>\n" +
-                            "                                            <td width=\"150\">Identifier</td>\n" +
-                            "                                            <td>\n" +
-                            "                                                <a onclick=\"location.href='/test/dataSearchDetail?Data_Code=" + data[x].data_Code + "'\" style=\"cursor:pointer;\">\n" +
-                            "                                                    " + data[x].identifier +
-                            "                                                </a>\n" +
-                            "                                            </td>\n" +
-                            "                                        </tr>\n" +
-                            "                                        </thead>\n" +
-                            "                                        <tbody>\n" +
-                            "                                        <tr>\n" +
-                            "                                            <td>Title</td>\n" +
-                            "                                            <td id=\"title\" >\n" +
-                            "                                                " + data[x].title +
-                            "                                            </td>\n" +
-                            "                                        </tr>\n" +
-                            "                                        <tr>\n" +
-                            "                                            <td>Description</td>\n" +
-                            "                                            <td id=\"desc\" >\n" +
-                            "                                                " + data[x].description +
-                            "                                            </td>\n" +
-                            "                                        </tr>\n" +
-                            "                                        </tbody>\n" +
-                            "                                    </table>";
+
+                        let filePath = data[x].fileList[0].filePath.replace('\\', '/');
+                        let temp = "<table class=\"testSearch\">\n" +
+                            "                                            <tbody>\n" +
+                            "                                                    <tr>\n" +
+                            "                                                        <td rowspan=\"4\" width=\"230\">\n" +
+                            "                                                            <a onclick=\"location.href='/test/dataSearchDetail?Data_Code=" +data[x].data_Code + "'\" style=\"cursor:pointer;\">\n" +
+                            "                                                                <img src=\ filePath \ class=\"card-img rounded-0\">\n" +
+                            "                                                            </a>\n" +
+                            "                                                        </td>\n" +
+                            "                                                    </tr>\n" +
+                            "                                                <tr>\n" +
+                            "                                                    <td id=\"tdIdentifier\"width=\"230\">Identifier</td>\n" +
+                            "                                                    <td>\n" +
+                            "                                                        <a onclick=\"location.href='/test/dataSearchDetail?Data_Code=" + data[x].data_Code + "'\" style=\"cursor:pointer;\">\n" +
+                            "                                                            " + data[x].identifier +
+                            "                                                        </a>\n" +
+                            "                                                    </td>\n" +
+                            "                                                </tr>\n" +
+                            "                                                <tr>\n" +
+                            "                                                    <td>Title</td>\n" +
+                            "                                                    <td id=\"title\">\n" +
+                            "                                                        " + data[x].title +
+                            "                                                    </td>\n" +
+                            "                                                </tr>\n" +
+                            "                                                <tr class=\"trEnd\" style=\"border-bottom: 1px solid #AAAAAA;\">\n" +
+                            "                                                    <td>Description</td>\n" +
+                            "                                                    <td id=\"desc\">\n" +
+                            "                                                        " + data[x].description +
+                            "                                                    </td>\n" +
+                            "                                                </tr>\n" +
+                            "                                            </tbody>\n" +
+                            "                                        </table>";
                         $('#searchResultTable').append(temp);
                         console.log(data[x].title);
                     }
