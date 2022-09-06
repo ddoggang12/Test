@@ -1,10 +1,8 @@
 package com.example.testsearch.controller;
 
 import com.example.testsearch.dto.Data;
-import com.example.testsearch.dto.ImageFile;
 import com.example.testsearch.dto.UserDto;
 import com.example.testsearch.mapper.CommonMapper;
-import com.example.testsearch.mapper.UserMapper;
 import com.example.testsearch.service.AdminService;
 import com.example.testsearch.service.UserService;
 import org.apache.logging.log4j.LogManager;

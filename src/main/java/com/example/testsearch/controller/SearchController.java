@@ -1,8 +1,6 @@
 package com.example.testsearch.controller;
 
-import com.example.testsearch.dto.ArtWork;
 import com.example.testsearch.dto.Data;
-import com.example.testsearch.dto.ImageFile;
 import com.example.testsearch.mapper.SearchMapper;
 import com.example.testsearch.service.SearchService;
 import org.apache.logging.log4j.LogManager;
@@ -71,73 +69,16 @@ public class SearchController {
     public  String getDataList(Model model){
 
         List<Data> dataList = searchService.getDataList();
-        int countData = searchService.countData();
         List<Map<String, Object>> PICntList = searchMapper.getPICntList();
         logger.info("PICntList에 담긴 값 : {}", PICntList);
 
         model.addAttribute("title", "data리스트 조회");
         model.addAttribute("dataList", dataList);
-        model.addAttribute("countData", countData);
         model.addAttribute("PICntList", PICntList);
 
         return "test/list2";
 
     }
-
-
-    /* 테스트리스트 조회 */
-    @GetMapping("/list")
-    public String testSearch(Model model){
-
-        List<ArtWork> artWorkList = searchService.getArtWorkList();
-        List<ImageFile> imageFileList = searchService.getImageFileList();
-
-        model.addAttribute("title","검색 테스트");
-        model.addAttribute("artWorkList", artWorkList);
-        model.addAttribute("imageFileList", imageFileList);
-
-        logger.info("artWorkList 담김 값: {}", artWorkList);
-
-        return "test/list";
-    }
-
-
-    /* 검색 */
-    @GetMapping("/searchResult")
-    public String searchResult( Model model
-            ,@RequestParam (value = "searchKey", defaultValue = "art_description") String searchKey
-            ,@RequestParam (value = "searchValue", required = false) String searchValue){
-
-        Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("searchKey", searchKey);
-        paramMap.put("searchValue", searchValue);
-
-        List<ArtWork> artWorkSearchList = searchService.getArtWorkSearchList(paramMap);
-        logger.info("artWorkSearchList에 담긴 값 : {}", artWorkSearchList);
-
-        model.addAttribute("title", "작품 검색");
-        model.addAttribute("artWorkSearchList", artWorkSearchList);
-
-        return "test/searchResult";
-    }
-
-
-    /* 상세검색 */
-    @GetMapping("/searchDetail")
-    public String searchDetail(  Model model
-            ,@RequestParam(value = "art_id",required = false)String art_id
-            ,@RequestParam(value = "filePath", required = false) String filePath) throws ParseException {
-        logger.info("파일 주소 : " , filePath);
-
-        ArtWork artWork = searchService.getArtWorkSearchDetailList(art_id);
-        logger.info("artWork 담긴 값 : {} ", artWork);
-
-        model.addAttribute("title","검색 상세 화면");
-        model.addAttribute("artWork",artWork);
-
-        return "test/searchDetail";
-    }
-
 
     /* select box 선택별 data 검색 */
    /* @PostMapping("/searchBySelectList")
