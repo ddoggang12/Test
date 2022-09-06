@@ -34,7 +34,7 @@
                                   <ul class="nav navbar-nav navbar-right">
                                       <li th:if="${session.SEMAIL != null}" style="margin-top: 13px; font-size: 17px;">Welcome [[${session.SNAME}]]</li>
                                       <li><a th:href="@{/}">HOME</a></li>
-                                      <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/dataSearchResult}">Collections</a></li>
+                                      <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/dataSearchResult?searchValue=}">Collections</a></li>
                                       <li th:if="${session.SEMAIL != null}"><a th:onclick="showTotalStatistics_Popup()" style="cursor:pointer">Statistics</a> </li>
                                       <li th:if="${session.SEMAIL != null}"><a th:href="@{/admin/insert}">Upload</a></li>
                                       <li th:if="${session.SEMAIL == null}"><a th:href="@{/user/login}">Log in</a></li>
@@ -43,13 +43,13 @@
                                   </ul>
                               </div>
                           </div>
-                      </nav>
+                      </nav>S
                   </div>
                   <script>
                       function showTotalStatistics_Popup(){
                           const url = "/test/totalStatisticsPopup";
-                          const winWidth = 1200;
-                          const winHeight = 800;
+                          const winWidth = 1000;
+                          const winHeight = 700;
                           const left = 0;
                           const top = 0;
                           const popupOption = "width=" + winWidth + ", height=" + winHeight + ", left=" + left + ", top=" +top;

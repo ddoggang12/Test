@@ -57,7 +57,7 @@
             COUNT(Providing_Institution) AS CNT
         FROM
             `data`
-        GROUP BY Providing_Institution ORDER BY cnt DESC;
+        GROUP BY Providing_Institution;
 
     </select>
 
