@@ -191,6 +191,9 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <div style="text-align: right; margin-top: 30px;">
+                                        <button type="button" class="btn" th:if="${session.SEMAIL != null}" th:onclick="|location.href='@{'/admin/insert'}'|">Upload</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,6 +204,11 @@
 
         <th:block layout:fragments="customCss">
             <style>
+
+                .btn{
+                    min-width: 100px !important;
+                    border-radius: 0px !important;
+                }
 
                 td {
                     padding: 10px;
