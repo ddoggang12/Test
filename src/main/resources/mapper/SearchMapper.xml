@@ -258,11 +258,52 @@
                 FROM
                     `data` AS d
                 WHERE
-                    DESCRIPTION LIKE CONCAT('%', #{searchValue}, '%')
+                    Identifier LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Title LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Subject LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Description LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Temporary LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Places LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Current_location LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Object_Etc LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Object_Type LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Object_Material LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Raw_Data_Type LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    Digital_Data_Type LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Coverage` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Creator` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Participants` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Publisher` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Provider` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Providing_Institution` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Provider_Country` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Collection_Name` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `Source` LIKE CONCAT('%', #{searchValue}, '%')
+                    OR
+                    `IsPartOf` LIKE CONCAT('%', #{searchValue}, '%')
             ) AS c;
 
     </select>
-
 
     <!-- data 검색 -->
     <select id="getDataSearchList" parameterType="map" resultMap="DataResultMap">
@@ -291,11 +332,51 @@
         `tb_file` AS tf
         ON
         tfc.fileIdx = tf.fileIdx
-        <trim prefix="WHERE" prefixOverrides="AND |OR ">
-            <if test="searchKey != null and searchKey !='' and searchValue != ''">
-                AND ${searchKey} LIKE CONCAT('%', #{searchValue}, '%')
-            </if>
-        </trim>
+
+        WHERE
+            Identifier LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Title LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Subject LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Description LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Temporary LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Places LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Current_location LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Object_Etc LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Object_Type LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Object_Material LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Raw_Data_Type LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            Digital_Data_Type LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Coverage` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Creator` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Participants` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Publisher` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Provider` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Providing_Institution` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Provider_Country` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Collection_Name` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `Source` LIKE CONCAT('%', #{searchValue}, '%')
+           OR
+            `IsPartOf` LIKE CONCAT('%', #{searchValue}, '%')
         ;
     </select>
 
