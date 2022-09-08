@@ -58,7 +58,6 @@ public class SearchService {
     public  List<Data> getDataSearchList(Map<String, Object> paramMap){
 
         List<Data> dataSearchList = searchMapper.getDataSearchList(paramMap);
-
         return dataSearchList;
     }
 

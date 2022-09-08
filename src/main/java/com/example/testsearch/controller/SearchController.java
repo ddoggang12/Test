@@ -143,7 +143,7 @@ public class SearchController {
     /* data 검색 */
     @GetMapping("/dataSearchResult")
     public String dataSeachResult(Model model
-            ,@RequestParam (value = "searchKey", defaultValue = "Description") String searchKey
+            ,@RequestParam (value = "searchKey", required = false) String searchKey
             ,@RequestParam (value = "searchValue", required = false) String searchValue){
 
         Map<String, Object> paramMap = new HashMap<>();
