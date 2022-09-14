@@ -33,11 +33,19 @@ public class SearchService {
     }
 
 
-    /* select box 선택별 data 검색 */
+    /* select box 선택별 data 검색 : en */
     public List<Data> getSearchBySelectList(Map<String, Object> paramMap) {
         List<Data> dataSearchList = searchMapper.getSearchBySelectList(paramMap);
 
         return dataSearchList;
+    }
+
+
+    /* select box 선택별 data 검색 : ru */
+    public List<Data> getSearchBySelectList_ru(Map<String, Object> paramMap) {
+        List<Data> ruDataSearchList = searchMapper.getSearchBySelectList_ru(paramMap);
+
+        return ruDataSearchList;
     }
 
     /* Data_Code로 상세 검색 */

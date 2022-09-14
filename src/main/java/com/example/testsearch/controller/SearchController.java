@@ -39,7 +39,7 @@ public class SearchController {
     }
 
 
-    /*차트 코드 컨트롤러부분*/
+    /* Ajax - 기관별 차트  en */
     @PostMapping("/totalStatistics")
     @ResponseBody
     public List<Map<String, Object>> totalStatistics(){
@@ -51,7 +51,19 @@ public class SearchController {
     }
 
 
-    /* can i use 차트 코드 컨트롤러부분*/
+    /* Ajax - 기관별 차트  ru */
+    @PostMapping("/ruTotalStatistics")
+    @ResponseBody
+    public List<Map<String, Object>> ruTotalStatistics(){
+
+        List<Map<String, Object>> ruPICntList = searchMapper.getPICntList_ru();
+
+        return ruPICntList;
+
+    }
+
+
+    /* 팝업 - 기관별 차트  en */
     @GetMapping("/totalStatisticsPopup")
     public String totalStatisticsPopup(Model model){
 
@@ -60,25 +72,23 @@ public class SearchController {
         model.addAttribute("title", "Staticstical Info");
         model.addAttribute("PICntList", PICntList);
 
-        return "test/totalStatisticsPopup";
+        return "en/test/totalStatisticsPopup";
     }
 
 
-    /* data리스트 조회 */
-    @GetMapping("/list2")
-    public  String getDataList(Model model){
 
-        List<Data> dataList = searchService.getDataList();
-        List<Map<String, Object>> PICntList = searchMapper.getPICntList();
-        logger.info("PICntList에 담긴 값 : {}", PICntList);
+    /* 팝업 - 기관별 차트  ru */
+    @GetMapping("/ru/totalStatisticsPopup")
+    public String ruTotalStatisticsPopup(Model model){
 
-        model.addAttribute("title", "data리스트 조회");
-        model.addAttribute("dataList", dataList);
-        model.addAttribute("PICntList", PICntList);
+        List<Map<String, Object>> ruPICntList = searchMapper.getPICntList_ru();
+        logger.info("ruPICntList에 담긴 값 : {}", ruPICntList);
+        model.addAttribute("title", "Статическая информация");
+        model.addAttribute("ruPICntList", ruPICntList);
 
-        return "test/list2";
-
+        return "ru/test/totalStatisticsPopup";
     }
+
 
     /* select box 선택별 data 검색 */
    /* @PostMapping("/searchBySelectList")
@@ -140,9 +150,69 @@ public class SearchController {
     }
 
 
-    /* data 검색 */
+
+    /* select box 선택별 data 검색  - Ajax */
+    @ResponseBody
+    @RequestMapping("/ruSearchBySelectList")
+    public List<Data> ruSearchBySelectList(Model model
+            , @RequestParam (value = "providingInstitutionList[]", required = false) ArrayList<String> providingInstitutionList
+            , @RequestParam (value = "rightsStatementMediaList[]", required = false) ArrayList<String> rightsStatementMediaList
+            , @RequestParam (value = "objectTypeList[]", required = false) ArrayList<String> objectTypeList
+            , @RequestParam (value = "digitalDateTypeList[]", required = false) ArrayList<String> digitalDateTypeList
+            , @RequestParam (value = "fileExtensionList[]", required = false) ArrayList<String> fileExtensionList){
+
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("providingInstitutionList", providingInstitutionList);
+        paramMap.put("rightsStatementMediaList", rightsStatementMediaList);
+        paramMap.put("objectTypeList", objectTypeList);
+        paramMap.put("digitalDateTypeList", digitalDateTypeList);
+        paramMap.put("fileExtensionList", fileExtensionList);
+
+        /*logger.info("providingInstitutionList 담긴 값 : {}", providingInstitutionList);*/
+
+        List<Data> ruSearchBySelectList = searchService.getSearchBySelectList_ru(paramMap);
+        /* logger.info("[TEST] searchBySelectList 담긴 값 : {}", searchBySelectList);*/
+        //model.addAttribute("title", "작품 검색");
+
+        model.addAttribute("dataSearchList", ruSearchBySelectList);
+
+        return ruSearchBySelectList;
+
+    }
+
+
+
+
+    /* data 검색 - en */
     @GetMapping("/dataSearchResult")
     public String dataSeachResult(Model model
+            ,@RequestParam (value = "searchKey", required = false) String searchKey
+            ,@RequestParam (value = "searchValue", required = false) String searchValue) {
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("searchKey", searchKey);
+        paramMap.put("searchValue", searchValue);
+
+        List<Data> dataSearchList = searchService.getDataSearchList(paramMap);
+        logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
+
+        int countSearchData = searchService.countSearchData(paramMap);
+        logger.info("data 검색 개수 : {}", countSearchData);
+
+        model.addAttribute("title", "작품 검색");
+        model.addAttribute("dataSearchList", dataSearchList);
+        model.addAttribute("countSearchData", countSearchData);
+
+        return "en/test/dataSearchResult";
+
+    }
+
+
+
+        /* data 검색 - ru */
+    @GetMapping("ru/dataSearchResult")
+    public String ruDataSeachResult(Model model
             ,@RequestParam (value = "searchKey", required = false) String searchKey
             ,@RequestParam (value = "searchValue", required = false) String searchValue){
 
@@ -160,13 +230,13 @@ public class SearchController {
         model.addAttribute("dataSearchList", dataSearchList);
         model.addAttribute("countSearchData", countSearchData);
 
-        return "test/dataSearchResult";
+        return "ru/test/dataSearchResult";
 
 
     }
 
 
-    /* Data_Code로 data 상세검색 */
+    /* Data_Code로 data 상세검색 - en */
     @GetMapping("/dataSearchDetail")
     public String dataSearchDetail( Model model
             ,@RequestParam(value = "Data_Code",required = false)String Data_Code
@@ -180,7 +250,27 @@ public class SearchController {
         model.addAttribute("title","Data 검색 상세 화면");
         model.addAttribute("data",data);
 
-        return "test/dataSearchDetail";
+        return "en/test/dataSearchDetail";
+
+
+    }
+
+
+    /* Data_Code로 data 상세검색 - ru */
+    @GetMapping("ru/dataSearchDetail")
+    public String ruDataSearchDetail( Model model
+            ,@RequestParam(value = "Data_Code",required = false)String Data_Code
+            ,@RequestParam(value = "filePath", required = false)String filePath) throws ParseException{
+
+        logger.info("파일 주소 : " , filePath);
+
+        Data data = searchService.getDataSearchDetailList(Data_Code);
+        logger.info("data 담긴 값 : {} ", data);
+
+        model.addAttribute("title","Data 검색 상세 화면");
+        model.addAttribute("data",data);
+
+        return "ru/test/dataSearchDetail";
 
 
     }

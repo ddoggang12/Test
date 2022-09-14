@@ -7,7 +7,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
   <!-- start: Header -->
-  <header id="main_menu" class="header navbar-fixed-top" th:fragment="headerFragment">
+  <header id="main_menu" class="header navbar-fixed-top" th:fragment="headerFragment_ru">
       <div class="main_menu_bg">
           <div class="container">
               <div class="row">
@@ -22,8 +22,8 @@
                                       <span class="icon-bar"></span>
                                       <span class="icon-bar"></span>
                                   </button>
-                                  <a class="navbar-brand" th:href="@{/}">
-                                      <strong>KGZ TEST</strong>
+                                  <a class="navbar-brand" th:href="@{/ru}">
+                                      <strong>КГЗ ТЕСТ</strong>
                                       <!--<img src="assets/images/logo.png"/>-->
                                   </a>
                               </div>
@@ -32,15 +32,18 @@
 
                               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                   <ul class="nav navbar-nav navbar-right">
-                                      <li><a th:href="@{/}">HOME</a></li>
-                                      <li><a th:href="@{/test/dataSearchResult?searchValue=}">Collection</a></li>
-                                      <li th:if="${session.SEMAIL != null}"><a th:onclick="showTotalStatistics_Popup()" style="cursor:pointer">Statistics</a> </li>
-                                      <li th:if="${session.SEMAIL == null}"><a th:href="@{/user/login}">Log in</a></li>
-                                      <li th:unless="${session.SEMAIL == null}"><a th:href="@{/user/logout}">Log out</a></li>
-                                      <li th:if="${session.SEMAIL == null}" ><a th:href="@{/user/join}">Join</a></li>
+                                      <li th:if="${session.SEMAIL != null}" style="margin-top: 13px; font-size: 17px;">
+                                          Добро пожаловать [[${session.SNAME}]]</li>
+                                      <li><a th:href="@{/ru}">ДОМ</a></li>
+                                      <li><a th:href="@{/test/ru/dataSearchResult?searchValue=}">Коллекции</a></li>
+                                      <li th:if="${session.SEMAIL != null}"><a th:onclick="showTotalStatistics_Popup()" style="cursor:pointer">Статистика</a></li>
+                                      <li th:if="${session.SEMAIL != null}"><a th:href="@{/admin/ru/insert}">Загрузить</a></li>
+                                      <li th:if="${session.SEMAIL == null}"><a th:href="@{/user/ru/login}">Авторизоваться</a></li>
+                                      <li th:unless="${session.SEMAIL == null}"><a th:href="@{/user/ru/logout}">Выйти</a></li>
+                                      <li th:if="${session.SEMAIL == null}" ><a th:href="@{/user/ru/join}">Присоединиться</a></li>
                                       <li>
                                           <select class="language" style="margin-top: 10px;" onchange="changeLanguage(this)">
-                                              <option value="Language">Language</option>
+                                              <option value="Language">Язык</option>
                                               <option value="English">English</option>
                                               <option value="русский">русский</option>
                                           </select>
@@ -52,13 +55,13 @@
                   </div>
                   <script>
                       function showTotalStatistics_Popup(){
-                          const url = "/test/totalStatisticsPopup";
+                          const url = "/test/ru/totalStatisticsPopup";
                           const winWidth = 1000;
                           const winHeight = 700;
                           const left = 0;
                           const top = 0;
                           const popupOption = "width=" + winWidth + ", height=" + winHeight + ", left=" + left + ", top=" +top;
-                          window.open(url, "Staticstical Info", popupOption);
+                          window.open(url, "Статическая информация", popupOption);
                       }
 
                       function changeLanguage(e){

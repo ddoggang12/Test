@@ -9,12 +9,21 @@ import java.util.Map;
 @Mapper
 public interface SearchMapper {
 
-    /* select box 선택별 data 검색 */
+    /* select box 선택별 data 검색 : en */
     public List<Data> getSearchBySelectList(Map<String, Object> paramMap);
+
+
+ /* select box 선택별 data 검색 : ru */
+    public List<Data> getSearchBySelectList_ru(Map<String, Object> paramMap);
 
 
     /* 통계 : Providing_Institution별 등록개수 */
     public List<Map<String, Object>> getPICntList();
+
+
+    /* 통계 : Providing_Institution_Ru별 등록개수 */
+    public List<Map<String, Object>> getPICntList_ru();
+
 
     /*자동증가 코드 : 쿼리문사용*/
     public String getDataCode();
