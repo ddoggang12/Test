@@ -28,16 +28,29 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    /* 회원가입 화면 */
+    /* 회원가입 화면 - en */
     @GetMapping("/join")
     public String addUser(Model model){
 
         model.addAttribute("title", "회원가입");
 
-        return "user/join";
+        return "en/user/join";
     }
 
-    /* 회원가입 처리 */
+
+
+    /* 회원가입 화면 - ru */
+    @GetMapping("/ru/join")
+    public String ruAddUser(Model model){
+
+        model.addAttribute("title", "회원가입");
+
+        return "ru/user/join";
+    }
+
+
+
+    /* 회원가입 처리 - en */
     @RequestMapping(value = "/join", method = {RequestMethod.POST})
     public String addUser(UserDto userDto){
 
@@ -48,6 +61,23 @@ public class UserController {
 
         return "redirect:/";
     }
+
+
+
+    /* 회원가입 처리 - ru */
+    @RequestMapping(value = "/ru/join", method = {RequestMethod.POST})
+    public String ruAddUser(UserDto userDto){
+
+        logger.info("회원가입폼에서 입력받은 데이터: {}", userDto);
+
+
+        userService.addUser(userDto);
+
+        return "redirect:/ru";
+    }
+
+
+
 
     /* Ajax - 이메일 중복체크 */
     @PostMapping("/idCheck")
@@ -64,7 +94,10 @@ public class UserController {
         return idCheck;
     }
 
-    /* 로그인 화면 */
+
+
+
+    /* 로그인 화면 - en */
     @GetMapping("/login")
     public String login( Model model
                         ,@RequestParam(value = "result", required = false) String result){
@@ -73,10 +106,23 @@ public class UserController {
 
         if(result != null) model.addAttribute("result", result);
 
-        return "user/login";
+        return "en/user/login";
     }
 
-    /* 로그인 처리 */
+
+    /* 로그인 화면 - ru */
+    @GetMapping("/ru/login")
+    public String ruLogin( Model model
+                        ,@RequestParam(value = "result", required = false) String result){
+
+        model.addAttribute("title", "로그인");
+
+        if(result != null) model.addAttribute("result", result);
+
+        return "ru/user/login";
+    }
+
+    /* 로그인 처리 - en */
     @PostMapping("/login")
     public String login(UserDto userDto, HttpSession session, RedirectAttributes reAttr){
         String useremail = userDto.getUseremail();
@@ -98,16 +144,54 @@ public class UserController {
             return "redirect:/";
         }
         reAttr.addAttribute("result", "등록된 회원이 없습니다.");
-        return "redirect:/user/login";
+        return "redirect:/en/user/login";
     }
 
-    /* 로그아웃 */
+
+
+    /* 로그인 처리 - ru */
+    @PostMapping("/ru/login")
+    public String ruLogin(UserDto userDto, HttpSession session, RedirectAttributes reAttr){
+        String useremail = userDto.getUseremail();
+        String userpw = userDto.getUserpw();
+
+        UserDto checkUser = userService.getUserInfoByEmail(useremail);
+
+        if(checkUser != null && checkUser.getUserpw() != null && userpw.equals(checkUser.getUserpw())){
+            String sessionName = checkUser.getUsername();
+            String sessionRole = checkUser.getEnabled();
+            String sessionId = checkUser.getUserId();
+
+            session.setAttribute("SEMAIL", useremail);
+            session.setAttribute("SROLE", sessionRole);
+            session.setAttribute("SNAME", sessionName);
+            session.setAttribute("SID",sessionId);
+            logger.info("로그인 성공");
+            logger.info("SID",sessionId);
+            return "redirect:/ru";
+        }
+        reAttr.addAttribute("result", "등록된 회원이 없습니다.");
+        return "redirect:/ru/user/login";
+    }
+
+
+    /* 로그아웃 - en */
     @GetMapping("/logout")
     public String logout(HttpSession session){
 
         session.invalidate();
 
         return "redirect:/";
+    }
+
+
+    /* 로그아웃 - ru */
+    @GetMapping("/ru/logout")
+    public String ruLogout(HttpSession session){
+
+        session.invalidate();
+
+        return "redirect:/ru";
     }
 
 }

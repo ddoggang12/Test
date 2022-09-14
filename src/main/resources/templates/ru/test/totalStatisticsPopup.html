@@ -63,7 +63,7 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header" style="margin-top: 40px;">
-                <strong>Statistical Info.</strong>
+                <strong>Статистическая информация.</strong>
                     <!--<img src="assets/images/logo.png"/>-->
             </div>
         </div>
@@ -102,17 +102,17 @@
             function drawChart() {
                 $.ajax({
                     type: 'POST',
-                    url: '/test/totalStatistics',
-                    data: {PICntList : this.PICntList},
+                    url: '/test/ruTotalStatistics',
+                    data: {ruPICntList : this.ruPICntList},
                     dataType: 'json',
                     success: function (data) {
                         console.log(data, 'data');
                         if (data) {
                             let bigarr =[];
-                            bigarr.push(['Task', 'Metadata of Kyrgyzstan']);
+                            bigarr.push(['Задача', 'Метаданные Кыргызстана']);
                             for(let i =0; i < data.length; i++){
                                 let arr = [];
-                                arr.push(data[i].Providing_Institution);
+                                arr.push(data[i].Providing_Institution_Ru);
                                 arr.push(data[i].CNT);
                                 bigarr.push(arr);
                             }
@@ -131,7 +131,7 @@
                             // 그래프 옵션 설정
                             const options = {
                                 //차트 상단의 제목 설정
-                                title: 'Providing Institution Statistical'
+                                title: 'Предоставление учреждению статистических данных'
                             };
 
                             // 입력값을 화면에 뿌려주는 역할
@@ -154,13 +154,13 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="copyright_text text-center">
-                                <p class=" wow fadeInRight" data-wow-duration="1s" style="margin-top: 10px">VJH3+3GC, Chuy Ave, Bishkek, Kyrgyzstan
-                                    <p>
+                                <p class=" wow fadeInRight" data-wow-duration="1s" style="margin-top: 10px">
+                                    <b>Система управления культурными ресурсами Кыргызстана</b>
+                                    <p>VJH3+3GC, проспект Чуй, Бишкек, Кыргызстан</p>
+                                    <!--<p>
                                         <a target="_blank" href="https://cics.center">The Center for Intangible Culture Studies</a>
-                                    </p>
-                                    <p>
-                                    shinwhahong@cics.center
-                                    </p>
+                                    </p>-->
+                                    <p>shinwhahong@cics.center</p>
                                 </p>
                             </div>
                         </div>

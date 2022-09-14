@@ -153,12 +153,19 @@
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${session.SEMAIL != null}" style="margin-top: 13px; font-size: 17px;">Welcome [[${session.SNAME}]]</li>
                 <li><a th:href="@{/}">HOME</a></li>
-                <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/dataSearchResult}">Collections</a></li>
+                <li th:if="${session.SEMAIL != null}"><a th:href="@{/test/dataSearchResult?searchValue=}">Collections</a></li>
                 <li th:if="${session.SEMAIL != null}"><a th:onclick="showTotalStatistics_Popup()" style="cursor:pointer">Statistics</a> </li>
                 <li th:if="${session.SEMAIL != null}"><a th:href="@{/admin/insert}">Upload</a></li>
                 <li th:if="${session.SEMAIL == null}"><a th:href="@{/user/login}">Log in</a></li>
                 <li th:unless="${session.SEMAIL == null}"><a th:href="@{/user/logout}">Log out</a></li>
                 <li th:if="${session.SEMAIL == null}" ><a th:href="@{/user/join}">Join</a></li>
+                <li>
+                    <select class="language" style="margin-top: 10px;" onchange="changeLanguage(this)">
+                        <option value="Language">Language</option>
+                        <option value="English">English</option>
+                        <option value="русский">русский</option>
+                    </select>
+                </li>
             </ul>
         </div>
     </div>
@@ -548,6 +555,26 @@
 
     }
 
+    function showTotalStatistics_Popup(){
+        const url = "/test/totalStatisticsPopup";
+        const winWidth = 1000;
+        const winHeight = 700;
+        const left = 0;
+        const top = 0;
+        const popupOption = "width=" + winWidth + ", height=" + winHeight + ", left=" + left + ", top=" +top;
+        window.open(url, "Staticstical Info", popupOption);
+    }
+
+    function changeLanguage(e){
+        if(e.value == "English"){
+            location.href="/admin/insert";
+        }
+        else if(e.value == "русский"){
+            location.href="/admin/ru/insert";
+        }
+
+    }
+
 
 </script>
 <!-- end: Javascript -->
@@ -557,13 +584,13 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="copyright_text text-center">
-                        <p class=" wow fadeInRight" data-wow-duration="1s" style="margin-top: 10px">VJH3+3GC, Chuy Ave, Bishkek, Kyrgyzstan
-                            <p>
+                        <p class=" wow fadeInRight" data-wow-duration="1s" style="margin-top: 10px">
+                            <b>Kyrgyzstan Cultural Resource Management System</b>
+                            <p>VJH3+3GC, Chuy Ave, Bishkek, Kyrgyzstan</p>
+                            <!--<p>
                                 <a target="_blank" href="https://cics.center">The Center for Intangible Culture Studies</a>
-                            </p>
-                            <p>
-                                shinwhahong@cics.center
-                            </p>
+                            </p>-->
+                            <p>shinwhahong@cics.center</p>
                         </p>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-    <head th:replace="fragments/head :: headFragment">
+    <head th:replace="fragments/head_ru :: headFragment_ru">
 
     </head>
 
@@ -14,7 +14,7 @@
         <![endif]-->
         <div class='preloader' th:replace="fragments/preloader :: preloaderFragment"></div>
 
-        <header th:replace="fragments/header :: headerFragment"></header>
+        <header th:replace="fragments/header_ru :: headerFragment_ru"></header>
 
         <main layout:fragment="customContents">
 
@@ -26,7 +26,7 @@
                                 <div align="center" style="padding: 20px 0px 0px 0px">
                                     <th:block th:if="${not #lists.isEmpty(data)}" th:each="l : ${data}">
                                         <span class="TitleInContentsInLineInContents" id="title">
-                                            [[${l.Title}]]
+                                            [[${l.Title_Ru}]]
                                         </span>
                                     </th:block>
                                     <div>
@@ -49,132 +49,132 @@
                                     <div class="row">
                                         <div class="tabs">
                                             <input id="all" type="radio" name="tab_item" checked>
-                                            <label class="tab_item" for="all">All Content</label>
+                                            <label class="tab_item" for="all">Весь контент</label>
                                             <input id="programming" type="radio" name="tab_item">
-                                            <label class="tab_item" for="programming">Map</label>
+                                            <label class="tab_item" for="programming">карта</label>
                                                 <div class="tab_content" id="all_content">
                                                     <div class id="CONTENTS">
                                                         <div class="LineInContents" style="border-bottom: none;">
                                                             <th:block th:if="${not #lists.isEmpty(data)}" th:each="l : ${data}">
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"th:text="Identifier"></div>
+                                                                    <div class="TitleInLineInContents" th:text="дентификатор"></div>
                                                                     <div class="ContentsInLineInContents"th:text="${l.Identifier}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"th:text="Title"></div>
-                                                                    <div class="ContentsInLineInContents"th:text="${l.Title}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Заголовок"></div>
+                                                                    <div class="ContentsInLineInContents"th:text="${l.Title_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"th:text="Subject"></div>
-                                                                    <div class="ContentsInLineInContents"th:text="${l.Subject}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Предмет"></div>
+                                                                    <div class="ContentsInLineInContents"th:text="${l.Subject_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Description"></div>
-                                                                    <div class="ContentsInLineInContents" id ="desc" th:text="${l.Description}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Описание"></div>
+                                                                    <div class="ContentsInLineInContents" id ="desc" th:text="${l.Description_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Institute_Identifier"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Идентификатор_института"></div>
                                                                     <div class="ContentsInLineInContents" th:text="${l.Institute_Identifier}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Language"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Language}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Язык"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Language_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Temporary"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Temporary}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Временные"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Temporary_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Places"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Places}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Места"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Place_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Current_location"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Current_location}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Текущее_местоположение"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Current_location_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Object_Type"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Type}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Тип_объекта"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Type_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Object_Size"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Size}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Размер_объекта"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Size_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Object_Material"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Material}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Материал_объекта"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Material_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Object_Etc"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Etc}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Объект_ит.д."></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Object_Etc_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Digital_Data_Type"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Digital_Data_Type}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Цифровой_тип_данных"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Digital_Data_Type_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="File_Extension"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Расширение_файла"></div>
                                                                     <div class="ContentsInLineInContents" th:text="${l.File_Extension}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Coverage"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Coverage}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Покрытие"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Coverage_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Creator"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Creator}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Создатель"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Creator_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Participants"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Participants}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Участники"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Participants_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Publisher"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Publisher}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Издатель"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Publisher_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Provider"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Provider}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Провайдер"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Provider_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Providing_Institution"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Providing_Institution}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Предоставляющее_учреждение"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Providing_Institution_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Provider_Country"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Provider_Country}"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Страна_провайдера"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Provider_Country_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Latitude"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Широта"></div>
                                                                     <div class="ContentsInLineInContents" id="lat" th:text="${l.Latitude}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents" th:text="Longitude"></div>
+                                                                    <div class="TitleInLineInContents" th:text="Долгота"></div>
                                                                     <div class="ContentsInLineInContents" id="lng" th:text="${l.Longitude}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"  th:text="Collection_Name"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Collection_Name}"></div>
+                                                                    <div class="TitleInLineInContents"  th:text="Название_коллекции"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Collection_Name_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"  th:text="Source"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Source}"></div>
+                                                                    <div class="TitleInLineInContents"  th:text="Источник"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Source_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"  th:text="IsPartOf"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.IsPartOf}"></div>
+                                                                    <div class="TitleInLineInContents"  th:text="Эточасть"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.IsPartOf_Ru}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"  th:text="Links"></div>
+                                                                    <div class="TitleInLineInContents"  th:text="Ссылки"></div>
                                                                     <div class="ContentsInLineInContents" th:text="${l.Links}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"  th:text="Rights_Statement_Media"></div>
+                                                                    <div class="TitleInLineInContents"  th:text="Права_Заявление_Медиа"></div>
                                                                     <div class="ContentsInLineInContents" th:text="${l.Rights_Statement_Media}"></div>
                                                                 </div>
                                                                 <div class="LineInContents">
-                                                                    <div class="TitleInLineInContents"  th:text="Rights"></div>
-                                                                    <div class="ContentsInLineInContents" th:text="${l.Rights}"></div>
+                                                                    <div class="TitleInLineInContents"  th:text="Права"></div>
+                                                                    <div class="ContentsInLineInContents" th:text="${l.Rights_Ru}"></div>
                                                                 </div>
                                                             </th:block>
                                                         </div>
@@ -185,7 +185,7 @@
                                             </div>
                                         </div>
                                         <div style="text-align: right; margin-top: 30px;">
-                                            <button type="button" class="btn" th:if="${session.SEMAIL != null}" th:onclick="|location.href='@{'/admin/insert'}'|">Upload</button>
+                                            <button type="button" class="btn" th:if="${session.SEMAIL != null}" th:onclick="|location.href='@{'/admin/ru/insert'}'|">Загрузить</button>
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +220,7 @@
                     margin: auto;
                 }
                 .TitleInLineInContents {
-                    width: 235px;
+                    width: 300px;
                     font-size: 16px;
                     font-weight: 600;
                     float: left;
@@ -229,7 +229,7 @@
                 }
                 .ContentsInLineInContents {
                     width: -webkit-calc(100% - 250px);
-                    width: calc(100% - 250px);
+                    width: calc(100% - 300px);
                     float: left;
                     display: block;
                     text-align: justify;
@@ -311,6 +311,9 @@
 
         <script>
 
+           /* $( document ).ready( function() {
+                $('div:empty').css("display", "none");
+            } );*/
 
 
             //구글 지도 api를 사용해서 위도 경도 값을 불러와서 하단부에 맵 구성
@@ -336,7 +339,7 @@
 
             }
         </script>
-        <footer th:replace="fragments/footer :: footerFragment"></footer>
+        <footer th:replace="fragments/footer_ru :: footerFragment_ru"></footer>
 
         <!-- START SCROLL TO TOP  -->
         <div class="scrollup">

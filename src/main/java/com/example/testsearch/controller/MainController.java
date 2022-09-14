@@ -11,13 +11,20 @@ public class MainController {
 
     private static final Logger logger = (Logger) LogManager.getLogger(MainController.class);
 
-
     @GetMapping("/")
-    public String main(Model model){
+    public String enMain(Model model){
 
         model.addAttribute("title", "검색");
 
-        return "main";
+        return "en/en_main";
     }
+    @GetMapping("/ru")
+    public String ruMain(Model model){
+
+        model.addAttribute("title", "검색");
+
+        return "ru/ru_main";
+    }
+
 
 }
