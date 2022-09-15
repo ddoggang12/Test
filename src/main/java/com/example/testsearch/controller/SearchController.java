@@ -151,7 +151,7 @@ public class SearchController {
 
 
 
-    /* select box 선택별 data 검색  - Ajax */
+    /* select box 선택별 data 검색  - Ajax ru */
     @ResponseBody
     @RequestMapping("/ruSearchBySelectList")
     public List<Data> ruSearchBySelectList(Model model
@@ -169,10 +169,10 @@ public class SearchController {
         paramMap.put("digitalDateTypeList", digitalDateTypeList);
         paramMap.put("fileExtensionList", fileExtensionList);
 
-        /*logger.info("providingInstitutionList 담긴 값 : {}", providingInstitutionList);*/
+        //logger.info("providingInstitutionList 담긴 값 : {}", providingInstitutionList);
 
         List<Data> ruSearchBySelectList = searchService.getSearchBySelectList_ru(paramMap);
-        /* logger.info("[TEST] searchBySelectList 담긴 값 : {}", searchBySelectList);*/
+         //logger.info("[TEST] searchBySelectList의 갯수 : " + ruSearchBySelectList.size());
         //model.addAttribute("title", "작품 검색");
 
         model.addAttribute("dataSearchList", ruSearchBySelectList);
@@ -195,10 +195,10 @@ public class SearchController {
         paramMap.put("searchValue", searchValue);
 
         List<Data> dataSearchList = searchService.getDataSearchList(paramMap);
-        logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
+        //logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
 
         int countSearchData = searchService.countSearchData(paramMap);
-        logger.info("data 검색 개수 : {}", countSearchData);
+        //logger.info("data 검색 개수 : {}", countSearchData);
 
         model.addAttribute("title", "작품 검색");
         model.addAttribute("dataSearchList", dataSearchList);
@@ -221,17 +221,70 @@ public class SearchController {
         paramMap.put("searchValue", searchValue);
 
         List<Data> dataSearchList = searchService.getDataSearchList(paramMap);
-        logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
+        //logger.info("dataSearchList 담긴 값 : {}", dataSearchList);
 
         int countSearchData = searchService.countSearchData(paramMap);
-        logger.info("data 검색 개수 : {}", countSearchData);
+        //logger.info("data 검색 개수 : {}", countSearchData);
 
         model.addAttribute("title", "작품 검색");
         model.addAttribute("dataSearchList", dataSearchList);
         model.addAttribute("countSearchData", countSearchData);
 
         return "ru/test/dataSearchResult";
+    }
+    @ResponseBody
+    @PostMapping("/dataSearchResult")
+    public List<Data> dataSearchResult(Model model
+            , @RequestParam (value = "providingInstitutionList[]", required = false) ArrayList<String> providingInstitutionList
+            , @RequestParam (value = "rightsStatementMediaList[]", required = false) ArrayList<String> rightsStatementMediaList
+            , @RequestParam (value = "objectTypeList[]", required = false) ArrayList<String> objectTypeList
+            , @RequestParam (value = "digitalDateTypeList[]", required = false) ArrayList<String> digitalDateTypeList
+            , @RequestParam (value = "fileExtensionList[]", required = false) ArrayList<String> fileExtensionList){
 
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("providingInstitutionList", providingInstitutionList);
+        paramMap.put("rightsStatementMediaList", rightsStatementMediaList);
+        paramMap.put("objectTypeList", objectTypeList);
+        paramMap.put("digitalDateTypeList", digitalDateTypeList);
+        paramMap.put("fileExtensionList", fileExtensionList);
+
+        /*logger.info("providingInstitutionList 담긴 값 : {}", providingInstitutionList);*/
+
+        List<Data> dataSearchResult = searchService.getSearchBySelectList(paramMap);
+        /* logger.info("[TEST] searchBySelectList 담긴 값 : {}", searchBySelectList);*/
+        //model.addAttribute("title", "작품 검색");
+
+        model.addAttribute("dataSearchList", dataSearchResult);
+
+        return dataSearchResult;
+    }
+    @ResponseBody
+    @PostMapping("ru/dataSearchResult")
+    public List<Data> rudataSearchResult(Model model
+            , @RequestParam (value = "providingInstitutionList[]", required = false) ArrayList<String> providingInstitutionList
+            , @RequestParam (value = "rightsStatementMediaList[]", required = false) ArrayList<String> rightsStatementMediaList
+            , @RequestParam (value = "objectTypeList[]", required = false) ArrayList<String> objectTypeList
+            , @RequestParam (value = "digitalDateTypeList[]", required = false) ArrayList<String> digitalDateTypeList
+            , @RequestParam (value = "fileExtensionList[]", required = false) ArrayList<String> fileExtensionList){
+
+
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("providingInstitutionList", providingInstitutionList);
+        paramMap.put("rightsStatementMediaList", rightsStatementMediaList);
+        paramMap.put("objectTypeList", objectTypeList);
+        paramMap.put("digitalDateTypeList", digitalDateTypeList);
+        paramMap.put("fileExtensionList", fileExtensionList);
+
+        /*logger.info("providingInstitutionList 담긴 값 : {}", providingInstitutionList);*/
+
+        List<Data> rudataSearchResult = searchService.getSearchBySelectList_ru(paramMap);
+        /* logger.info("[TEST] searchBySelectList 담긴 값 : {}", searchBySelectList);*/
+        //model.addAttribute("title", "작품 검색");
+
+        model.addAttribute("dataSearchList", rudataSearchResult);
+
+        return rudataSearchResult;
 
     }
 
